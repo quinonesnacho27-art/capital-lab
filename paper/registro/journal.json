@@ -1,0 +1,28 @@
+{
+ "inicio": {
+  "fecha_inicio": "2026-08-04",
+  "monto_real_maximo_clp": 200000,
+  "nota": "Definido antes de empezar. El monto real inicial debe poder perderse por completo sin impacto."
+ },
+ "trades": [],
+ "posiciones_abiertas": [
+  {
+   "ticker": "SPY",
+   "estrategia": "Ruptura 20 días",
+   "fecha_entrada": "2026-08-04",
+   "razon_entrada": "Cierre sobre el máximo de 20 días (ruptura)",
+   "precio_entrada_usd": 771.33,
+   "stop_usd": 751.96,
+   "invertido_clp": 398247
+  }
+ ],
+ "metricas": {
+  "sesiones": 1,
+  "n_trades": 0,
+  "sharpe": null,
+  "max_drawdown": null,
+  "win_rate": null,
+  "retorno_total": null,
+  "resultado_clp": null
+ }
+}

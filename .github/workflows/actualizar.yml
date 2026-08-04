@@ -1,0 +1,47 @@
+name: Actualizar simulación de portafolio
+
+# Cada lunes re-descarga los datos históricos, re-corre la simulación y
+# commitea site/data.js si cambió. Al hacer push de site/ se dispara solo
+# el workflow "Publicar la web" (mismo patrón que parcelas-radar).
+
+on:
+  schedule:
+    # Lunes 09:00 en Chile continental (12:00/13:00 UTC según horario).
+    - cron: "0 12 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: capital-lab-actualizar
+  cancel-in-progress: false
+
+jobs:
+  simular:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Instalar dependencias
+        run: pip install -r requirements.txt
+
+      - name: Correr la simulación
+        run: python main_portafolio.py
+
+      - name: Guardar el dashboard en el repo
+        run: |
+          git config user.name  "capital-lab[bot]"
+          git config user.email "actions@github.com"
+          git add site/data.js
+          if git diff --staged --quiet; then
+            echo "Sin cambios en la simulación."
+          else
+            git commit -m "Simulación del $(date -u +%Y-%m-%d)"
+            git push
+          fi
