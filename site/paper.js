@@ -1,5 +1,5 @@
 window.PAPER = {
- "generado": "2026-08-05 23:28 UTC",
+ "generado": "2026-08-07 01:36 UTC",
  "inicio": {
   "fecha_inicio": "2026-08-04",
   "monto_real_maximo_clp": 200000,
@@ -25,6 +25,10 @@ window.PAPER = {
    {
     "fecha": "2026-08-05",
     "equity_clp": 994821
+   },
+   {
+    "fecha": "2026-08-06",
+    "equity_clp": 993789
    }
   ],
   "trades": [],
@@ -40,13 +44,13 @@ window.PAPER = {
    }
   ],
   "metricas": {
-   "sesiones": 2,
+   "sesiones": 3,
    "n_trades": 0,
    "sharpe": null,
-   "max_drawdown": -0.0052,
+   "max_drawdown": -0.0062,
    "win_rate": null,
-   "retorno_total": -0.0052,
-   "resultado_clp": -5179
+   "retorno_total": -0.0062,
+   "resultado_clp": -6211
   },
   "buy_hold": [
    {
@@ -56,21 +60,17 @@ window.PAPER = {
    {
     "fecha": "2026-08-05",
     "equity_clp": 986994
+   },
+   {
+    "fecha": "2026-08-06",
+    "equity_clp": 984404
    }
   ]
  },
  "backtest": {
-  "desde": "2024-08-05",
-  "hasta": "2026-08-05",
+  "desde": "2024-08-07",
+  "hasta": "2026-08-07",
   "equity": [
-   {
-    "fecha": "2024-08-05",
-    "equity_clp": 1000000
-   },
-   {
-    "fecha": "2024-08-06",
-    "equity_clp": 1000000
-   },
    {
     "fecha": "2024-08-07",
     "equity_clp": 1000000
@@ -129,7 +129,7 @@ window.PAPER = {
    },
    {
     "fecha": "2024-08-27",
-    "equity_clp": 989768
+    "equity_clp": 989769
    },
    {
     "fecha": "2024-08-28",
@@ -137,11 +137,11 @@ window.PAPER = {
    },
    {
     "fecha": "2024-08-29",
-    "equity_clp": 990060
+    "equity_clp": 990061
    },
    {
     "fecha": "2024-08-30",
-    "equity_clp": 994004
+    "equity_clp": 994005
    },
    {
     "fecha": "2024-09-03",
@@ -161,7 +161,7 @@ window.PAPER = {
    },
    {
     "fecha": "2024-09-09",
-    "equity_clp": 994448
+    "equity_clp": 994449
    },
    {
     "fecha": "2024-09-10",
@@ -257,7 +257,7 @@ window.PAPER = {
    },
    {
     "fecha": "2024-10-11",
-    "equity_clp": 1030365
+    "equity_clp": 1030366
    },
    {
     "fecha": "2024-10-14",
@@ -281,7 +281,7 @@ window.PAPER = {
    },
    {
     "fecha": "2024-10-21",
-    "equity_clp": 1038082
+    "equity_clp": 1038083
    },
    {
     "fecha": "2024-10-22",
@@ -349,7 +349,7 @@ window.PAPER = {
    },
    {
     "fecha": "2024-11-13",
-    "equity_clp": 1114498
+    "equity_clp": 1114497
    },
    {
     "fecha": "2024-11-14",
@@ -365,7 +365,7 @@ window.PAPER = {
    },
    {
     "fecha": "2024-11-19",
-    "equity_clp": 1085330
+    "equity_clp": 1085331
    },
    {
     "fecha": "2024-11-20",
@@ -397,7 +397,7 @@ window.PAPER = {
    },
    {
     "fecha": "2024-12-02",
-    "equity_clp": 1097102
+    "equity_clp": 1097103
    },
    {
     "fecha": "2024-12-03",
@@ -405,7 +405,7 @@ window.PAPER = {
    },
    {
     "fecha": "2024-12-04",
-    "equity_clp": 1119807
+    "equity_clp": 1119808
    },
    {
     "fecha": "2024-12-05",
@@ -429,7 +429,7 @@ window.PAPER = {
    },
    {
     "fecha": "2024-12-12",
-    "equity_clp": 1120395
+    "equity_clp": 1120396
    },
    {
     "fecha": "2024-12-13",
@@ -437,7 +437,7 @@ window.PAPER = {
    },
    {
     "fecha": "2024-12-16",
-    "equity_clp": 1119673
+    "equity_clp": 1119674
    },
    {
     "fecha": "2024-12-17",
@@ -449,7 +449,7 @@ window.PAPER = {
    },
    {
     "fecha": "2024-12-19",
-    "equity_clp": 1105665
+    "equity_clp": 1105666
    },
    {
     "fecha": "2024-12-20",
@@ -469,7 +469,7 @@ window.PAPER = {
    },
    {
     "fecha": "2024-12-27",
-    "equity_clp": 1114975
+    "equity_clp": 1114976
    },
    {
     "fecha": "2024-12-30",
@@ -497,7 +497,7 @@ window.PAPER = {
    },
    {
     "fecha": "2025-01-08",
-    "equity_clp": 1112320
+    "equity_clp": 1112321
    },
    {
     "fecha": "2025-01-10",
@@ -725,7 +725,7 @@ window.PAPER = {
    },
    {
     "fecha": "2025-04-02",
-    "equity_clp": 978633
+    "equity_clp": 978634
    },
    {
     "fecha": "2025-04-03",
@@ -849,7 +849,7 @@ window.PAPER = {
    },
    {
     "fecha": "2025-05-16",
-    "equity_clp": 955292
+    "equity_clp": 955293
    },
    {
     "fecha": "2025-05-19",
@@ -925,7 +925,7 @@ window.PAPER = {
    },
    {
     "fecha": "2025-06-13",
-    "equity_clp": 957483
+    "equity_clp": 957484
    },
    {
     "fecha": "2025-06-16",
@@ -985,7 +985,7 @@ window.PAPER = {
    },
    {
     "fecha": "2025-07-08",
-    "equity_clp": 1023052
+    "equity_clp": 1023053
    },
    {
     "fecha": "2025-07-09",
@@ -1009,7 +1009,7 @@ window.PAPER = {
    },
    {
     "fecha": "2025-07-16",
-    "equity_clp": 1059418
+    "equity_clp": 1059419
    },
    {
     "fecha": "2025-07-17",
@@ -1037,7 +1037,7 @@ window.PAPER = {
    },
    {
     "fecha": "2025-07-25",
-    "equity_clp": 1053406
+    "equity_clp": 1053407
    },
    {
     "fecha": "2025-07-28",
@@ -1173,7 +1173,7 @@ window.PAPER = {
    },
    {
     "fecha": "2025-09-12",
-    "equity_clp": 1077886
+    "equity_clp": 1077887
    },
    {
     "fecha": "2025-09-15",
@@ -1217,7 +1217,7 @@ window.PAPER = {
    },
    {
     "fecha": "2025-09-29",
-    "equity_clp": 1103873
+    "equity_clp": 1103874
    },
    {
     "fecha": "2025-09-30",
@@ -1257,7 +1257,7 @@ window.PAPER = {
    },
    {
     "fecha": "2025-10-13",
-    "equity_clp": 1087400
+    "equity_clp": 1087401
    },
    {
     "fecha": "2025-10-14",
@@ -1277,7 +1277,7 @@ window.PAPER = {
    },
    {
     "fecha": "2025-10-20",
-    "equity_clp": 1104586
+    "equity_clp": 1104587
    },
    {
     "fecha": "2025-10-21",
@@ -1365,7 +1365,7 @@ window.PAPER = {
    },
    {
     "fecha": "2025-11-19",
-    "equity_clp": 1065388
+    "equity_clp": 1065389
    },
    {
     "fecha": "2025-11-20",
@@ -1505,7 +1505,7 @@ window.PAPER = {
    },
    {
     "fecha": "2026-01-12",
-    "equity_clp": 1075225
+    "equity_clp": 1075226
    },
    {
     "fecha": "2026-01-13",
@@ -1553,7 +1553,7 @@ window.PAPER = {
    },
    {
     "fecha": "2026-01-29",
-    "equity_clp": 1045738
+    "equity_clp": 1045739
    },
    {
     "fecha": "2026-01-30",
@@ -1593,7 +1593,7 @@ window.PAPER = {
    },
    {
     "fecha": "2026-02-12",
-    "equity_clp": 1001944
+    "equity_clp": 1001945
    },
    {
     "fecha": "2026-02-13",
@@ -1617,7 +1617,7 @@ window.PAPER = {
    },
    {
     "fecha": "2026-02-23",
-    "equity_clp": 1008141
+    "equity_clp": 1008142
    },
    {
     "fecha": "2026-02-24",
@@ -1781,7 +1781,7 @@ window.PAPER = {
    },
    {
     "fecha": "2026-04-22",
-    "equity_clp": 1084684
+    "equity_clp": 1084685
    },
    {
     "fecha": "2026-04-23",
@@ -1829,7 +1829,7 @@ window.PAPER = {
    },
    {
     "fecha": "2026-05-08",
-    "equity_clp": 1181728
+    "equity_clp": 1181729
    },
    {
     "fecha": "2026-05-11",
@@ -1881,7 +1881,7 @@ window.PAPER = {
    },
    {
     "fecha": "2026-05-28",
-    "equity_clp": 1236356
+    "equity_clp": 1236357
    },
    {
     "fecha": "2026-05-29",
@@ -1965,11 +1965,11 @@ window.PAPER = {
    },
    {
     "fecha": "2026-06-29",
-    "equity_clp": 1261303
+    "equity_clp": 1261304
    },
    {
     "fecha": "2026-06-30",
-    "equity_clp": 1281086
+    "equity_clp": 1281087
    },
    {
     "fecha": "2026-07-01",
@@ -1989,7 +1989,7 @@ window.PAPER = {
    },
    {
     "fecha": "2026-07-08",
-    "equity_clp": 1240754
+    "equity_clp": 1240755
    },
    {
     "fecha": "2026-07-09",
@@ -2070,6 +2070,10 @@ window.PAPER = {
    {
     "fecha": "2026-08-05",
     "equity_clp": 1234700
+   },
+   {
+    "fecha": "2026-08-06",
+    "equity_clp": 1233598
    }
   ],
   "trades": [
@@ -2097,7 +2101,7 @@ window.PAPER = {
     "precio_entrada_usd": 557.78,
     "precio_salida_usd": 557.19,
     "riesgo_clp": 10000,
-    "invertido_clp": 366209,
+    "invertido_clp": 366210,
     "resultado_clp": 11844,
     "resultado_pct": 0.0323
    },
@@ -2111,7 +2115,7 @@ window.PAPER = {
     "precio_entrada_usd": 579.14,
     "precio_salida_usd": 574.48,
     "riesgo_clp": 10000,
-    "invertido_clp": 378053,
+    "invertido_clp": 378054,
     "resultado_clp": 7165,
     "resultado_pct": 0.019
    },
@@ -2139,7 +2143,7 @@ window.PAPER = {
     "precio_entrada_usd": 539.31,
     "precio_salida_usd": 572.39,
     "riesgo_clp": 9873,
-    "invertido_clp": 353389,
+    "invertido_clp": 353388,
     "resultado_clp": 59755,
     "resultado_pct": 0.1691
    },
@@ -2153,7 +2157,7 @@ window.PAPER = {
     "precio_entrada_usd": 221.73,
     "precio_salida_usd": 210.33,
     "riesgo_clp": 10000,
-    "invertido_clp": 184927,
+    "invertido_clp": 184928,
     "resultado_clp": -16098,
     "resultado_pct": -0.0871
    },
@@ -2168,7 +2172,7 @@ window.PAPER = {
     "precio_salida_usd": 217.23,
     "riesgo_clp": 10000,
     "invertido_clp": 207413,
-    "resultado_clp": -19893,
+    "resultado_clp": -19894,
     "resultado_pct": -0.0959
    },
    {
@@ -2181,7 +2185,7 @@ window.PAPER = {
     "precio_entrada_usd": 596.23,
     "precio_salida_usd": 582.24,
     "riesgo_clp": 10000,
-    "invertido_clp": 395210,
+    "invertido_clp": 395209,
     "resultado_clp": -15245,
     "resultado_pct": -0.0386
    },
@@ -2378,7 +2382,7 @@ window.PAPER = {
     "precio_salida_usd": 293.63,
     "riesgo_clp": 10000,
     "invertido_clp": 197929,
-    "resultado_clp": -2908,
+    "resultado_clp": -2909,
     "resultado_pct": -0.0147
    },
    {
@@ -2447,7 +2451,7 @@ window.PAPER = {
     "precio_entrada_usd": 629.64,
     "precio_salida_usd": 613.69,
     "riesgo_clp": 10000,
-    "invertido_clp": 193578,
+    "invertido_clp": 193577,
     "resultado_clp": -4791,
     "resultado_pct": -0.0247
    },
@@ -2627,2029 +2631,2025 @@ window.PAPER = {
    }
   ],
   "metricas": {
-   "sesiones": 502,
+   "sesiones": 501,
    "n_trades": 38,
    "sharpe": 0.45,
    "max_drawdown": -0.1953,
    "win_rate": 0.4211,
-   "retorno_total": 0.2347,
-   "resultado_clp": 234700
+   "retorno_total": 0.2336,
+   "resultado_clp": 233598
   },
   "buy_hold": [
    {
-    "fecha": "2024-08-05",
+    "fecha": "2024-08-07",
     "equity_clp": 1000000
    },
    {
-    "fecha": "2024-08-06",
-    "equity_clp": 1033243
-   },
-   {
-    "fecha": "2024-08-07",
-    "equity_clp": 1017098
-   },
-   {
     "fecha": "2024-08-08",
-    "equity_clp": 1040071
+    "equity_clp": 1022587
    },
    {
     "fecha": "2024-08-09",
-    "equity_clp": 1034798
+    "equity_clp": 1017402
    },
    {
     "fecha": "2024-08-12",
-    "equity_clp": 1031633
+    "equity_clp": 1014291
    },
    {
     "fecha": "2024-08-13",
-    "equity_clp": 1050501
+    "equity_clp": 1032841
    },
    {
     "fecha": "2024-08-14",
-    "equity_clp": 1051354
+    "equity_clp": 1033680
    },
    {
     "fecha": "2024-08-15",
-    "equity_clp": 1072015
+    "equity_clp": 1053994
    },
    {
     "fecha": "2024-08-16",
-    "equity_clp": 1072761
+    "equity_clp": 1054728
    },
    {
     "fecha": "2024-08-19",
-    "equity_clp": 1089536
+    "equity_clp": 1071220
    },
    {
     "fecha": "2024-08-20",
-    "equity_clp": 1070482
+    "equity_clp": 1052486
    },
    {
     "fecha": "2024-08-21",
-    "equity_clp": 1074708
+    "equity_clp": 1056641
    },
    {
     "fecha": "2024-08-22",
-    "equity_clp": 1057266
+    "equity_clp": 1039493
    },
    {
     "fecha": "2024-08-23",
-    "equity_clp": 1072503
+    "equity_clp": 1054473
    },
    {
     "fecha": "2024-08-26",
-    "equity_clp": 1057593
+    "equity_clp": 1039815
    },
    {
     "fecha": "2024-08-27",
-    "equity_clp": 1056667
+    "equity_clp": 1038904
    },
    {
     "fecha": "2024-08-28",
-    "equity_clp": 1051588
+    "equity_clp": 1033910
    },
    {
     "fecha": "2024-08-29",
-    "equity_clp": 1057605
+    "equity_clp": 1039826
    },
    {
     "fecha": "2024-08-30",
-    "equity_clp": 1070276
+    "equity_clp": 1052284
    },
    {
     "fecha": "2024-09-03",
-    "equity_clp": 1048847
+    "equity_clp": 1031215
    },
    {
     "fecha": "2024-09-04",
-    "equity_clp": 1061798
+    "equity_clp": 1043948
    },
    {
     "fecha": "2024-09-05",
-    "equity_clp": 1075795
+    "equity_clp": 1057710
    },
    {
     "fecha": "2024-09-06",
-    "equity_clp": 1056937
+    "equity_clp": 1039169
    },
    {
     "fecha": "2024-09-09",
-    "equity_clp": 1069962
+    "equity_clp": 1051975
    },
    {
     "fecha": "2024-09-10",
-    "equity_clp": 1074839
+    "equity_clp": 1056770
    },
    {
     "fecha": "2024-09-11",
-    "equity_clp": 1092657
+    "equity_clp": 1074288
    },
    {
     "fecha": "2024-09-12",
-    "equity_clp": 1092981
+    "equity_clp": 1074607
    },
    {
     "fecha": "2024-09-13",
-    "equity_clp": 1089449
+    "equity_clp": 1071134
    },
    {
     "fecha": "2024-09-16",
-    "equity_clp": 1085320
+    "equity_clp": 1067075
    },
    {
     "fecha": "2024-09-17",
-    "equity_clp": 1078201
+    "equity_clp": 1060075
    },
    {
     "fecha": "2024-09-18",
-    "equity_clp": 1083231
+    "equity_clp": 1065021
    },
    {
     "fecha": "2024-09-19",
-    "equity_clp": 1102712
+    "equity_clp": 1084174
    },
    {
     "fecha": "2024-09-20",
-    "equity_clp": 1100936
+    "equity_clp": 1082428
    },
    {
     "fecha": "2024-09-23",
-    "equity_clp": 1100768
+    "equity_clp": 1082264
    },
    {
     "fecha": "2024-09-24",
-    "equity_clp": 1097268
+    "equity_clp": 1078822
    },
    {
     "fecha": "2024-09-25",
-    "equity_clp": 1084069
+    "equity_clp": 1065845
    },
    {
     "fecha": "2024-09-26",
-    "equity_clp": 1086150
+    "equity_clp": 1067891
    },
    {
     "fecha": "2024-09-27",
-    "equity_clp": 1077470
+    "equity_clp": 1059357
    },
    {
     "fecha": "2024-09-30",
-    "equity_clp": 1075037
+    "equity_clp": 1056965
    },
    {
     "fecha": "2024-10-01",
-    "equity_clp": 1062636
+    "equity_clp": 1044772
    },
    {
     "fecha": "2024-10-02",
-    "equity_clp": 1070571
+    "equity_clp": 1052574
    },
    {
     "fecha": "2024-10-03",
-    "equity_clp": 1077411
+    "equity_clp": 1059299
    },
    {
     "fecha": "2024-10-04",
-    "equity_clp": 1098204
+    "equity_clp": 1079742
    },
    {
     "fecha": "2024-10-07",
-    "equity_clp": 1092366
+    "equity_clp": 1074003
    },
    {
     "fecha": "2024-10-08",
-    "equity_clp": 1105109
+    "equity_clp": 1086531
    },
    {
     "fecha": "2024-10-09",
-    "equity_clp": 1121561
+    "equity_clp": 1102706
    },
    {
     "fecha": "2024-10-10",
-    "equity_clp": 1119130
+    "equity_clp": 1100316
    },
    {
     "fecha": "2024-10-11",
-    "equity_clp": 1121957
+    "equity_clp": 1103096
    },
    {
     "fecha": "2024-10-14",
-    "equity_clp": 1131340
+    "equity_clp": 1112321
    },
    {
     "fecha": "2024-10-15",
-    "equity_clp": 1118384
+    "equity_clp": 1099583
    },
    {
     "fecha": "2024-10-16",
-    "equity_clp": 1139227
+    "equity_clp": 1120076
    },
    {
     "fecha": "2024-10-17",
-    "equity_clp": 1136463
+    "equity_clp": 1117358
    },
    {
     "fecha": "2024-10-18",
-    "equity_clp": 1151523
+    "equity_clp": 1132165
    },
    {
     "fecha": "2024-10-21",
-    "equity_clp": 1131218
+    "equity_clp": 1112201
    },
    {
     "fecha": "2024-10-22",
-    "equity_clp": 1156115
+    "equity_clp": 1136680
    },
    {
     "fecha": "2024-10-23",
-    "equity_clp": 1141700
+    "equity_clp": 1122507
    },
    {
     "fecha": "2024-10-24",
-    "equity_clp": 1139682
+    "equity_clp": 1120523
    },
    {
     "fecha": "2024-10-25",
-    "equity_clp": 1141254
+    "equity_clp": 1122069
    },
    {
     "fecha": "2024-10-28",
-    "equity_clp": 1131790
+    "equity_clp": 1112763
    },
    {
     "fecha": "2024-10-29",
-    "equity_clp": 1146610
+    "equity_clp": 1127335
    },
    {
     "fecha": "2024-10-30",
-    "equity_clp": 1154386
+    "equity_clp": 1134980
    },
    {
     "fecha": "2024-10-31",
-    "equity_clp": 1138376
+    "equity_clp": 1119240
    },
    {
     "fecha": "2024-11-01",
-    "equity_clp": 1142705
+    "equity_clp": 1123496
    },
    {
     "fecha": "2024-11-04",
-    "equity_clp": 1124196
+    "equity_clp": 1105297
    },
    {
     "fecha": "2024-11-05",
-    "equity_clp": 1145529
+    "equity_clp": 1126272
    },
    {
     "fecha": "2024-11-06",
-    "equity_clp": 1176746
+    "equity_clp": 1156964
    },
    {
     "fecha": "2024-11-07",
-    "equity_clp": 1194353
+    "equity_clp": 1174275
    },
    {
     "fecha": "2024-11-08",
-    "equity_clp": 1192351
+    "equity_clp": 1172307
    },
    {
     "fecha": "2024-11-11",
-    "equity_clp": 1179265
+    "equity_clp": 1159440
    },
    {
     "fecha": "2024-11-12",
-    "equity_clp": 1204050
+    "equity_clp": 1183809
    },
    {
     "fecha": "2024-11-13",
-    "equity_clp": 1225465
+    "equity_clp": 1204864
    },
    {
     "fecha": "2024-11-14",
-    "equity_clp": 1210171
+    "equity_clp": 1189828
    },
    {
     "fecha": "2024-11-15",
-    "equity_clp": 1189389
+    "equity_clp": 1169395
    },
    {
     "fecha": "2024-11-18",
-    "equity_clp": 1178234
+    "equity_clp": 1158427
    },
    {
     "fecha": "2024-11-19",
-    "equity_clp": 1195272
+    "equity_clp": 1175179
    },
    {
     "fecha": "2024-11-20",
-    "equity_clp": 1193759
+    "equity_clp": 1173691
    },
    {
     "fecha": "2024-11-21",
-    "equity_clp": 1202590
+    "equity_clp": 1182374
    },
    {
     "fecha": "2024-11-22",
-    "equity_clp": 1206740
+    "equity_clp": 1186453
    },
    {
     "fecha": "2024-11-25",
-    "equity_clp": 1200131
+    "equity_clp": 1179955
    },
    {
     "fecha": "2024-11-26",
-    "equity_clp": 1220420
+    "equity_clp": 1199904
    },
    {
     "fecha": "2024-11-27",
-    "equity_clp": 1218305
+    "equity_clp": 1197825
    },
    {
     "fecha": "2024-11-29",
-    "equity_clp": 1226464
+    "equity_clp": 1205846
    },
    {
     "fecha": "2024-12-02",
-    "equity_clp": 1207939
+    "equity_clp": 1187633
    },
    {
     "fecha": "2024-12-03",
-    "equity_clp": 1230263
+    "equity_clp": 1209581
    },
    {
     "fecha": "2024-12-04",
-    "equity_clp": 1229981
+    "equity_clp": 1209304
    },
    {
     "fecha": "2024-12-05",
-    "equity_clp": 1231406
+    "equity_clp": 1210705
    },
    {
     "fecha": "2024-12-06",
-    "equity_clp": 1227348
+    "equity_clp": 1206715
    },
    {
     "fecha": "2024-12-09",
-    "equity_clp": 1206114
+    "equity_clp": 1185838
    },
    {
     "fecha": "2024-12-10",
-    "equity_clp": 1216604
+    "equity_clp": 1196152
    },
    {
     "fecha": "2024-12-11",
-    "equity_clp": 1232701
+    "equity_clp": 1211978
    },
    {
     "fecha": "2024-12-12",
-    "equity_clp": 1226639
+    "equity_clp": 1206018
    },
    {
     "fecha": "2024-12-13",
-    "equity_clp": 1228521
+    "equity_clp": 1207869
    },
    {
     "fecha": "2024-12-16",
-    "equity_clp": 1219707
+    "equity_clp": 1199203
    },
    {
     "fecha": "2024-12-17",
-    "equity_clp": 1237719
+    "equity_clp": 1216912
    },
    {
     "fecha": "2024-12-18",
-    "equity_clp": 1199048
+    "equity_clp": 1178891
    },
    {
     "fecha": "2024-12-19",
-    "equity_clp": 1213094
+    "equity_clp": 1192701
    },
    {
     "fecha": "2024-12-20",
-    "equity_clp": 1224244
+    "equity_clp": 1203663
    },
    {
     "fecha": "2024-12-23",
-    "equity_clp": 1210869
+    "equity_clp": 1190513
    },
    {
     "fecha": "2024-12-24",
-    "equity_clp": 1243793
+    "equity_clp": 1222884
    },
    {
     "fecha": "2024-12-26",
-    "equity_clp": 1242381
+    "equity_clp": 1221496
    },
    {
     "fecha": "2024-12-27",
-    "equity_clp": 1229117
+    "equity_clp": 1208454
    },
    {
     "fecha": "2024-12-30",
-    "equity_clp": 1203308
+    "equity_clp": 1183079
    },
    {
     "fecha": "2024-12-31",
-    "equity_clp": 1216438
+    "equity_clp": 1195989
    },
    {
     "fecha": "2025-01-02",
-    "equity_clp": 1213449
+    "equity_clp": 1193050
    },
    {
     "fecha": "2025-01-03",
-    "equity_clp": 1241954
+    "equity_clp": 1221076
    },
    {
     "fecha": "2025-01-06",
-    "equity_clp": 1256884
+    "equity_clp": 1235754
    },
    {
     "fecha": "2025-01-07",
-    "equity_clp": 1242922
+    "equity_clp": 1222027
    },
    {
     "fecha": "2025-01-08",
-    "equity_clp": 1237052
+    "equity_clp": 1216256
    },
    {
     "fecha": "2025-01-10",
-    "equity_clp": 1220264
+    "equity_clp": 1199750
    },
    {
     "fecha": "2025-01-13",
-    "equity_clp": 1225642
+    "equity_clp": 1205038
    },
    {
     "fecha": "2025-01-14",
-    "equity_clp": 1226197
+    "equity_clp": 1205584
    },
    {
     "fecha": "2025-01-15",
-    "equity_clp": 1246136
+    "equity_clp": 1225187
    },
    {
     "fecha": "2025-01-16",
-    "equity_clp": 1242985
+    "equity_clp": 1222090
    },
    {
     "fecha": "2025-01-17",
-    "equity_clp": 1264917
+    "equity_clp": 1243652
    },
    {
     "fecha": "2025-01-21",
-    "equity_clp": 1269237
+    "equity_clp": 1247900
    },
    {
     "fecha": "2025-01-22",
-    "equity_clp": 1271468
+    "equity_clp": 1250094
    },
    {
     "fecha": "2025-01-23",
-    "equity_clp": 1262330
+    "equity_clp": 1241109
    },
    {
     "fecha": "2025-01-24",
-    "equity_clp": 1253868
+    "equity_clp": 1232790
    },
    {
     "fecha": "2025-01-27",
-    "equity_clp": 1210544
+    "equity_clp": 1190193
    },
    {
     "fecha": "2025-01-28",
-    "equity_clp": 1246501
+    "equity_clp": 1225546
    },
    {
     "fecha": "2025-01-29",
-    "equity_clp": 1249941
+    "equity_clp": 1228929
    },
    {
     "fecha": "2025-01-30",
-    "equity_clp": 1253199
+    "equity_clp": 1232131
    },
    {
     "fecha": "2025-01-31",
-    "equity_clp": 1237060
+    "equity_clp": 1216264
    },
    {
     "fecha": "2025-02-03",
-    "equity_clp": 1233894
+    "equity_clp": 1213151
    },
    {
     "fecha": "2025-02-04",
-    "equity_clp": 1238713
+    "equity_clp": 1217890
    },
    {
     "fecha": "2025-02-05",
-    "equity_clp": 1226755
+    "equity_clp": 1206133
    },
    {
     "fecha": "2025-02-06",
-    "equity_clp": 1229144
+    "equity_clp": 1208481
    },
    {
     "fecha": "2025-02-07",
-    "equity_clp": 1207663
+    "equity_clp": 1187361
    },
    {
     "fecha": "2025-02-10",
-    "equity_clp": 1197843
+    "equity_clp": 1177707
    },
    {
     "fecha": "2025-02-11",
-    "equity_clp": 1215929
+    "equity_clp": 1195488
    },
    {
     "fecha": "2025-02-12",
-    "equity_clp": 1211558
+    "equity_clp": 1191191
    },
    {
     "fecha": "2025-02-13",
-    "equity_clp": 1217941
+    "equity_clp": 1197466
    },
    {
     "fecha": "2025-02-14",
-    "equity_clp": 1213346
+    "equity_clp": 1192948
    },
    {
     "fecha": "2025-02-18",
-    "equity_clp": 1210161
+    "equity_clp": 1189818
    },
    {
     "fecha": "2025-02-19",
-    "equity_clp": 1215329
+    "equity_clp": 1194899
    },
    {
     "fecha": "2025-02-20",
-    "equity_clp": 1212556
+    "equity_clp": 1192172
    },
    {
     "fecha": "2025-02-21",
-    "equity_clp": 1181199
+    "equity_clp": 1161342
    },
    {
     "fecha": "2025-02-24",
-    "equity_clp": 1161369
+    "equity_clp": 1141845
    },
    {
     "fecha": "2025-02-25",
-    "equity_clp": 1171268
+    "equity_clp": 1151578
    },
    {
     "fecha": "2025-02-26",
-    "equity_clp": 1169983
+    "equity_clp": 1150315
    },
    {
     "fecha": "2025-02-27",
-    "equity_clp": 1151455
+    "equity_clp": 1132098
    },
    {
     "fecha": "2025-02-28",
-    "equity_clp": 1182211
+    "equity_clp": 1162338
    },
    {
     "fecha": "2025-03-03",
-    "equity_clp": 1147318
+    "equity_clp": 1128031
    },
    {
     "fecha": "2025-03-04",
-    "equity_clp": 1145171
+    "equity_clp": 1125920
    },
    {
     "fecha": "2025-03-05",
-    "equity_clp": 1153739
+    "equity_clp": 1134344
    },
    {
     "fecha": "2025-03-06",
-    "equity_clp": 1123734
+    "equity_clp": 1104843
    },
    {
     "fecha": "2025-03-07",
-    "equity_clp": 1117325
+    "equity_clp": 1098542
    },
    {
     "fecha": "2025-03-10",
-    "equity_clp": 1071470
+    "equity_clp": 1053458
    },
    {
     "fecha": "2025-03-11",
-    "equity_clp": 1094332
+    "equity_clp": 1075936
    },
    {
     "fecha": "2025-03-12",
-    "equity_clp": 1094441
+    "equity_clp": 1076042
    },
    {
     "fecha": "2025-03-13",
-    "equity_clp": 1081407
+    "equity_clp": 1063228
    },
    {
     "fecha": "2025-03-14",
-    "equity_clp": 1102697
+    "equity_clp": 1084160
    },
    {
     "fecha": "2025-03-17",
-    "equity_clp": 1086428
+    "equity_clp": 1068165
    },
    {
     "fecha": "2025-03-18",
-    "equity_clp": 1078442
+    "equity_clp": 1060313
    },
    {
     "fecha": "2025-03-19",
-    "equity_clp": 1086265
+    "equity_clp": 1068004
    },
    {
     "fecha": "2025-03-20",
-    "equity_clp": 1082651
+    "equity_clp": 1064451
    },
    {
     "fecha": "2025-03-21",
-    "equity_clp": 1095135
+    "equity_clp": 1076725
    },
    {
     "fecha": "2025-03-24",
-    "equity_clp": 1101724
+    "equity_clp": 1083203
    },
    {
     "fecha": "2025-03-25",
-    "equity_clp": 1119152
+    "equity_clp": 1100338
    },
    {
     "fecha": "2025-03-26",
-    "equity_clp": 1095424
+    "equity_clp": 1077009
    },
    {
     "fecha": "2025-03-27",
-    "equity_clp": 1097078
+    "equity_clp": 1078636
    },
    {
     "fecha": "2025-03-28",
-    "equity_clp": 1086176
+    "equity_clp": 1067917
    },
    {
     "fecha": "2025-03-31",
-    "equity_clp": 1074247
+    "equity_clp": 1056188
    },
    {
     "fecha": "2025-04-01",
-    "equity_clp": 1105902
+    "equity_clp": 1087311
    },
    {
     "fecha": "2025-04-02",
-    "equity_clp": 1119230
+    "equity_clp": 1100415
    },
    {
     "fecha": "2025-04-03",
-    "equity_clp": 1074545
+    "equity_clp": 1056482
    },
    {
     "fecha": "2025-04-04",
-    "equity_clp": 1004988
+    "equity_clp": 988094
    },
    {
     "fecha": "2025-04-07",
-    "equity_clp": 1009519
+    "equity_clp": 992548
    },
    {
     "fecha": "2025-04-08",
-    "equity_clp": 1030614
+    "equity_clp": 1013288
    },
    {
     "fecha": "2025-04-09",
-    "equity_clp": 1150713
+    "equity_clp": 1131369
    },
    {
     "fecha": "2025-04-10",
-    "equity_clp": 1078522
+    "equity_clp": 1060392
    },
    {
     "fecha": "2025-04-11",
-    "equity_clp": 1106562
+    "equity_clp": 1087959
    },
    {
     "fecha": "2025-04-14",
-    "equity_clp": 1097378
+    "equity_clp": 1078930
    },
    {
     "fecha": "2025-04-15",
-    "equity_clp": 1088299
+    "equity_clp": 1070004
    },
    {
     "fecha": "2025-04-16",
-    "equity_clp": 1067435
+    "equity_clp": 1049490
    },
    {
     "fecha": "2025-04-17",
-    "equity_clp": 1068903
+    "equity_clp": 1050934
    },
    {
     "fecha": "2025-04-21",
-    "equity_clp": 1043460
+    "equity_clp": 1025919
    },
    {
     "fecha": "2025-04-22",
-    "equity_clp": 1062045
+    "equity_clp": 1044191
    },
    {
     "fecha": "2025-04-23",
-    "equity_clp": 1068257
+    "equity_clp": 1050299
    },
    {
     "fecha": "2025-04-24",
-    "equity_clp": 1078839
+    "equity_clp": 1060703
    },
    {
     "fecha": "2025-04-25",
-    "equity_clp": 1080991
+    "equity_clp": 1062818
    },
    {
     "fecha": "2025-04-28",
-    "equity_clp": 1079683
+    "equity_clp": 1061533
    },
    {
     "fecha": "2025-04-29",
-    "equity_clp": 1096057
+    "equity_clp": 1077631
    },
    {
     "fecha": "2025-04-30",
-    "equity_clp": 1098467
+    "equity_clp": 1080001
    },
    {
     "fecha": "2025-05-01",
-    "equity_clp": 1112736
+    "equity_clp": 1094030
    },
    {
     "fecha": "2025-05-02",
-    "equity_clp": 1125132
+    "equity_clp": 1106218
    },
    {
     "fecha": "2025-05-05",
-    "equity_clp": 1119472
+    "equity_clp": 1100652
    },
    {
     "fecha": "2025-05-06",
-    "equity_clp": 1100008
+    "equity_clp": 1081516
    },
    {
     "fecha": "2025-05-07",
-    "equity_clp": 1103740
+    "equity_clp": 1085186
    },
    {
     "fecha": "2025-05-08",
-    "equity_clp": 1120301
+    "equity_clp": 1101468
    },
    {
     "fecha": "2025-05-09",
-    "equity_clp": 1112936
+    "equity_clp": 1094227
    },
    {
     "fecha": "2025-05-12",
-    "equity_clp": 1141554
+    "equity_clp": 1122364
    },
    {
     "fecha": "2025-05-13",
-    "equity_clp": 1163310
+    "equity_clp": 1143754
    },
    {
     "fecha": "2025-05-14",
-    "equity_clp": 1157544
+    "equity_clp": 1138085
    },
    {
     "fecha": "2025-05-15",
-    "equity_clp": 1164101
+    "equity_clp": 1144532
    },
    {
     "fecha": "2025-05-16",
-    "equity_clp": 1169220
+    "equity_clp": 1149565
    },
    {
     "fecha": "2025-05-19",
-    "equity_clp": 1174164
+    "equity_clp": 1154426
    },
    {
     "fecha": "2025-05-20",
-    "equity_clp": 1168627
+    "equity_clp": 1148981
    },
    {
     "fecha": "2025-05-21",
-    "equity_clp": 1151133
+    "equity_clp": 1131782
    },
    {
     "fecha": "2025-05-22",
-    "equity_clp": 1152589
+    "equity_clp": 1133213
    },
    {
     "fecha": "2025-05-23",
-    "equity_clp": 1143812
+    "equity_clp": 1124583
    },
    {
     "fecha": "2025-05-27",
-    "equity_clp": 1165338
+    "equity_clp": 1145747
    },
    {
     "fecha": "2025-05-28",
-    "equity_clp": 1155923
+    "equity_clp": 1136491
    },
    {
     "fecha": "2025-05-29",
-    "equity_clp": 1161054
+    "equity_clp": 1141536
    },
    {
     "fecha": "2025-05-30",
-    "equity_clp": 1159151
+    "equity_clp": 1139664
    },
    {
     "fecha": "2025-06-02",
-    "equity_clp": 1144973
+    "equity_clp": 1125725
    },
    {
     "fecha": "2025-06-03",
-    "equity_clp": 1172615
+    "equity_clp": 1152902
    },
    {
     "fecha": "2025-06-04",
-    "equity_clp": 1173486
+    "equity_clp": 1153759
    },
    {
     "fecha": "2025-06-05",
-    "equity_clp": 1165379
+    "equity_clp": 1145788
    },
    {
     "fecha": "2025-06-06",
-    "equity_clp": 1168067
+    "equity_clp": 1148431
    },
    {
     "fecha": "2025-06-09",
-    "equity_clp": 1170163
+    "equity_clp": 1150492
    },
    {
     "fecha": "2025-06-10",
-    "equity_clp": 1182649
+    "equity_clp": 1162768
    },
    {
     "fecha": "2025-06-11",
-    "equity_clp": 1181759
+    "equity_clp": 1161893
    },
    {
     "fecha": "2025-06-12",
-    "equity_clp": 1181293
+    "equity_clp": 1161435
    },
    {
     "fecha": "2025-06-13",
-    "equity_clp": 1163082
+    "equity_clp": 1143530
    },
    {
     "fecha": "2025-06-16",
-    "equity_clp": 1154319
+    "equity_clp": 1134914
    },
    {
     "fecha": "2025-06-17",
-    "equity_clp": 1171866
+    "equity_clp": 1152166
    },
    {
     "fecha": "2025-06-18",
-    "equity_clp": 1183234
+    "equity_clp": 1163342
    },
    {
     "fecha": "2025-06-20",
-    "equity_clp": 1174909
+    "equity_clp": 1155158
    },
    {
     "fecha": "2025-06-23",
-    "equity_clp": 1185151
+    "equity_clp": 1165228
    },
    {
     "fecha": "2025-06-24",
-    "equity_clp": 1208945
+    "equity_clp": 1188621
    },
    {
     "fecha": "2025-06-25",
-    "equity_clp": 1193734
+    "equity_clp": 1173667
    },
    {
     "fecha": "2025-06-26",
-    "equity_clp": 1204990
+    "equity_clp": 1184733
    },
    {
     "fecha": "2025-06-27",
-    "equity_clp": 1202989
+    "equity_clp": 1182766
    },
    {
     "fecha": "2025-06-30",
-    "equity_clp": 1193617
+    "equity_clp": 1173551
    },
    {
     "fecha": "2025-07-01",
-    "equity_clp": 1208856
+    "equity_clp": 1188534
    },
    {
     "fecha": "2025-07-02",
-    "equity_clp": 1210411
+    "equity_clp": 1190063
    },
    {
     "fecha": "2025-07-03",
-    "equity_clp": 1216835
+    "equity_clp": 1196380
    },
    {
     "fecha": "2025-07-07",
-    "equity_clp": 1213299
+    "equity_clp": 1192903
    },
    {
     "fecha": "2025-07-08",
-    "equity_clp": 1226899
+    "equity_clp": 1206274
    },
    {
     "fecha": "2025-07-09",
-    "equity_clp": 1237260
+    "equity_clp": 1216461
    },
    {
     "fecha": "2025-07-10",
-    "equity_clp": 1248261
+    "equity_clp": 1227277
    },
    {
     "fecha": "2025-07-11",
-    "equity_clp": 1244685
+    "equity_clp": 1223761
    },
    {
     "fecha": "2025-07-14",
-    "equity_clp": 1231623
+    "equity_clp": 1210918
    },
    {
     "fecha": "2025-07-15",
-    "equity_clp": 1265819
+    "equity_clp": 1244540
    },
    {
     "fecha": "2025-07-16",
-    "equity_clp": 1268555
+    "equity_clp": 1247230
    },
    {
     "fecha": "2025-07-17",
-    "equity_clp": 1277097
+    "equity_clp": 1255628
    },
    {
     "fecha": "2025-07-18",
-    "equity_clp": 1272231
+    "equity_clp": 1250844
    },
    {
     "fecha": "2025-07-21",
-    "equity_clp": 1273242
+    "equity_clp": 1251838
    },
    {
     "fecha": "2025-07-22",
-    "equity_clp": 1260511
+    "equity_clp": 1239320
    },
    {
     "fecha": "2025-07-23",
-    "equity_clp": 1266715
+    "equity_clp": 1245421
    },
    {
     "fecha": "2025-07-24",
-    "equity_clp": 1264241
+    "equity_clp": 1242988
    },
    {
     "fecha": "2025-07-25",
-    "equity_clp": 1271845
+    "equity_clp": 1250464
    },
    {
     "fecha": "2025-07-28",
-    "equity_clp": 1254325
+    "equity_clp": 1233239
    },
    {
     "fecha": "2025-07-29",
-    "equity_clp": 1279935
+    "equity_clp": 1258419
    },
    {
     "fecha": "2025-07-30",
-    "equity_clp": 1280564
+    "equity_clp": 1259037
    },
    {
     "fecha": "2025-07-31",
-    "equity_clp": 1303913
+    "equity_clp": 1281993
    },
    {
     "fecha": "2025-08-01",
-    "equity_clp": 1270479
+    "equity_clp": 1249122
    },
    {
     "fecha": "2025-08-04",
-    "equity_clp": 1256243
+    "equity_clp": 1235125
    },
    {
     "fecha": "2025-08-05",
-    "equity_clp": 1275437
+    "equity_clp": 1253996
    },
    {
     "fecha": "2025-08-06",
-    "equity_clp": 1285300
+    "equity_clp": 1263693
    },
    {
     "fecha": "2025-08-07",
-    "equity_clp": 1294854
+    "equity_clp": 1273087
    },
    {
     "fecha": "2025-08-08",
-    "equity_clp": 1298898
+    "equity_clp": 1277062
    },
    {
     "fecha": "2025-08-11",
-    "equity_clp": 1293589
+    "equity_clp": 1271843
    },
    {
     "fecha": "2025-08-12",
-    "equity_clp": 1308590
+    "equity_clp": 1286591
    },
    {
     "fecha": "2025-08-13",
-    "equity_clp": 1296342
+    "equity_clp": 1274550
    },
    {
     "fecha": "2025-08-14",
-    "equity_clp": 1291406
+    "equity_clp": 1269697
    },
    {
     "fecha": "2025-08-15",
-    "equity_clp": 1305816
+    "equity_clp": 1283864
    },
    {
     "fecha": "2025-08-18",
-    "equity_clp": 1302949
+    "equity_clp": 1281046
    },
    {
     "fecha": "2025-08-19",
-    "equity_clp": 1296002
+    "equity_clp": 1274215
    },
    {
     "fecha": "2025-08-20",
-    "equity_clp": 1291686
+    "equity_clp": 1269972
    },
    {
     "fecha": "2025-08-21",
-    "equity_clp": 1290151
+    "equity_clp": 1268463
    },
    {
     "fecha": "2025-08-22",
-    "equity_clp": 1316284
+    "equity_clp": 1294157
    },
    {
     "fecha": "2025-08-25",
-    "equity_clp": 1295759
+    "equity_clp": 1273976
    },
    {
     "fecha": "2025-08-26",
-    "equity_clp": 1304723
+    "equity_clp": 1282790
    },
    {
     "fecha": "2025-08-27",
-    "equity_clp": 1313024
+    "equity_clp": 1290951
    },
    {
     "fecha": "2025-08-28",
-    "equity_clp": 1320565
+    "equity_clp": 1298366
    },
    {
     "fecha": "2025-08-29",
-    "equity_clp": 1312215
+    "equity_clp": 1290156
    },
    {
     "fecha": "2025-09-02",
-    "equity_clp": 1301334
+    "equity_clp": 1279458
    },
    {
     "fecha": "2025-09-03",
-    "equity_clp": 1316749
+    "equity_clp": 1294613
    },
    {
     "fecha": "2025-09-04",
-    "equity_clp": 1320618
+    "equity_clp": 1298417
    },
    {
     "fecha": "2025-09-05",
-    "equity_clp": 1322003
+    "equity_clp": 1299779
    },
    {
     "fecha": "2025-09-08",
-    "equity_clp": 1318391
+    "equity_clp": 1296228
    },
    {
     "fecha": "2025-09-09",
-    "equity_clp": 1325991
+    "equity_clp": 1303700
    },
    {
     "fecha": "2025-09-10",
-    "equity_clp": 1325204
+    "equity_clp": 1302927
    },
    {
     "fecha": "2025-09-11",
-    "equity_clp": 1328919
+    "equity_clp": 1306578
    },
    {
     "fecha": "2025-09-12",
-    "equity_clp": 1315968
+    "equity_clp": 1293846
    },
    {
     "fecha": "2025-09-15",
-    "equity_clp": 1305544
+    "equity_clp": 1283597
    },
    {
     "fecha": "2025-09-16",
-    "equity_clp": 1319391
+    "equity_clp": 1297211
    },
    {
     "fecha": "2025-09-17",
-    "equity_clp": 1312473
+    "equity_clp": 1290409
    },
    {
     "fecha": "2025-09-18",
-    "equity_clp": 1324703
+    "equity_clp": 1302433
    },
    {
     "fecha": "2025-09-19",
-    "equity_clp": 1336048
+    "equity_clp": 1313588
    },
    {
     "fecha": "2025-09-22",
-    "equity_clp": 1342200
+    "equity_clp": 1319637
    },
    {
     "fecha": "2025-09-23",
-    "equity_clp": 1336082
+    "equity_clp": 1313622
    },
    {
     "fecha": "2025-09-24",
-    "equity_clp": 1321102
+    "equity_clp": 1298893
    },
    {
     "fecha": "2025-09-25",
-    "equity_clp": 1320444
+    "equity_clp": 1298246
    },
    {
     "fecha": "2025-09-26",
-    "equity_clp": 1337941
+    "equity_clp": 1315449
    },
    {
     "fecha": "2025-09-29",
-    "equity_clp": 1342233
+    "equity_clp": 1319669
    },
    {
     "fecha": "2025-09-30",
-    "equity_clp": 1354913
+    "equity_clp": 1332136
    },
    {
     "fecha": "2025-10-01",
-    "equity_clp": 1354345
+    "equity_clp": 1331578
    },
    {
     "fecha": "2025-10-02",
-    "equity_clp": 1353493
+    "equity_clp": 1330740
    },
    {
     "fecha": "2025-10-03",
-    "equity_clp": 1356181
+    "equity_clp": 1333383
    },
    {
     "fecha": "2025-10-06",
-    "equity_clp": 1341037
+    "equity_clp": 1318493
    },
    {
     "fecha": "2025-10-07",
-    "equity_clp": 1355942
+    "equity_clp": 1333148
    },
    {
     "fecha": "2025-10-08",
-    "equity_clp": 1360736
+    "equity_clp": 1337861
    },
    {
     "fecha": "2025-10-09",
-    "equity_clp": 1344572
+    "equity_clp": 1321969
    },
    {
     "fecha": "2025-10-10",
-    "equity_clp": 1308217
+    "equity_clp": 1286225
    },
    {
     "fecha": "2025-10-13",
-    "equity_clp": 1323497
+    "equity_clp": 1301248
    },
    {
     "fecha": "2025-10-14",
-    "equity_clp": 1335168
+    "equity_clp": 1312723
    },
    {
     "fecha": "2025-10-15",
-    "equity_clp": 1347125
+    "equity_clp": 1324479
    },
    {
     "fecha": "2025-10-16",
-    "equity_clp": 1335541
+    "equity_clp": 1313090
    },
    {
     "fecha": "2025-10-17",
-    "equity_clp": 1337311
+    "equity_clp": 1314830
    },
    {
     "fecha": "2025-10-20",
-    "equity_clp": 1359256
+    "equity_clp": 1336406
    },
    {
     "fecha": "2025-10-21",
-    "equity_clp": 1344945
+    "equity_clp": 1322336
    },
    {
     "fecha": "2025-10-22",
-    "equity_clp": 1338516
+    "equity_clp": 1316015
    },
    {
     "fecha": "2025-10-23",
-    "equity_clp": 1344755
+    "equity_clp": 1322148
    },
    {
     "fecha": "2025-10-24",
-    "equity_clp": 1351733
+    "equity_clp": 1329010
    },
    {
     "fecha": "2025-10-27",
-    "equity_clp": 1344592
+    "equity_clp": 1321988
    },
    {
     "fecha": "2025-10-28",
-    "equity_clp": 1361118
+    "equity_clp": 1338237
    },
    {
     "fecha": "2025-10-29",
-    "equity_clp": 1364960
+    "equity_clp": 1342013
    },
    {
     "fecha": "2025-10-30",
-    "equity_clp": 1347669
+    "equity_clp": 1325014
    },
    {
     "fecha": "2025-10-31",
-    "equity_clp": 1354261
+    "equity_clp": 1331495
    },
    {
     "fecha": "2025-11-03",
-    "equity_clp": 1337747
+    "equity_clp": 1315258
    },
    {
     "fecha": "2025-11-04",
-    "equity_clp": 1335752
+    "equity_clp": 1313297
    },
    {
     "fecha": "2025-11-05",
-    "equity_clp": 1351607
+    "equity_clp": 1328885
    },
    {
     "fecha": "2025-11-06",
-    "equity_clp": 1332908
+    "equity_clp": 1310501
    },
    {
     "fecha": "2025-11-07",
-    "equity_clp": 1332213
+    "equity_clp": 1309817
    },
    {
     "fecha": "2025-11-10",
-    "equity_clp": 1335759
+    "equity_clp": 1313304
    },
    {
     "fecha": "2025-11-11",
-    "equity_clp": 1349534
+    "equity_clp": 1326847
    },
    {
     "fecha": "2025-11-12",
-    "equity_clp": 1347678
+    "equity_clp": 1325022
    },
    {
     "fecha": "2025-11-13",
-    "equity_clp": 1316659
+    "equity_clp": 1294525
    },
    {
     "fecha": "2025-11-14",
-    "equity_clp": 1316246
+    "equity_clp": 1294119
    },
    {
     "fecha": "2025-11-17",
-    "equity_clp": 1288377
+    "equity_clp": 1266718
    },
    {
     "fecha": "2025-11-18",
-    "equity_clp": 1284671
+    "equity_clp": 1263075
    },
    {
     "fecha": "2025-11-19",
-    "equity_clp": 1301547
+    "equity_clp": 1279668
    },
    {
     "fecha": "2025-11-20",
-    "equity_clp": 1281778
+    "equity_clp": 1260230
    },
    {
     "fecha": "2025-11-21",
-    "equity_clp": 1292045
+    "equity_clp": 1270325
    },
    {
     "fecha": "2025-11-24",
-    "equity_clp": 1322930
+    "equity_clp": 1300691
    },
    {
     "fecha": "2025-11-25",
-    "equity_clp": 1338319
+    "equity_clp": 1315821
    },
    {
     "fecha": "2025-11-26",
-    "equity_clp": 1339421
+    "equity_clp": 1316904
    },
    {
     "fecha": "2025-11-28",
-    "equity_clp": 1335094
+    "equity_clp": 1312650
    },
    {
     "fecha": "2025-12-01",
-    "equity_clp": 1329987
+    "equity_clp": 1307629
    },
    {
     "fecha": "2025-12-02",
-    "equity_clp": 1334936
+    "equity_clp": 1312495
    },
    {
     "fecha": "2025-12-03",
-    "equity_clp": 1331141
+    "equity_clp": 1308763
    },
    {
     "fecha": "2025-12-04",
-    "equity_clp": 1324887
+    "equity_clp": 1302614
    },
    {
     "fecha": "2025-12-05",
-    "equity_clp": 1325640
+    "equity_clp": 1303355
    },
    {
     "fecha": "2025-12-08",
-    "equity_clp": 1327637
+    "equity_clp": 1305319
    },
    {
     "fecha": "2025-12-09",
-    "equity_clp": 1328377
+    "equity_clp": 1306046
    },
    {
     "fecha": "2025-12-10",
-    "equity_clp": 1341521
+    "equity_clp": 1318969
    },
    {
     "fecha": "2025-12-11",
-    "equity_clp": 1341229
+    "equity_clp": 1318682
    },
    {
     "fecha": "2025-12-12",
-    "equity_clp": 1313042
+    "equity_clp": 1290968
    },
    {
     "fecha": "2025-12-15",
-    "equity_clp": 1305318
+    "equity_clp": 1283375
    },
    {
     "fecha": "2025-12-16",
-    "equity_clp": 1307590
+    "equity_clp": 1285608
    },
    {
     "fecha": "2025-12-17",
-    "equity_clp": 1292650
+    "equity_clp": 1270920
    },
    {
     "fecha": "2025-12-18",
-    "equity_clp": 1308086
+    "equity_clp": 1286096
    },
    {
     "fecha": "2025-12-19",
-    "equity_clp": 1310187
+    "equity_clp": 1288162
    },
    {
     "fecha": "2025-12-22",
-    "equity_clp": 1317625
+    "equity_clp": 1295475
    },
    {
     "fecha": "2025-12-23",
-    "equity_clp": 1322499
+    "equity_clp": 1300266
    },
    {
     "fecha": "2025-12-24",
-    "equity_clp": 1324188
+    "equity_clp": 1301927
    },
    {
     "fecha": "2025-12-26",
-    "equity_clp": 1318990
+    "equity_clp": 1296817
    },
    {
     "fecha": "2025-12-29",
-    "equity_clp": 1316543
+    "equity_clp": 1294411
    },
    {
     "fecha": "2025-12-30",
-    "equity_clp": 1327789
+    "equity_clp": 1305468
    },
    {
     "fecha": "2025-12-31",
-    "equity_clp": 1297323
+    "equity_clp": 1275514
    },
    {
     "fecha": "2026-01-02",
-    "equity_clp": 1299267
+    "equity_clp": 1277426
    },
    {
     "fecha": "2026-01-05",
-    "equity_clp": 1317254
+    "equity_clp": 1295110
    },
    {
     "fecha": "2026-01-06",
-    "equity_clp": 1321373
+    "equity_clp": 1299160
    },
    {
     "fecha": "2026-01-07",
-    "equity_clp": 1302405
+    "equity_clp": 1280511
    },
    {
     "fecha": "2026-01-08",
-    "equity_clp": 1304328
+    "equity_clp": 1282402
    },
    {
     "fecha": "2026-01-09",
-    "equity_clp": 1315375
+    "equity_clp": 1293263
    },
    {
     "fecha": "2026-01-12",
-    "equity_clp": 1314708
+    "equity_clp": 1292606
    },
    {
     "fecha": "2026-01-13",
-    "equity_clp": 1296005
+    "equity_clp": 1274218
    },
    {
     "fecha": "2026-01-14",
-    "equity_clp": 1292378
+    "equity_clp": 1270652
    },
    {
     "fecha": "2026-01-15",
-    "equity_clp": 1289737
+    "equity_clp": 1268056
    },
    {
     "fecha": "2026-01-16",
-    "equity_clp": 1290367
+    "equity_clp": 1268675
    },
    {
     "fecha": "2026-01-20",
-    "equity_clp": 1270946
+    "equity_clp": 1249580
    },
    {
     "fecha": "2026-01-21",
-    "equity_clp": 1281731
+    "equity_clp": 1260184
    },
    {
     "fecha": "2026-01-22",
-    "equity_clp": 1273482
+    "equity_clp": 1252074
    },
    {
     "fecha": "2026-01-23",
-    "equity_clp": 1269427
+    "equity_clp": 1248087
    },
    {
     "fecha": "2026-01-26",
-    "equity_clp": 1274102
+    "equity_clp": 1252683
    },
    {
     "fecha": "2026-01-27",
-    "equity_clp": 1271165
+    "equity_clp": 1249796
    },
    {
     "fecha": "2026-01-28",
-    "equity_clp": 1263922
+    "equity_clp": 1242675
    },
    {
     "fecha": "2026-01-29",
-    "equity_clp": 1265361
+    "equity_clp": 1244089
    },
    {
     "fecha": "2026-01-30",
-    "equity_clp": 1256789
+    "equity_clp": 1235661
    },
    {
     "fecha": "2026-02-02",
-    "equity_clp": 1272989
+    "equity_clp": 1251589
    },
    {
     "fecha": "2026-02-03",
-    "equity_clp": 1261030
+    "equity_clp": 1239831
    },
    {
     "fecha": "2026-02-04",
-    "equity_clp": 1247567
+    "equity_clp": 1226595
    },
    {
     "fecha": "2026-02-05",
-    "equity_clp": 1229365
+    "equity_clp": 1208698
    },
    {
     "fecha": "2026-02-06",
-    "equity_clp": 1264630
+    "equity_clp": 1243370
    },
    {
     "fecha": "2026-02-09",
-    "equity_clp": 1262189
+    "equity_clp": 1240971
    },
    {
     "fecha": "2026-02-10",
-    "equity_clp": 1247126
+    "equity_clp": 1226161
    },
    {
     "fecha": "2026-02-11",
-    "equity_clp": 1250919
+    "equity_clp": 1229891
    },
    {
     "fecha": "2026-02-12",
-    "equity_clp": 1230125
+    "equity_clp": 1209446
    },
    {
     "fecha": "2026-02-13",
-    "equity_clp": 1234552
+    "equity_clp": 1213798
    },
    {
     "fecha": "2026-02-17",
-    "equity_clp": 1244786
+    "equity_clp": 1223860
    },
    {
     "fecha": "2026-02-18",
-    "equity_clp": 1255990
+    "equity_clp": 1234876
    },
    {
     "fecha": "2026-02-19",
-    "equity_clp": 1246701
+    "equity_clp": 1225743
    },
    {
     "fecha": "2026-02-20",
-    "equity_clp": 1260716
+    "equity_clp": 1239523
    },
    {
     "fecha": "2026-02-23",
-    "equity_clp": 1249833
+    "equity_clp": 1228823
    },
    {
     "fecha": "2026-02-24",
-    "equity_clp": 1258918
+    "equity_clp": 1237754
    },
    {
     "fecha": "2026-02-25",
-    "equity_clp": 1261130
+    "equity_clp": 1239929
    },
    {
     "fecha": "2026-02-26",
-    "equity_clp": 1248107
+    "equity_clp": 1227125
    },
    {
     "fecha": "2026-02-27",
-    "equity_clp": 1254643
+    "equity_clp": 1233552
    },
    {
     "fecha": "2026-03-02",
-    "equity_clp": 1266950
+    "equity_clp": 1245652
    },
    {
     "fecha": "2026-03-03",
-    "equity_clp": 1269431
+    "equity_clp": 1248091
    },
    {
     "fecha": "2026-03-04",
-    "equity_clp": 1303400
+    "equity_clp": 1281489
    },
    {
     "fecha": "2026-03-05",
-    "equity_clp": 1288154
+    "equity_clp": 1266499
    },
    {
     "fecha": "2026-03-06",
-    "equity_clp": 1287318
+    "equity_clp": 1265677
    },
    {
     "fecha": "2026-03-09",
-    "equity_clp": 1306079
+    "equity_clp": 1284123
    },
    {
     "fecha": "2026-03-10",
-    "equity_clp": 1309606
+    "equity_clp": 1287591
    },
    {
     "fecha": "2026-03-11",
-    "equity_clp": 1270603
+    "equity_clp": 1249243
    },
    {
     "fecha": "2026-03-12",
-    "equity_clp": 1262925
+    "equity_clp": 1241695
    },
    {
     "fecha": "2026-03-13",
-    "equity_clp": 1282042
+    "equity_clp": 1260490
    },
    {
     "fecha": "2026-03-16",
-    "equity_clp": 1296518
+    "equity_clp": 1274723
    },
    {
     "fecha": "2026-03-17",
-    "equity_clp": 1289591
+    "equity_clp": 1267912
    },
    {
     "fecha": "2026-03-18",
-    "equity_clp": 1268087
+    "equity_clp": 1246769
    },
    {
     "fecha": "2026-03-19",
-    "equity_clp": 1276427
+    "equity_clp": 1254970
    },
    {
     "fecha": "2026-03-20",
-    "equity_clp": 1254499
+    "equity_clp": 1233410
    },
    {
     "fecha": "2026-03-23",
-    "equity_clp": 1288593
+    "equity_clp": 1266931
    },
    {
     "fecha": "2026-03-24",
-    "equity_clp": 1260910
+    "equity_clp": 1239713
    },
    {
     "fecha": "2026-03-25",
-    "equity_clp": 1277237
+    "equity_clp": 1255766
    },
    {
     "fecha": "2026-03-26",
-    "equity_clp": 1253511
+    "equity_clp": 1232439
    },
    {
     "fecha": "2026-03-27",
-    "equity_clp": 1247392
+    "equity_clp": 1226423
    },
    {
     "fecha": "2026-03-30",
-    "equity_clp": 1236095
+    "equity_clp": 1215315
    },
    {
     "fecha": "2026-03-31",
-    "equity_clp": 1282365
+    "equity_clp": 1260807
    },
    {
     "fecha": "2026-04-01",
-    "equity_clp": 1286318
+    "equity_clp": 1264694
    },
    {
     "fecha": "2026-04-02",
-    "equity_clp": 1268500
+    "equity_clp": 1247176
    },
    {
     "fecha": "2026-04-06",
-    "equity_clp": 1284148
+    "equity_clp": 1262560
    },
    {
     "fecha": "2026-04-07",
-    "equity_clp": 1279962
+    "equity_clp": 1258445
    },
    {
     "fecha": "2026-04-08",
-    "equity_clp": 1313264
+    "equity_clp": 1291187
    },
    {
     "fecha": "2026-04-09",
-    "equity_clp": 1293125
+    "equity_clp": 1271387
    },
    {
     "fecha": "2026-04-10",
-    "equity_clp": 1284189
+    "equity_clp": 1262601
    },
    {
     "fecha": "2026-04-13",
-    "equity_clp": 1300840
+    "equity_clp": 1278972
    },
    {
     "fecha": "2026-04-14",
-    "equity_clp": 1317354
+    "equity_clp": 1295208
    },
    {
     "fecha": "2026-04-15",
-    "equity_clp": 1314900
+    "equity_clp": 1292795
    },
    {
     "fecha": "2026-04-16",
-    "equity_clp": 1316227
+    "equity_clp": 1294100
    },
    {
     "fecha": "2026-04-17",
-    "equity_clp": 1333896
+    "equity_clp": 1311472
    },
    {
     "fecha": "2026-04-20",
-    "equity_clp": 1337538
+    "equity_clp": 1315053
    },
    {
     "fecha": "2026-04-21",
-    "equity_clp": 1315200
+    "equity_clp": 1293090
    },
    {
     "fecha": "2026-04-22",
-    "equity_clp": 1344680
+    "equity_clp": 1322075
    },
    {
     "fecha": "2026-04-23",
-    "equity_clp": 1336143
+    "equity_clp": 1313681
    },
    {
     "fecha": "2026-04-24",
-    "equity_clp": 1353670
+    "equity_clp": 1330914
    },
    {
     "fecha": "2026-04-27",
-    "equity_clp": 1358489
+    "equity_clp": 1335651
    },
    {
     "fecha": "2026-04-28",
-    "equity_clp": 1348001
+    "equity_clp": 1325340
    },
    {
     "fecha": "2026-04-29",
-    "equity_clp": 1344143
+    "equity_clp": 1321547
    },
    {
     "fecha": "2026-04-30",
-    "equity_clp": 1377853
+    "equity_clp": 1354691
    },
    {
     "fecha": "2026-05-01",
-    "equity_clp": 1375558
+    "equity_clp": 1352434
    },
    {
     "fecha": "2026-05-04",
-    "equity_clp": 1368662
+    "equity_clp": 1345654
    },
    {
     "fecha": "2026-05-05",
-    "equity_clp": 1398774
+    "equity_clp": 1375259
    },
    {
     "fecha": "2026-05-06",
-    "equity_clp": 1407483
+    "equity_clp": 1383822
    },
    {
     "fecha": "2026-05-07",
-    "equity_clp": 1389676
+    "equity_clp": 1366314
    },
    {
     "fecha": "2026-05-08",
-    "equity_clp": 1392315
+    "equity_clp": 1368909
    },
    {
     "fecha": "2026-05-11",
-    "equity_clp": 1398166
+    "equity_clp": 1374661
    },
    {
     "fecha": "2026-05-12",
-    "equity_clp": 1403934
+    "equity_clp": 1380333
    },
    {
     "fecha": "2026-05-13",
-    "equity_clp": 1436556
+    "equity_clp": 1412406
    },
    {
     "fecha": "2026-05-14",
-    "equity_clp": 1406123
+    "equity_clp": 1382485
    },
    {
     "fecha": "2026-05-15",
-    "equity_clp": 1401241
+    "equity_clp": 1377686
    },
    {
     "fecha": "2026-05-18",
-    "equity_clp": 1405626
+    "equity_clp": 1381997
    },
    {
     "fecha": "2026-05-19",
-    "equity_clp": 1400572
+    "equity_clp": 1377027
    },
    {
     "fecha": "2026-05-20",
-    "equity_clp": 1422044
+    "equity_clp": 1398139
    },
    {
     "fecha": "2026-05-21",
-    "equity_clp": 1413371
+    "equity_clp": 1389611
    },
    {
     "fecha": "2026-05-22",
-    "equity_clp": 1419892
+    "equity_clp": 1396023
    },
    {
     "fecha": "2026-05-26",
-    "equity_clp": 1426725
+    "equity_clp": 1402741
    },
    {
     "fecha": "2026-05-27",
-    "equity_clp": 1421896
+    "equity_clp": 1397993
    },
    {
     "fecha": "2026-05-28",
-    "equity_clp": 1430060
+    "equity_clp": 1406020
    },
    {
     "fecha": "2026-05-29",
-    "equity_clp": 1428716
+    "equity_clp": 1404698
    },
    {
     "fecha": "2026-06-01",
-    "equity_clp": 1430404
+    "equity_clp": 1406358
    },
    {
     "fecha": "2026-06-02",
-    "equity_clp": 1436114
+    "equity_clp": 1411972
    },
    {
     "fecha": "2026-06-03",
-    "equity_clp": 1422615
+    "equity_clp": 1398700
    },
    {
     "fecha": "2026-06-04",
-    "equity_clp": 1436272
+    "equity_clp": 1412127
    },
    {
     "fecha": "2026-06-05",
-    "equity_clp": 1400250
+    "equity_clp": 1376711
    },
    {
     "fecha": "2026-06-08",
-    "equity_clp": 1432613
+    "equity_clp": 1408529
    },
    {
     "fecha": "2026-06-09",
-    "equity_clp": 1441937
+    "equity_clp": 1417697
    },
    {
     "fecha": "2026-06-10",
-    "equity_clp": 1409225
+    "equity_clp": 1385534
    },
    {
     "fecha": "2026-06-11",
-    "equity_clp": 1431222
+    "equity_clp": 1407162
    },
    {
     "fecha": "2026-06-12",
-    "equity_clp": 1424560
+    "equity_clp": 1400612
    },
    {
     "fecha": "2026-06-15",
-    "equity_clp": 1438624
+    "equity_clp": 1414440
    },
    {
     "fecha": "2026-06-16",
-    "equity_clp": 1415511
+    "equity_clp": 1391715
    },
    {
     "fecha": "2026-06-17",
-    "equity_clp": 1390436
+    "equity_clp": 1367062
    },
    {
     "fecha": "2026-06-18",
-    "equity_clp": 1406622
+    "equity_clp": 1382976
    },
    {
     "fecha": "2026-06-22",
-    "equity_clp": 1425704
+    "equity_clp": 1401737
    },
    {
     "fecha": "2026-06-23",
-    "equity_clp": 1412390
+    "equity_clp": 1388646
    },
    {
     "fecha": "2026-06-24",
-    "equity_clp": 1423453
+    "equity_clp": 1399524
    },
    {
     "fecha": "2026-06-25",
-    "equity_clp": 1432924
+    "equity_clp": 1408835
    },
    {
     "fecha": "2026-06-26",
-    "equity_clp": 1425056
+    "equity_clp": 1401100
    },
    {
     "fecha": "2026-06-29",
-    "equity_clp": 1451935
+    "equity_clp": 1427527
    },
    {
     "fecha": "2026-06-30",
-    "equity_clp": 1462876
+    "equity_clp": 1438284
    },
    {
     "fecha": "2026-07-01",
-    "equity_clp": 1460596
+    "equity_clp": 1436043
    },
    {
     "fecha": "2026-07-02",
-    "equity_clp": 1464201
+    "equity_clp": 1439587
    },
    {
     "fecha": "2026-07-06",
-    "equity_clp": 1470242
+    "equity_clp": 1445526
    },
    {
     "fecha": "2026-07-07",
-    "equity_clp": 1473966
+    "equity_clp": 1449187
    },
    {
     "fecha": "2026-07-08",
-    "equity_clp": 1467685
+    "equity_clp": 1443012
    },
    {
     "fecha": "2026-07-09",
-    "equity_clp": 1493162
+    "equity_clp": 1468060
    },
    {
     "fecha": "2026-07-10",
-    "equity_clp": 1487243
+    "equity_clp": 1462242
    },
    {
     "fecha": "2026-07-13",
-    "equity_clp": 1475713
+    "equity_clp": 1450906
    },
    {
     "fecha": "2026-07-14",
-    "equity_clp": 1486753
+    "equity_clp": 1461760
    },
    {
     "fecha": "2026-07-15",
-    "equity_clp": 1483904
+    "equity_clp": 1458958
    },
    {
     "fecha": "2026-07-16",
-    "equity_clp": 1474953
+    "equity_clp": 1450158
    },
    {
     "fecha": "2026-07-17",
-    "equity_clp": 1459803
+    "equity_clp": 1435262
    },
    {
     "fecha": "2026-07-20",
-    "equity_clp": 1472980
+    "equity_clp": 1448219
    },
    {
     "fecha": "2026-07-21",
-    "equity_clp": 1484949
+    "equity_clp": 1459986
    },
    {
     "fecha": "2026-07-22",
-    "equity_clp": 1483842
+    "equity_clp": 1458897
    },
    {
     "fecha": "2026-07-23",
-    "equity_clp": 1468294
+    "equity_clp": 1443611
    },
    {
     "fecha": "2026-07-24",
-    "equity_clp": 1479130
+    "equity_clp": 1454265
    },
    {
     "fecha": "2026-07-27",
-    "equity_clp": 1485890
+    "equity_clp": 1460911
    },
    {
     "fecha": "2026-07-28",
-    "equity_clp": 1480080
+    "equity_clp": 1455199
    },
    {
     "fecha": "2026-07-29",
-    "equity_clp": 1448531
+    "equity_clp": 1424180
    },
    {
     "fecha": "2026-07-30",
-    "equity_clp": 1473652
+    "equity_clp": 1448879
    },
    {
     "fecha": "2026-07-31",
-    "equity_clp": 1468609
+    "equity_clp": 1443920
    },
    {
     "fecha": "2026-08-03",
-    "equity_clp": 1486145
+    "equity_clp": 1461161
    },
    {
     "fecha": "2026-08-04",
-    "equity_clp": 1515741
+    "equity_clp": 1490261
    },
    {
     "fecha": "2026-08-05",
-    "equity_clp": 1496028
+    "equity_clp": 1470879
+   },
+   {
+    "fecha": "2026-08-06",
+    "equity_clp": 1467019
    }
   ]
  },
  "graduacion": {
   "chequeos": {
    "meses": {
-    "valor": 0.0,
+    "valor": 0.1,
     "umbral": 6,
     "cumple": false
    },
@@ -4659,7 +4659,7 @@ window.PAPER = {
     "cumple": false
    },
    "drawdown": {
-    "valor": -0.0052,
+    "valor": -0.0062,
     "umbral": -0.15,
     "cumple": true
    }
