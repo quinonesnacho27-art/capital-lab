@@ -17,12 +17,12 @@
   }
  ],
  "metricas": {
-  "sesiones": 6,
+  "sesiones": 7,
   "n_trades": 0,
   "sharpe": null,
   "max_drawdown": -0.0062,
   "win_rate": null,
-  "retorno_total": -0.0046,
-  "resultado_clp": -4558
+  "retorno_total": -0.0042,
+  "resultado_clp": -4206
  }
 }
