@@ -14,15 +14,24 @@
    "precio_entrada_usd": 771.33,
    "stop_usd": 751.96,
    "invertido_clp": 398247
+  },
+  {
+   "ticker": "QQQ",
+   "estrategia": "Ruptura 20 días",
+   "fecha_entrada": "2026-08-13",
+   "razon_entrada": "Cierre sobre el máximo de 20 días (ruptura)",
+   "precio_entrada_usd": 732.07,
+   "stop_usd": 705.76,
+   "invertido_clp": 277908
   }
  ],
  "metricas": {
-  "sesiones": 7,
+  "sesiones": 8,
   "n_trades": 0,
   "sharpe": null,
   "max_drawdown": -0.0062,
   "win_rate": null,
-  "retorno_total": -0.0042,
-  "resultado_clp": -4206
+  "retorno_total": -0.0012,
+  "resultado_clp": -1209
  }
 }
