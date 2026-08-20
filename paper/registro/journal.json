@@ -4,17 +4,23 @@
   "monto_real_maximo_clp": 200000,
   "nota": "Definido antes de empezar. El monto real inicial debe poder perderse por completo sin impacto."
  },
- "trades": [],
- "posiciones_abiertas": [
+ "trades": [
   {
    "ticker": "SPY",
    "estrategia": "Ruptura 20 días",
    "fecha_entrada": "2026-08-04",
+   "fecha_salida": "2026-08-20",
    "razon_entrada": "Cierre sobre el máximo de 20 días (ruptura)",
+   "razon_salida": "Cierre bajo el mínimo de 10 días",
    "precio_entrada_usd": 771.33,
-   "stop_usd": 751.96,
-   "invertido_clp": 398247
-  },
+   "precio_salida_usd": 762.6,
+   "riesgo_clp": 10000,
+   "invertido_clp": 398247,
+   "resultado_clp": -5363,
+   "resultado_pct": -0.0135
+  }
+ ],
+ "posiciones_abiertas": [
   {
    "ticker": "QQQ",
    "estrategia": "Ruptura 20 días",
@@ -26,12 +32,12 @@
   }
  ],
  "metricas": {
-  "sesiones": 12,
-  "n_trades": 0,
+  "sesiones": 13,
+  "n_trades": 1,
   "sharpe": null,
   "max_drawdown": -0.0116,
-  "win_rate": null,
-  "retorno_total": -0.0069,
-  "resultado_clp": -6941
+  "win_rate": 0.0,
+  "retorno_total": -0.0109,
+  "resultado_clp": -10861
  }
 }
