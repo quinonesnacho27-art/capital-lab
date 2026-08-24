@@ -18,26 +18,30 @@
    "invertido_clp": 398247,
    "resultado_clp": -5998,
    "resultado_pct": -0.0151
-  }
- ],
- "posiciones_abiertas": [
+  },
   {
    "ticker": "QQQ",
    "estrategia": "Ruptura 20 días",
    "fecha_entrada": "2026-08-13",
+   "fecha_salida": "2026-08-24",
    "razon_entrada": "Cierre sobre el máximo de 20 días (ruptura)",
+   "razon_salida": "Stop loss tocado en 705.76 USD",
    "precio_entrada_usd": 732.07,
-   "stop_usd": 705.76,
-   "invertido_clp": 277908
+   "precio_salida_usd": 705.76,
+   "riesgo_clp": 9988,
+   "invertido_clp": 277908,
+   "resultado_clp": -10724,
+   "resultado_pct": -0.0386
   }
  ],
+ "posiciones_abiertas": [],
  "metricas": {
-  "sesiones": 14,
-  "n_trades": 1,
+  "sesiones": 15,
+  "n_trades": 2,
   "sharpe": null,
-  "max_drawdown": -0.013,
+  "max_drawdown": -0.0167,
   "win_rate": 0.0,
-  "retorno_total": -0.013,
-  "resultado_clp": -13014
+  "retorno_total": -0.0167,
+  "resultado_clp": -16721
  }
 }
