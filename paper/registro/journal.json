@@ -30,18 +30,18 @@
    "precio_salida_usd": 705.76,
    "riesgo_clp": 9988,
    "invertido_clp": 277908,
-   "resultado_clp": -10724,
-   "resultado_pct": -0.0386
+   "resultado_clp": -7924,
+   "resultado_pct": -0.0285
   }
  ],
  "posiciones_abiertas": [],
  "metricas": {
-  "sesiones": 15,
+  "sesiones": 16,
   "n_trades": 2,
   "sharpe": null,
-  "max_drawdown": -0.0167,
+  "max_drawdown": -0.0139,
   "win_rate": 0.0,
-  "retorno_total": -0.0167,
-  "resultado_clp": -16721
+  "retorno_total": -0.0139,
+  "resultado_clp": -13922
  }
 }
