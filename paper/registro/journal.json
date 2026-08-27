@@ -34,9 +34,19 @@
    "resultado_pct": -0.0285
   }
  ],
- "posiciones_abiertas": [],
+ "posiciones_abiertas": [
+  {
+   "ticker": "QQQ",
+   "estrategia": "Cruce de medias 20/50",
+   "fecha_entrada": "2026-08-26",
+   "razon_entrada": "SMA20 cruzó sobre SMA50 (tendencia al alza)",
+   "precio_entrada_usd": 711.37,
+   "stop_usd": 690.17,
+   "invertido_clp": 330875
+  }
+ ],
  "metricas": {
-  "sesiones": 16,
+  "sesiones": 17,
   "n_trades": 2,
   "sharpe": null,
   "max_drawdown": -0.0139,
