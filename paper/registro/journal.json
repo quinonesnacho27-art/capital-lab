@@ -42,16 +42,16 @@
    "razon_entrada": "SMA20 cruzó sobre SMA50 (tendencia al alza)",
    "precio_entrada_usd": 711.37,
    "stop_usd": 690.17,
-   "invertido_clp": 330875
+   "invertido_clp": 330871
   }
  ],
  "metricas": {
-  "sesiones": 17,
+  "sesiones": 18,
   "n_trades": 2,
   "sharpe": null,
   "max_drawdown": -0.0139,
   "win_rate": 0.0,
-  "retorno_total": -0.0139,
-  "resultado_clp": -13922
+  "retorno_total": -0.007,
+  "resultado_clp": -7022
  }
 }
