@@ -12,8 +12,8 @@
    "fecha_salida": "2026-08-20",
    "razon_entrada": "Cierre sobre el máximo de 20 días (ruptura)",
    "razon_salida": "Cierre bajo el mínimo de 10 días",
-   "precio_entrada_usd": 771.33,
-   "precio_salida_usd": 762.6,
+   "precio_entrada_usd": 769.42,
+   "precio_salida_usd": 760.71,
    "riesgo_clp": 10000,
    "invertido_clp": 398247,
    "resultado_clp": -5998,
@@ -46,12 +46,12 @@
   }
  ],
  "metricas": {
-  "sesiones": 32,
+  "sesiones": 33,
   "n_trades": 2,
-  "sharpe": -0.19,
+  "sharpe": 0.35,
   "max_drawdown": -0.0139,
   "win_rate": 0.0,
-  "retorno_total": 0.0037,
-  "resultado_clp": 3750
+  "retorno_total": 0.0082,
+  "resultado_clp": 8155
  }
 }
