@@ -25,9 +25,9 @@
    "fecha_entrada": "2026-08-13",
    "fecha_salida": "2026-08-24",
    "razon_entrada": "Cierre sobre el máximo de 20 días (ruptura)",
-   "razon_salida": "Stop loss tocado en 705.76 USD",
-   "precio_entrada_usd": 732.07,
-   "precio_salida_usd": 705.76,
+   "razon_salida": "Stop loss tocado en 705.03 USD",
+   "precio_entrada_usd": 731.31,
+   "precio_salida_usd": 705.03,
    "riesgo_clp": 9988,
    "invertido_clp": 277908,
    "resultado_clp": -7924,
@@ -40,18 +40,36 @@
    "estrategia": "Cruce de medias 20/50",
    "fecha_entrada": "2026-08-26",
    "razon_entrada": "SMA20 cruzó sobre SMA50 (tendencia al alza)",
-   "precio_entrada_usd": 711.37,
-   "stop_usd": 690.17,
+   "precio_entrada_usd": 710.63,
+   "stop_usd": 689.45,
    "invertido_clp": 330871
+  },
+  {
+   "ticker": "SPY",
+   "estrategia": "Ruptura 20 días",
+   "fecha_entrada": "2026-09-21",
+   "razon_entrada": "Cierre sobre el máximo de 20 días (ruptura)",
+   "precio_entrada_usd": 773.5,
+   "stop_usd": 759.46,
+   "invertido_clp": 550778
+  },
+  {
+   "ticker": "QQQ",
+   "estrategia": "Ruptura 20 días",
+   "fecha_entrada": "2026-09-21",
+   "razon_entrada": "Cierre sobre el máximo de 20 días (ruptura)",
+   "precio_entrada_usd": 741.47,
+   "stop_usd": 721.02,
+   "invertido_clp": 104429
   }
  ],
  "metricas": {
-  "sesiones": 33,
+  "sesiones": 34,
   "n_trades": 2,
-  "sharpe": 0.35,
+  "sharpe": 1.43,
   "max_drawdown": -0.0139,
   "win_rate": 0.0,
-  "retorno_total": 0.0082,
-  "resultado_clp": 8155
+  "retorno_total": 0.0183,
+  "resultado_clp": 18270
  }
 }
