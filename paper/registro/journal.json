@@ -32,6 +32,20 @@
    "invertido_clp": 277908,
    "resultado_clp": -7924,
    "resultado_pct": -0.0285
+  },
+  {
+   "ticker": "SPY",
+   "estrategia": "Ruptura 20 días",
+   "fecha_entrada": "2026-09-21",
+   "fecha_salida": "2026-10-01",
+   "razon_entrada": "Cierre sobre el máximo de 20 días (ruptura)",
+   "razon_salida": "Stop loss tocado en 759.46 USD",
+   "precio_entrada_usd": 773.5,
+   "precio_salida_usd": 759.46,
+   "riesgo_clp": 10000,
+   "invertido_clp": 550778,
+   "resultado_clp": -2812,
+   "resultado_pct": -0.0051
   }
  ],
  "posiciones_abiertas": [
@@ -45,15 +59,6 @@
    "invertido_clp": 330871
   },
   {
-   "ticker": "SPY",
-   "estrategia": "Ruptura 20 días",
-   "fecha_entrada": "2026-09-21",
-   "razon_entrada": "Cierre sobre el máximo de 20 días (ruptura)",
-   "precio_entrada_usd": 773.5,
-   "stop_usd": 759.46,
-   "invertido_clp": 550778
-  },
-  {
    "ticker": "QQQ",
    "estrategia": "Ruptura 20 días",
    "fecha_entrada": "2026-09-21",
@@ -61,15 +66,24 @@
    "precio_entrada_usd": 741.47,
    "stop_usd": 721.02,
    "invertido_clp": 104429
+  },
+  {
+   "ticker": "SOXX",
+   "estrategia": "Ruptura 20 días",
+   "fecha_entrada": "2026-10-01",
+   "razon_entrada": "Cierre sobre el máximo de 20 días (ruptura)",
+   "precio_entrada_usd": 576.33,
+   "stop_usd": 543.47,
+   "invertido_clp": 175376
   }
  ],
  "metricas": {
-  "sesiones": 40,
-  "n_trades": 2,
-  "sharpe": 0.79,
+  "sesiones": 42,
+  "n_trades": 3,
+  "sharpe": 1.07,
   "max_drawdown": -0.0178,
   "win_rate": 0.0,
-  "retorno_total": 0.0171,
-  "resultado_clp": 17124
+  "retorno_total": 0.022,
+  "resultado_clp": 22031
  }
 }
