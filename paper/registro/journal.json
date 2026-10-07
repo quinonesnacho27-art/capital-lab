@@ -75,15 +75,24 @@
    "precio_entrada_usd": 576.33,
    "stop_usd": 543.47,
    "invertido_clp": 175376
+  },
+  {
+   "ticker": "SPY",
+   "estrategia": "Ruptura 20 días",
+   "fecha_entrada": "2026-10-06",
+   "razon_entrada": "Cierre sobre el máximo de 20 días (ruptura)",
+   "precio_entrada_usd": 779.09,
+   "stop_usd": 765.57,
+   "invertido_clp": 372591
   }
  ],
  "metricas": {
-  "sesiones": 44,
+  "sesiones": 45,
   "n_trades": 3,
-  "sharpe": 2.04,
+  "sharpe": 1.87,
   "max_drawdown": -0.0178,
   "win_rate": 0.0,
-  "retorno_total": 0.0394,
-  "resultado_clp": 39406
+  "retorno_total": 0.0373,
+  "resultado_clp": 37252
  }
 }
