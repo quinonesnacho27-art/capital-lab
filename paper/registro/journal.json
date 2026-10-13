@@ -46,6 +46,20 @@
    "invertido_clp": 550778,
    "resultado_clp": -2812,
    "resultado_pct": -0.0051
+  },
+  {
+   "ticker": "SOXX",
+   "estrategia": "Ruptura 20 días",
+   "fecha_entrada": "2026-10-01",
+   "fecha_salida": "2026-10-12",
+   "razon_entrada": "Cierre sobre el máximo de 20 días (ruptura)",
+   "razon_salida": "Stop loss tocado en 543.47 USD",
+   "precio_entrada_usd": 576.33,
+   "precio_salida_usd": 543.47,
+   "riesgo_clp": 10000,
+   "invertido_clp": 175376,
+   "resultado_clp": -9072,
+   "resultado_pct": -0.0517
   }
  ],
  "posiciones_abiertas": [
@@ -68,15 +82,6 @@
    "invertido_clp": 104429
   },
   {
-   "ticker": "SOXX",
-   "estrategia": "Ruptura 20 días",
-   "fecha_entrada": "2026-10-01",
-   "razon_entrada": "Cierre sobre el máximo de 20 días (ruptura)",
-   "precio_entrada_usd": 576.33,
-   "stop_usd": 543.47,
-   "invertido_clp": 175376
-  },
-  {
    "ticker": "SPY",
    "estrategia": "Ruptura 20 días",
    "fecha_entrada": "2026-10-06",
@@ -87,12 +92,12 @@
   }
  ],
  "metricas": {
-  "sesiones": 48,
-  "n_trades": 3,
-  "sharpe": 1.01,
-  "max_drawdown": -0.0178,
+  "sesiones": 49,
+  "n_trades": 4,
+  "sharpe": 0.68,
+  "max_drawdown": -0.0188,
   "win_rate": 0.0,
-  "retorno_total": 0.0251,
-  "resultado_clp": 25055
+  "retorno_total": 0.0198,
+  "resultado_clp": 19831
  }
 }
