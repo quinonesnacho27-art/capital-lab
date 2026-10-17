@@ -74,6 +74,20 @@
    "invertido_clp": 104429,
    "resultado_clp": 592,
    "resultado_pct": 0.0057
+  },
+  {
+   "ticker": "SPY",
+   "estrategia": "Ruptura 20 días",
+   "fecha_entrada": "2026-10-06",
+   "fecha_salida": "2026-10-15",
+   "razon_entrada": "Cierre sobre el máximo de 20 días (ruptura)",
+   "razon_salida": "Stop loss tocado en 765.57 USD",
+   "precio_entrada_usd": 779.09,
+   "precio_salida_usd": 765.57,
+   "riesgo_clp": 10000,
+   "invertido_clp": 372591,
+   "resultado_clp": -1864,
+   "resultado_pct": -0.005
   }
  ],
  "posiciones_abiertas": [
@@ -85,24 +99,15 @@
    "precio_entrada_usd": 710.63,
    "stop_usd": 689.45,
    "invertido_clp": 330871
-  },
-  {
-   "ticker": "SPY",
-   "estrategia": "Ruptura 20 días",
-   "fecha_entrada": "2026-10-06",
-   "razon_entrada": "Cierre sobre el máximo de 20 días (ruptura)",
-   "precio_entrada_usd": 779.09,
-   "stop_usd": 765.57,
-   "invertido_clp": 372591
   }
  ],
  "metricas": {
-  "sesiones": 51,
-  "n_trades": 5,
-  "sharpe": -0.01,
-  "max_drawdown": -0.0305,
-  "win_rate": 0.2,
-  "retorno_total": 0.0077,
-  "resultado_clp": 7676
+  "sesiones": 52,
+  "n_trades": 6,
+  "sharpe": -0.03,
+  "max_drawdown": -0.0308,
+  "win_rate": 0.1667,
+  "retorno_total": 0.0074,
+  "resultado_clp": 7435
  }
 }
