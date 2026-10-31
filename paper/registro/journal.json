@@ -88,26 +88,30 @@
    "invertido_clp": 372591,
    "resultado_clp": -1864,
    "resultado_pct": -0.005
-  }
- ],
- "posiciones_abiertas": [
+  },
   {
    "ticker": "QQQ",
    "estrategia": "Cruce de medias 20/50",
    "fecha_entrada": "2026-08-26",
+   "fecha_salida": "2026-10-30",
    "razon_entrada": "SMA20 cruzó sobre SMA50 (tendencia al alza)",
+   "razon_salida": "Stop loss tocado en 689.45 USD",
    "precio_entrada_usd": 710.63,
-   "stop_usd": 689.45,
-   "invertido_clp": 330871
+   "precio_salida_usd": 689.45,
+   "riesgo_clp": 9861,
+   "invertido_clp": 330871,
+   "resultado_clp": 16551,
+   "resultado_pct": 0.05
   }
  ],
+ "posiciones_abiertas": [],
  "metricas": {
-  "sesiones": 62,
-  "n_trades": 6,
-  "sharpe": -0.32,
-  "max_drawdown": -0.0472,
-  "win_rate": 0.1667,
-  "retorno_total": 0.002,
-  "resultado_clp": 1991
+  "sesiones": 63,
+  "n_trades": 7,
+  "sharpe": -0.84,
+  "max_drawdown": -0.0484,
+  "win_rate": 0.2857,
+  "retorno_total": -0.0109,
+  "resultado_clp": -10872
  }
 }
