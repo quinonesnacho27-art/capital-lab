@@ -106,7 +106,7 @@
  ],
  "posiciones_abiertas": [],
  "metricas": {
-  "sesiones": 65,
+  "sesiones": 66,
   "n_trades": 7,
   "sharpe": -0.84,
   "max_drawdown": -0.0484,
