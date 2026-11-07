@@ -104,9 +104,28 @@
    "resultado_pct": 0.05
   }
  ],
- "posiciones_abiertas": [],
+ "posiciones_abiertas": [
+  {
+   "ticker": "QQQ",
+   "estrategia": "Rebote RSI 30/70",
+   "fecha_entrada": "2026-11-06",
+   "razon_entrada": "RSI14 recuperó el nivel 30 desde sobreventa",
+   "precio_entrada_usd": 656.1,
+   "stop_usd": 625.2,
+   "invertido_clp": 210002
+  },
+  {
+   "ticker": "SOXX",
+   "estrategia": "Rebote RSI 30/70",
+   "fecha_entrada": "2026-11-06",
+   "razon_entrada": "RSI14 recuperó el nivel 30 desde sobreventa",
+   "precio_entrada_usd": 136.53,
+   "stop_usd": 120.4,
+   "invertido_clp": 83745
+  }
+ ],
  "metricas": {
-  "sesiones": 67,
+  "sesiones": 68,
   "n_trades": 7,
   "sharpe": -0.84,
   "max_drawdown": -0.0484,
