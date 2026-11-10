@@ -158,7 +158,7 @@ const COLORES = { "Bot": "var(--acento)", "Estrategia base sola": "var(--serie-2
 (function equity() {
   const series = Object.entries(B.equity).filter(([, p]) => p.length > 1);
   if (!series.length) { $("g-equity").innerHTML = "<p class='tenue'>Aún no hay suficientes datos.</p>"; return; }
-  const W = 940, H = 280, m = { i: 62, d: 12, a: 10, b: 26 };
+  const W = Math.max(320, $("g-equity").clientWidth || 940), H = W < 600 ? 230 : 280, m = { i: 58, d: 6, a: 10, b: 26 };
   const todos = series.flatMap(([, p]) => p);
   const t0 = Math.min(...todos.map(p => p[0])), t1 = Math.max(...todos.map(p => p[0]));
   let v0 = Math.min(...todos.map(p => p[1])), v1 = Math.max(...todos.map(p => p[1]));
@@ -208,7 +208,7 @@ if (B.tendencia) {
 }
 function velas(s) {
   const d = B.velas[s] || []; if (!d.length) { $("g-velas").innerHTML = ""; return; }
-  const W = 940, H = 260, m = { i: 62, d: 8, a: 8, b: 22 }, n = d.length;
+  const W = Math.max(320, $("g-velas").clientWidth || 940), H = W < 600 ? 220 : 260, m = { i: 58, d: 4, a: 8, b: 22 }, n = d.length;
   let lo = Math.min(...d.map(v => v[3])), hi = Math.max(...d.map(v => v[2])); const h = (hi - lo) * 0.05; lo -= h; hi += h;
   const paso = (W - m.i - m.d) / n, y = v => H - m.b - (v - lo) / (hi - lo) * (H - m.a - m.b);
   let g = `<svg viewBox="0 0 ${W} ${H}" width="100%" role="img" aria-label="Velas diarias de ${s}">`;
