@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Bot de trading</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600&display=swap">
+<style>
+  /* Panel de operación: resumen arriba, detalle abajo, una columna en el celular. */
+  :root {
+    --fondo: #f6f7f9; --superficie: #ffffff; --tinta: #10151c; --tinta-2: #4b5563; --tenue: #8a93a0;
+    --linea: #e3e6ea; --acento: #2a78d6; --serie-2: #eb6834; --serie-3: #8a93a0;
+    --sube: #0a7d33; --baja: #c93535; --aviso: #b56a00; --aviso-fondo: #fff4df;
+    --titulos: "Space Grotesk", system-ui, sans-serif; --texto: Inter, system-ui, "Segoe UI", sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      color-scheme: dark;
+      --fondo: #0d1117; --superficie: #161b22; --tinta: #f0f3f6; --tinta-2: #b4bcc7; --tenue: #7d8794;
+      --linea: #262d36; --acento: #4a94ea; --serie-2: #e07a4c; --serie-3: #7d8794;
+      --sube: #3fb96a; --baja: #f06a6a; --aviso: #f0b040; --aviso-fondo: #2b2110;
+    }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--fondo); color: var(--tinta); font: 15px/1.5 var(--texto); }
+  main { max-width: 980px; margin: 0 auto; padding: 20px 16px 60px; display: flex; flex-direction: column; gap: 18px; }
+  h1 { font: 600 22px/1.2 var(--titulos); margin: 0; }
+  h2 { font: 600 16px/1.3 var(--titulos); margin: 0 0 10px; }
+  .cab { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; }
+  .chapa { font-size: 12px; font-weight: 600; letter-spacing: .04em; padding: 3px 10px; border-radius: 999px;
+           border: 1px solid var(--linea); color: var(--tinta-2); text-transform: uppercase; }
+  .chapa.real { background: var(--baja); border-color: var(--baja); color: #fff; }
+  .tenue { color: var(--tenue); font-size: 13px; }
+  .aviso { background: var(--aviso-fondo); color: var(--aviso); border-radius: 10px; padding: 10px 14px; font-size: 14px; }
+  .panel { background: var(--superficie); border: 1px solid var(--linea); border-radius: 14px; padding: 16px; min-width: 0; }
+  .capital { font: 600 40px/1.1 var(--titulos); font-variant-numeric: tabular-nums; }
+  .sube { color: var(--sube); } .baja { color: var(--baja); }
+  .fila { display: flex; flex-wrap: wrap; gap: 8px 22px; margin-top: 10px; }
+  .dato { display: flex; flex-direction: column; }
+  .dato span:first-child { font-size: 12px; color: var(--tenue); }
+  .dato span:last-child { font-weight: 600; font-variant-numeric: tabular-nums; }
+  .leyenda { display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: 13px; color: var(--tinta-2); margin-top: 8px; }
+  .punto { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 6px; }
+  .rejilla { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 12px; }
+  .pos { border: 1px solid var(--linea); border-radius: 10px; padding: 12px; }
+  .pos b { font-family: var(--titulos); font-size: 16px; }
+  .desborde { overflow-x: auto; }
+  table { border-collapse: collapse; width: 100%; font-size: 13.5px; }
+  th, td { padding: 7px 10px; text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  th { color: var(--tenue); font-weight: 500; border-bottom: 1px solid var(--linea); }
+  td:first-child, th:first-child { text-align: left; padding-left: 0; }
+  td.texto { white-space: normal; text-align: left; min-width: 220px; color: var(--tinta-2); }
+  tbody tr + tr td { border-top: 1px solid var(--linea); }
+  .botones { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 8px; }
+  .botones button { font: 500 13px var(--texto); padding: 5px 12px; border-radius: 999px; cursor: pointer;
+                    border: 1px solid var(--linea); background: transparent; color: var(--tinta-2); }
+  .botones button[aria-pressed="true"] { background: var(--acento); border-color: var(--acento); color: #fff; }
+  .botones button:focus-visible { outline: 2px solid var(--acento); outline-offset: 2px; }
+  .decision { border-top: 1px solid var(--linea); padding: 10px 0; }
+  .decision:first-of-type { border-top: 0; padding-top: 0; }
+  .decision p { margin: 4px 0 0; color: var(--tinta-2); }
+  a { color: var(--acento); }
+  svg text { font-family: var(--texto); }
+  #tip { position: fixed; display: none; pointer-events: none; background: var(--superficie); border: 1px solid var(--linea);
+         border-radius: 8px; padding: 6px 10px; font-size: 12.5px; box-shadow: 0 4px 14px rgba(0,0,0,.18); z-index: 5; }
+  footer { color: var(--tenue); font-size: 12.5px; }
+</style>
+</head>
+<body>
+<main>
+  <div class="cab"><h1>Bot de trading</h1><span class="chapa" id="modo"></span><span class="tenue" id="generado"></span></div>
+  <div id="avisos"></div>
+
+  <section class="panel">
+    <div class="tenue">Capital del bot</div>
+    <div class="capital" id="capital"></div>
+    <div class="fila" id="resumen"></div>
+  </section>
+
+  <section class="panel">
+    <h2>Evolución del capital (CLP)</h2>
+    <div id="g-equity"></div>
+    <div class="leyenda" id="l-equity"></div>
+  </section>
+
+  <section class="panel"><h2>Posiciones abiertas</h2><div id="posiciones"></div></section>
+
+  <section class="panel">
+    <h2>Mercado: quién está en tendencia</h2>
+    <div class="desborde"><table id="t-tendencia"></table></div>
+    <p class="tenue" id="nota-tendencia"></p>
+    <div class="botones" id="b-velas"></div>
+    <div id="g-velas"></div>
+  </section>
+
+  <section class="panel"><h2>Inteligencia artificial</h2><div id="ia"></div></section>
+  <section class="panel"><h2>Operaciones cerradas</h2><div class="desborde"><table id="t-ops"></table></div></section>
+  <section class="panel"><h2>Qué dijeron las voces influyentes</h2><div id="voces"></div></section>
+  <section class="panel">
+    <h2>Qué señales están acertando</h2>
+    <div class="desborde"><table id="t-senales"></table></div>
+    <p class="tenue">Correlación entre lo que dijo cada señal y lo que pasó 7 días después (último año más lo vivido). Cerca de 0: no predice. Negativa: predice al revés.</p>
+  </section>
+  <section class="panel">
+    <h2>Radar de empresas</h2>
+    <p class="tenue" style="margin-top:0">Material de estudio. El bot no compra acciones y esto no es una recomendación.</p>
+    <div class="desborde"><table id="t-acciones"></table></div>
+    <div id="ipos" style="margin-top:14px"></div>
+  </section>
+
+  <footer>El bot puede perder todo el capital asignado. Resultados pasados no garantizan resultados futuros.</footer>
+</main>
+<div id="tip"></div>
+
+<script src="data.js"></script>
+<script>
+"use strict";
+const B = window.BOT, $ = id => document.getElementById(id);
+const esc = t => String(t ?? "").replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const clp = u => "$" + Math.round(u * B.dolar).toLocaleString("es-CL");
+const pct = v => v == null ? "—" : (v > 0 ? "+" : "") + (v * 100).toFixed(1).replace(".", ",") + "%";
+const tono = v => v > 0 ? "sube" : v < 0 ? "baja" : "";
+const num = v => Number(v).toLocaleString("es-CL", { maximumSignificantDigits: 6 });
+const corto = s => s.split("/")[0];
+const tip = $("tip");
+function mostrarTip(ev, html) {
+  tip.innerHTML = html; tip.style.display = "block";
+  tip.style.left = Math.min(ev.clientX + 12, innerWidth - tip.offsetWidth - 8) + "px";
+  tip.style.top = (ev.clientY + 14) + "px";
+}
+const ocultarTip = () => { tip.style.display = "none"; };
+
+// ── Cabecera y avisos ────────────────────────────────────────────────
+$("modo").textContent = B.modo === "real" ? "Dinero real" : "Papel (simulado)";
+if (B.modo === "real") $("modo").classList.add("real");
+const horas = (Date.now() / 1000 - B.generado_ts) / 3600;
+$("generado").textContent = "Actualizado " + (horas < 1 ? "hace menos de 1 hora" : "hace " + Math.round(horas) + " h") + " · " + B.generado;
+const avisos = [];
+if (horas > 2.5) avisos.push(`Sin datos nuevos hace ${Math.round(horas)} horas: el computador del bot puede estar apagado o sin internet.`);
+if (B.pausado) avisos.push("El bot está en pausa: no abre posiciones nuevas.");
+if (B.ia.activa && !B.ia.conectada) avisos.push("La IA está desconectada. El bot opera con la estrategia base. Para conectarla: correr «claude auth login» en el computador.");
+(B.noticias.alertas || []).forEach(a => avisos.push(`Noticia de alto impacto (${esc(a.fuente)}): ${esc(a.titulo)}. Compras nuevas bloqueadas por unas horas.`));
+$("avisos").innerHTML = avisos.map(a => `<div class="aviso" style="margin-bottom:8px">${a}</div>`).join("");
+
+// ── Capital ──────────────────────────────────────────────────────────
+$("capital").innerHTML = `${clp(B.capital.usdt)} <span class="${tono(B.capital.retorno)}" style="font-size:20px">${pct(B.capital.retorno)}</span>`;
+const e = B.estadisticas;
+$("resumen").innerHTML = [
+  ["Desde", B.inicio], ["En USDT", B.capital.usdt.toFixed(2)],
+  ...Object.entries(B.comparacion).slice(1).map(([k, v]) => [k, pct(v)]),
+  ["Operaciones cerradas", e.cerradas ? `${e.cerradas} (${e.ganadas} ganadas)` : "0"],
+  ["Posiciones posibles", B.capital.casilleros + " a la vez"],
+].map(([k, v]) => `<div class="dato"><span>${esc(k)}</span><span>${esc(v)}</span></div>`).join("");
+
+// ── Gráfico de capital ───────────────────────────────────────────────
+const COLORES = { "Bot": "var(--acento)", "Estrategia base sola": "var(--serie-2)", "Comprar y mantener BTC": "var(--serie-3)" };
+(function equity() {
+  const series = Object.entries(B.equity).filter(([, p]) => p.length > 1);
+  if (!series.length) { $("g-equity").innerHTML = "<p class='tenue'>Aún no hay suficientes datos.</p>"; return; }
+  const W = 940, H = 280, m = { i: 62, d: 12, a: 10, b: 26 };
+  const todos = series.flatMap(([, p]) => p);
+  const t0 = Math.min(...todos.map(p => p[0])), t1 = Math.max(...todos.map(p => p[0]));
+  let v0 = Math.min(...todos.map(p => p[1])), v1 = Math.max(...todos.map(p => p[1]));
+  const h = (v1 - v0) * 0.08 || 0.1; v0 -= h; v1 += h;
+  const x = t => m.i + (t - t0) / (t1 - t0 || 1) * (W - m.i - m.d), y = v => H - m.b - (v - v0) / (v1 - v0) * (H - m.a - m.b);
+  let s = `<svg viewBox="0 0 ${W} ${H}" width="100%" role="img" aria-label="Evolución del capital">`;
+  for (let k = 0; k <= 4; k++) { const v = v0 + (v1 - v0) * k / 4;
+    s += `<line x1="${m.i}" x2="${W - m.d}" y1="${y(v)}" y2="${y(v)}" stroke="var(--linea)"/><text x="${m.i - 8}" y="${y(v) + 4}" text-anchor="end" font-size="11" fill="var(--tenue)">${clp(v)}</text>`; }
+  const ini = B.capital.inicial_usdt;
+  if (ini > v0 && ini < v1) s += `<line x1="${m.i}" x2="${W - m.d}" y1="${y(ini)}" y2="${y(ini)}" stroke="var(--tenue)" stroke-dasharray="4 4"/>`;
+  const f = t => new Date(t * 1000).toLocaleDateString("es-CL", { day: "numeric", month: "short" });
+  s += `<text x="${m.i}" y="${H - 6}" font-size="11" fill="var(--tenue)">${f(t0)}</text><text x="${W - m.d}" y="${H - 6}" font-size="11" text-anchor="end" fill="var(--tenue)">${f(t1)}</text>`;
+  for (const [n, p] of [...series].reverse())
+    s += `<path d="${p.map((q, i) => (i ? "L" : "M") + x(q[0]).toFixed(1) + "," + y(q[1]).toFixed(1)).join("")}" fill="none" stroke="${COLORES[n]}" stroke-width="${n === "Bot" ? 2.4 : 1.6}"/>`;
+  s += `<rect id="z-eq" x="${m.i}" y="${m.a}" width="${W - m.i - m.d}" height="${H - m.a - m.b}" fill="transparent"/></svg>`;
+  $("g-equity").innerHTML = s;
+  $("l-equity").innerHTML = series.map(([n]) => `<span><span class="punto" style="background:${COLORES[n]}"></span>${n}</span>`).join("");
+  const z = $("z-eq");
+  z.addEventListener("mousemove", ev => { const r = z.getBoundingClientRect(), t = t0 + (ev.clientX - r.left) / r.width * (t1 - t0);
+    mostrarTip(ev, `<b>${new Date(t * 1000).toLocaleString("es-CL", { dateStyle: "medium", timeStyle: "short" })}</b>` + series.map(([n, p]) => {
+      const q = p.reduce((a, b) => Math.abs(b[0] - t) < Math.abs(a[0] - t) ? b : a);
+      return `<br><span class="punto" style="background:${COLORES[n]}"></span>${n}: ${clp(q[1])}`; }).join("")); });
+  z.addEventListener("mouseleave", ocultarTip);
+})();
+
+// ── Posiciones ───────────────────────────────────────────────────────
+$("posiciones").innerHTML = B.posiciones.length ? `<div class="rejilla">` + B.posiciones.map(p => {
+  const r = p.precio / p.entrada - 1;
+  return `<div class="pos"><b>${esc(p.simbolo)}</b> <span class="${tono(r)}" style="font-weight:600">${pct(r)}</span>
+    <div class="fila" style="margin-top:6px"><div class="dato"><span>Invertido</span><span>${clp(p.invertido_usdt)}</span></div>
+    <div class="dato"><span>Entrada</span><span>${num(p.entrada)}</span></div><div class="dato"><span>Ahora</span><span>${num(p.precio)}</span></div>
+    <div class="dato"><span>Stop loss</span><span>${num(p.stop)} (${pct(p.stop / p.precio - 1)})</span></div></div>
+    <p class="tenue" style="margin:8px 0 0">${esc(p.razon)}</p></div>`; }).join("") + `</div>`
+  : `<p class="tenue" style="margin:0">Ninguna. Todo el capital está en USDT (dólar digital), esperando una tendencia alcista.</p>`;
+
+// ── Tendencia y velas ────────────────────────────────────────────────
+if (B.tendencia) {
+  const T = B.tendencia, enPos = new Set(B.posiciones.map(p => p.simbolo));
+  $("t-tendencia").innerHTML = `<thead><tr><th>Cripto</th><th>Precio (USDT)</th><th>Retorno 21 días</th><th>Sobre media 50 d</th><th>Estado</th></tr></thead><tbody>` +
+    Object.entries(T.detalle).sort((a, b) => b[1].mom - a[1].mom).map(([s, d]) => {
+      const puesto = T.ranking.indexOf(s);
+      const estado = enPos.has(s) ? "En cartera" : puesto >= 0 ? `En tendencia (n.º ${puesto + 1})` : "Fuera";
+      return `<tr><td><b>${corto(s)}</b></td><td>${num(B.precios[s] ?? 0)}</td><td class="${tono(d.mom)}">${pct(d.mom)}</td><td>${d.sobre_sma ? "Sí" : "No"}</td><td>${estado}</td></tr>`; }).join("") + "</tbody>";
+  const btc = T.detalle["BTC/USDT"];
+  $("nota-tendencia").textContent = btc && !(btc.mom > 0 && btc.sobre_sma)
+    ? "BTC no está en tendencia alcista: el filtro de mercado impide comprar cualquier cripto." : `Señal del cierre diario del ${T.dia}.`;
+}
+function velas(s) {
+  const d = B.velas[s] || []; if (!d.length) { $("g-velas").innerHTML = ""; return; }
+  const W = 940, H = 260, m = { i: 62, d: 8, a: 8, b: 22 }, n = d.length;
+  let lo = Math.min(...d.map(v => v[3])), hi = Math.max(...d.map(v => v[2])); const h = (hi - lo) * 0.05; lo -= h; hi += h;
+  const paso = (W - m.i - m.d) / n, y = v => H - m.b - (v - lo) / (hi - lo) * (H - m.a - m.b);
+  let g = `<svg viewBox="0 0 ${W} ${H}" width="100%" role="img" aria-label="Velas diarias de ${s}">`;
+  for (let k = 0; k <= 3; k++) { const v = lo + (hi - lo) * k / 3;
+    g += `<line x1="${m.i}" x2="${W - m.d}" y1="${y(v)}" y2="${y(v)}" stroke="var(--linea)"/><text x="${m.i - 8}" y="${y(v) + 4}" text-anchor="end" font-size="11" fill="var(--tenue)">${num(v)}</text>`; }
+  d.forEach((v, i) => { const [f, o, hh, l, c] = v, cx = m.i + paso * (i + .5), col = c >= o ? "var(--sube)" : "var(--baja)";
+    g += `<g data-i="${i}"><line x1="${cx}" x2="${cx}" y1="${y(hh)}" y2="${y(l)}" stroke="${col}"/><rect x="${cx - paso * .32}" y="${y(Math.max(o, c))}" width="${paso * .64}" height="${Math.max(1, Math.abs(y(o) - y(c)))}" fill="${col}"/><rect x="${cx - paso / 2}" y="${m.a}" width="${paso}" height="${H - m.a - m.b}" fill="transparent"/></g>`; });
+  g += `<text x="${m.i}" y="${H - 5}" font-size="11" fill="var(--tenue)">${d[0][0]}</text><text x="${W - m.d}" y="${H - 5}" font-size="11" text-anchor="end" fill="var(--tenue)">${d[n - 1][0]}</text></svg>`;
+  $("g-velas").innerHTML = g;
+  $("g-velas").querySelectorAll("g").forEach(el => { const v = d[+el.dataset.i];
+    el.addEventListener("mousemove", ev => mostrarTip(ev, `<b>${v[0]}</b><br>Apertura ${num(v[1])} · Cierre ${num(v[4])}<br>Máximo ${num(v[2])} · Mínimo ${num(v[3])}<br><span class="${tono(v[4] - v[1])}">${pct(v[4] / v[1] - 1)}</span>`));
+    el.addEventListener("mouseleave", ocultarTip); });
+  $("b-velas").querySelectorAll("button").forEach(b => b.setAttribute("aria-pressed", b.dataset.s === s));
+}
+$("b-velas").innerHTML = Object.keys(B.velas).map(s => `<button type="button" data-s="${s}">${corto(s)} · velas diarias</button>`).join("");
+$("b-velas").addEventListener("click", ev => { if (ev.target.dataset.s) velas(ev.target.dataset.s); });
+velas((B.posiciones[0] || {}).simbolo || Object.keys(B.velas)[0]);
+
+// ── IA ───────────────────────────────────────────────────────────────
+(function ia() {
+  const I = B.ia, h = I.historial;
+  let s = `<div class="fila" style="margin-top:0">
+    <div class="dato"><span>Estado</span><span>${!I.activa ? "Desactivada" : I.conectada ? "Conectada" : "Desconectada"}</span></div>
+    <div class="dato"><span>Decisiones evaluadas</span><span>${h.decisiones_evaluadas}</span></div>
+    <div class="dato"><span>Veces que se apartó de la base</span><span>${h.desvios_de_la_base}${h.desvios_de_la_base ? ` (${h.desvios_que_superaron_a_la_base} le ganaron)` : ""}</span></div>
+    <div class="dato"><span>Lecciones</span><span>${I.lecciones.filter(l => l.estado === "confirmada").length} confirmadas · ${I.lecciones.filter(l => l.estado === "hipotesis").length} en prueba</span></div></div>`;
+  if (I.decisiones.length) s += `<h2 style="margin-top:16px">Últimas decisiones</h2>` + I.decisiones.map(d => {
+    const ev = d.evaluacion;
+    return `<div class="decision"><b>${esc((d.ejecuto || []).map(corto).join(", ") || "Todo en USDT")}</b>
+      <span class="tenue"> · ${esc(d.fecha.replace("T", " ").slice(0, 16))} · confianza ${Math.round((d.confianza || 0) * 100)}% · ${esc(d.disparador)}</span>
+      <p>${esc(d.tesis)}</p>${(d.notas || []).length ? `<p class="tenue">Límites aplicados: ${esc(d.notas.join(" "))}</p>` : ""}
+      ${ev ? `<p class="tenue">A las 24 h: IA <span class="${tono(ev.ret_cerebro)}">${pct(ev.ret_cerebro)}</span> · base ${pct(ev.ret_base)}</p>` : ""}</div>`; }).join("");
+  else s += `<p class="tenue">Aún no hay decisiones de la IA. Hasta que se conecte, decide la estrategia base (tendencia con filtro de BTC).</p>`;
+  if (I.lecciones.length) s += `<h2 style="margin-top:16px">Lecciones aprendidas</h2>` + I.lecciones.map(l =>
+    `<div class="decision"><b>${l.estado === "confirmada" ? "Confirmada" : "En prueba"}</b> <span class="tenue">· a favor ${l.a_favor}, en contra ${l.en_contra}</span><p>${esc(l.texto)}</p></div>`).join("");
+  $("ia").innerHTML = s;
+})();
+
+// ── Operaciones ──────────────────────────────────────────────────────
+$("t-ops").innerHTML = B.operaciones.length ? `<thead><tr><th>Cierre (UTC)</th><th>Cripto</th><th>Resultado</th><th>Salida por</th><th style="text-align:left">Motivo</th></tr></thead><tbody>` +
+  B.operaciones.map(o => `<tr><td>${esc(o.fecha.replace("T", " ").slice(0, 16))}</td><td>${corto(o.simbolo)}</td>
+    <td class="${tono(o.retorno)}">${clp(o.resultado_usdt)} (${pct(o.retorno)})</td><td>${esc({ stop: "Stop loss", senal: "Señal", manual: "Manual", kill: "Kill switch" }[o.motivo] || o.motivo)}</td>
+    <td class="texto">${esc(o.razon_salida)}</td></tr>`).join("") + "</tbody>" : `<tbody><tr><td class="tenue">Aún no hay operaciones cerradas.</td></tr></tbody>`;
+
+// ── Voces ────────────────────────────────────────────────────────────
+(function voces() {
+  const V = B.voces;
+  if (!V.disponible) { $("voces").innerHTML = `<p class="tenue" style="margin:0">Disponible cuando la IA esté conectada: revisa dos veces al día lo que publicaron y declararon ${"Musk, Saylor, CZ, Buterin, Trump, Powell"} y otros.</p>`; return; }
+  $("voces").innerHTML = `<p style="margin-top:0">${esc(V.lectura_general)}</p>` + (V.declaraciones.length ? V.declaraciones.map(d =>
+    `<div class="decision"><b>${esc(d.persona)}</b> <span class="tenue">· ${esc(d.fecha)} · ${esc(d.activos_afectados.join(", "))} · impacto <span class="${tono(d.impacto)}">${d.impacto > 0 ? "+" : ""}${d.impacto.toFixed(1)}</span></span>
+     <p>${esc(d.resumen)} ${/^https?:\/\//.test(d.fuente) ? `<a href="${esc(d.fuente)}" rel="noopener">fuente</a>` : ""}</p></div>`).join("")
+    : `<p class="tenue">Sin declaraciones relevantes verificables en las últimas 48 horas.</p>`) + `<p class="tenue">Actualizado ${esc(V.actualizado || "")}. No es tiempo real.</p>`;
+})();
+
+// ── Señales ──────────────────────────────────────────────────────────
+(function sen() {
+  const s7 = B.senales["7d"] || {}, s1 = B.senales["1d"] || {};
+  const nombres = { tendencia: "Tendencia 21 d / 50 d", momentum_7d: "Momentum 7 días", reversion_rsi: "Reversión RSI", fear_greed_contrario: "Fear & Greed (contrario)",
+    funding_contrario: "Financiamiento de futuros (contrario)", riesgo_macro: "Bolsa de EE.UU. (S&P 500)", liquidez_stablecoins: "Liquidez (stablecoins)", ml: "Modelo de machine learning", noticias: "Sentimiento de noticias" };
+  $("t-senales").innerHTML = `<thead><tr><th>Señal</th><th>Correlación 7 d</th><th>Correlación 1 d</th><th>Observaciones</th><th>Peso</th></tr></thead><tbody>` +
+    Object.entries(s7).sort((a, b) => b[1].ic - a[1].ic).map(([k, v]) => `<tr><td>${esc(nombres[k] || k)}</td><td class="${tono(v.ic)}">${v.ic.toFixed(3)}</td>
+      <td>${(s1[k] || {}).ic?.toFixed(3) ?? "—"}</td><td>${v.observaciones}</td><td>${v.peso.toFixed(3)}</td></tr>`).join("") + "</tbody>";
+})();
+
+// ── Radar ────────────────────────────────────────────────────────────
+(function radar() {
+  const R = B.radar;
+  $("t-acciones").innerHTML = R.acciones.length ? `<thead><tr><th>Acción</th><th>Precio (USD)</th><th>1 mes</th><th>3 meses</th><th>1 año</th><th>Volatilidad anual</th><th>Peor caída (1 año)</th><th>Desde su máximo</th></tr></thead><tbody>` +
+    R.acciones.map(a => `<tr><td><b>${esc(a.ticker)}</b></td><td>${num(a.precio)}</td><td class="${tono(a.ret_1m)}">${pct(a.ret_1m)}</td><td class="${tono(a.ret_3m)}">${pct(a.ret_3m)}</td>
+      <td class="${tono(a.ret_1a)}">${pct(a.ret_1a)}</td><td>${pct(a.volatilidad_anual).replace("+", "")}</td><td>${pct(a.peor_caida_1a)}</td><td>${pct(a.dist_maximo_1a)}</td></tr>`).join("") + "</tbody>"
+    : `<tbody><tr><td class="tenue">Las métricas se cargan en la próxima hora.</td></tr></tbody>`;
+  $("ipos").innerHTML = `<h2>Salidas a bolsa: próximas y recientes</h2>` + (R.ipos.length ? R.ipos.map(i =>
+    `<div class="decision"><b>${esc(i.empresa)}</b> <span class="tenue">· ${esc(i.sector)} · ${esc(i.estado)} · ${esc(i.fecha_estimada)}</span>
+     <p>${esc(i.por_que_importa)}</p><p class="tenue">Riesgos: ${esc(i.riesgos)} ${/^https?:\/\//.test(i.fuente) ? `<a href="${esc(i.fuente)}" rel="noopener">fuente</a>` : ""}</p></div>`).join("")
+    : `<p class="tenue">Disponible cuando la IA esté conectada: busca cada semana las empresas que están por salir a bolsa.</p>`);
+})();
+</script>
+</body>
+</html>
