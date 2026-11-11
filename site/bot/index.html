@@ -104,6 +104,11 @@
     <p class="tenue">Correlación entre lo que dijo cada señal y lo que pasó 7 días después (último año más lo vivido). Cerca de 0: no predice. Negativa: predice al revés.</p>
   </section>
   <section class="panel">
+    <h2>Pronóstico de Kronos (7 días)</h2>
+    <div class="desborde"><table id="t-kronos"></table></div>
+    <p class="tenue">Kronos es un modelo de IA entrenado con velas de muchos mercados. Simula caminos de precio posibles; aquí se ve el promedio y cuántos terminan arriba. Es una señal más para la IA que decide: no compra ni vende por sí solo, y su acierto real se mide en la tabla de arriba.</p>
+  </section>
+  <section class="panel">
     <h2>Radar de empresas</h2>
     <p class="tenue" style="margin-top:0">Material de estudio. El bot no compra acciones y esto no es una recomendación.</p>
     <div class="desborde"><table id="t-acciones"></table></div>
@@ -271,10 +276,20 @@ $("t-ops").innerHTML = B.operaciones.length ? `<thead><tr><th>Cierre (UTC)</th><
 (function sen() {
   const s7 = B.senales["7d"] || {}, s1 = B.senales["1d"] || {};
   const nombres = { tendencia: "Tendencia 21 d / 50 d", momentum_7d: "Momentum 7 días", reversion_rsi: "Reversión RSI", fear_greed_contrario: "Fear & Greed (contrario)",
-    funding_contrario: "Financiamiento de futuros (contrario)", riesgo_macro: "Bolsa de EE.UU. (S&P 500)", liquidez_stablecoins: "Liquidez (stablecoins)", ml: "Modelo de machine learning", noticias: "Sentimiento de noticias" };
+    funding_contrario: "Financiamiento de futuros (contrario)", riesgo_macro: "Bolsa de EE.UU. (S&P 500)", liquidez_stablecoins: "Liquidez (stablecoins)", ml: "Modelo de machine learning", noticias: "Sentimiento de noticias", kronos: "Kronos (pronóstico de velas)" };
   $("t-senales").innerHTML = `<thead><tr><th>Señal</th><th>Correlación 7 d</th><th>Correlación 1 d</th><th>Observaciones</th><th>Peso</th></tr></thead><tbody>` +
     Object.entries(s7).sort((a, b) => b[1].ic - a[1].ic).map(([k, v]) => `<tr><td>${esc(nombres[k] || k)}</td><td class="${tono(v.ic)}">${v.ic.toFixed(3)}</td>
       <td>${(s1[k] || {}).ic?.toFixed(3) ?? "—"}</td><td>${v.observaciones}</td><td>${v.peso.toFixed(3)}</td></tr>`).join("") + "</tbody>";
+})();
+
+// ── Kronos ───────────────────────────────────────────────────────────
+(function kronos() {
+  const K = (B.kronos || {}).pronostico || {};
+  $("t-kronos").innerHTML = Object.keys(K).length ? `<thead><tr><th>Activo</th><th>Retorno esperado 7 d</th><th>Caminos que suben</th><th>Dispersión</th><th>Puntaje</th></tr></thead><tbody>` +
+    Object.entries(K).map(([s, k]) => `<tr><td><b>${corto(s)}</b></td><td class="${tono(k.retorno_esperado_7d)}">${pct(k.retorno_esperado_7d)}</td>
+      <td>${Math.round(k.prob_sube * 100)}%</td><td>±${(k.dispersion * 100).toFixed(1)}%</td><td class="${tono(k.puntaje)}">${k.puntaje.toFixed(2)}</td></tr>`).join("") +
+    `</tbody><caption class="tenue" style="caption-side:bottom;text-align:left;padding-top:6px">Con velas hasta ${esc(B.kronos.dia_ultima_vela || "")}.</caption>`
+    : `<tbody><tr><td class="tenue">Sin pronóstico todavía: se calcula una vez al día.</td></tr></tbody>`;
 })();
 
 // ── Radar ────────────────────────────────────────────────────────────
