@@ -10,7 +10,7 @@
   /* Panel de operación: resumen arriba, detalle abajo, una columna en el celular. */
   :root {
     --fondo: #f6f7f9; --superficie: #ffffff; --tinta: #10151c; --tinta-2: #4b5563; --tenue: #8a93a0;
-    --linea: #e3e6ea; --acento: #2a78d6; --serie-2: #eb6834; --serie-3: #8a93a0;
+    --linea: #e3e6ea; --acento: #2a78d6; --serie-2: #eb6834; --serie-3: #8a93a0; --serie-4: #9b6bd6;
     --sube: #0a7d33; --baja: #c93535; --aviso: #b56a00; --aviso-fondo: #fff4df;
     --titulos: "Space Grotesk", system-ui, sans-serif; --texto: Inter, system-ui, "Segoe UI", sans-serif;
   }
@@ -18,7 +18,7 @@
     :root {
       color-scheme: dark;
       --fondo: #0d1117; --superficie: #161b22; --tinta: #f0f3f6; --tinta-2: #b4bcc7; --tenue: #7d8794;
-      --linea: #262d36; --acento: #4a94ea; --serie-2: #e07a4c; --serie-3: #7d8794;
+      --linea: #262d36; --acento: #4a94ea; --serie-2: #e07a4c; --serie-3: #7d8794; --serie-4: #a98be6;
       --sube: #3fb96a; --baja: #f06a6a; --aviso: #f0b040; --aviso-fondo: #2b2110;
     }
   }
@@ -82,6 +82,7 @@
     <h2>Evolución del capital (CLP)</h2>
     <div id="g-equity"></div>
     <div class="leyenda" id="l-equity"></div>
+    <p class="tenue" id="nota-corto" style="margin:8px 0 0"></p>
   </section>
 
   <section class="panel"><h2>Posiciones abiertas</h2><div id="posiciones"></div></section>
@@ -154,7 +155,7 @@ $("resumen").innerHTML = [
 ].map(([k, v]) => `<div class="dato"><span>${esc(k)}</span><span>${esc(v)}</span></div>`).join("");
 
 // ── Gráfico de capital ───────────────────────────────────────────────
-const COLORES = { "Bot": "var(--acento)", "Estrategia base sola": "var(--serie-2)", "Comprar y mantener BTC": "var(--serie-3)" };
+const COLORES = { "Bot": "var(--acento)", "Estrategia base sola": "var(--serie-2)", "Comprar y mantener BTC": "var(--serie-3)", "Corto en bajadas (virtual)": "var(--serie-4)" };
 (function equity() {
   const series = Object.entries(B.equity).filter(([, p]) => p.length > 1);
   if (!series.length) { $("g-equity").innerHTML = "<p class='tenue'>Aún no hay suficientes datos.</p>"; return; }
@@ -183,6 +184,9 @@ const COLORES = { "Bot": "var(--acento)", "Estrategia base sola": "var(--serie-2
       return `<br><span class="punto" style="background:${COLORES[n]}"></span>${n}: ${clp(q[1])}`; }).join("")); });
   z.addEventListener("mouseleave", ocultarTip);
 })();
+
+$("nota-corto").textContent = "«Corto en bajadas» es una cartera con dinero ficticio que apuesta a la baja cuando BTC cae. En la prueba histórica 2020–2026 no tuvo ventaja; se mide aquí antes de usarla con dinero real."
+  + ((B.corto_virtual || []).length ? " Ahora está en corto en " + B.corto_virtual.map(p => corto(p.simbolo)).join(", ") + "." : " Ahora no tiene posición.");
 
 // ── Posiciones ───────────────────────────────────────────────────────
 $("posiciones").innerHTML = B.posiciones.length ? `<div class="rejilla">` + B.posiciones.map(p => {
