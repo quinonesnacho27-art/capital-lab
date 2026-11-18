@@ -304,6 +304,18 @@ $("l-equity").addEventListener("click", ev => { const b = ev.target.closest("but
         <div class="fila" style="margin-top:6px">${dato("Invertido", clp(p.invertido_usdt))}${dato("Entrada", num(p.entrada))}${dato("Ahora", num(p.precio))}${dato("Stop", num(p.stop) + " (" + pct(p.stop / p.precio - 1) + ")")}</div>
         <p class="tenue" style="margin:6px 0 0">${esc(p.razon)}</p></div>`; }).join("")
       : `<p class="tenue" style="margin:4px 0 0">Todo el capital está en USDT (dólar digital). Compra cuando BTC vuelva a tendencia alcista. Hasta ${C.casilleros} posición${C.casilleros > 1 ? "es" : ""} a la vez.</p>`);
+  const R = B.corto_real;
+  if (R && R.activo) {
+    const p = R.pos, r = p && p.precio ? p.entrada / p.precio - 1 : null;
+    $("corto").innerHTML = `<div class="etq">Corto · dinero real${R.pausado ? " · en pausa" : ""}</div>
+      <div class="valor"><span class="${tono(R.retorno)}">${pct(R.retorno)}</span></div>` +
+      (p ? `<div class="pos"><b>${esc(corto(p.simbolo))}</b> apostando a la baja <span class="${tono(r)}" style="font-weight:600">${pct(r)}</span>
+        <div class="fila" style="margin-top:6px">${dato("Entrada", num(p.entrada))}${dato("Ahora", p.precio ? num(p.precio) : "—")}${dato("Stop", num(p.stop))}</div></div>`
+         : `<p class="tenue" style="margin:4px 0 0">Sin posición: abre solo cuando BTC está en tendencia bajista.</p>`) +
+      `<p class="tenue" style="margin:8px 0 0">Capital del corto: ${R.capital != null ? R.capital.toFixed(2) + " USDT" : "—"} en la billetera de Futuros. Sin apalancamiento; se pausa solo si pierde 25%.
+       ${R.operaciones.length ? `Últimas: ` + R.operaciones.slice(0, 3).map(o => `${corto(o.simbolo)} <span class="${tono(o.resultado_usdt)}">${o.resultado_usdt >= 0 ? "+" : ""}${o.resultado_usdt.toFixed(2)}</span>`).join(" · ") : ""}</p>`;
+    return;
+  }
   const cv = B.corto_virtual || [], rc = B.comparacion["Corto en bajadas (virtual)"];
   $("corto").innerHTML = `<div class="etq">Corto · dinero ficticio</div>
     <div class="valor"><span class="${tono(rc)}">${pct(rc)}</span></div>` +
