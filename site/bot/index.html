@@ -348,7 +348,8 @@ function cortoReal(R) {
   const rMejor = p.entrada / p.min - 1, rStop = p.entrada / p.stop - 1, usdStop = p.cantidad * (p.entrada - p.stop) - 2 * (p.comision_usdt || 0);
   const asegurado = p.stop < p.entrada;
   // Regla de precios: a la izquierda precios más bajos (ganancia), a la derecha el stop (pérdida).
-  const lo = Math.min(p.min, ahora) * 0.995, hi = Math.max(p.stop, ahora) * 1.005, X = v => ((v - lo) / (hi - lo) * 100).toFixed(1) + "%";
+  const S = p.seguro || null, eq = S ? S.equilibrio_precio : null;
+  const lo = Math.min(p.min, ahora, eq || Infinity) * 0.995, hi = Math.max(p.stop, ahora) * 1.005, X = v => ((v - lo) / (hi - lo) * 100).toFixed(1) + "%";
   const ranking = sombra_ranking(), puesto = ranking.indexOf(s), btc = T0.detalle["BTC/USDT"] || {};
   const btcBaja = btc.mom < 0 && !btc.sobre_sma, vaiven = vaivenDiario(s);
   $("corto").innerHTML = cab + `
@@ -360,6 +361,7 @@ function cortoReal(R) {
       <div class="marca" style="left:${X(p.min)};--m:var(--sube)"></div>
       <div class="marca" style="left:${X(p.entrada)};--m:var(--tinta-2)"></div>
       <div class="marca" style="left:${X(p.stop)};--m:var(--baja)"></div>
+      ${eq && !S.nivel ? `<div class="marca" style="left:${X(eq)};--m:var(--aviso)"></div>` : ""}
       <div class="marca ahora" style="left:${X(ahora)};--m:var(--c)"></div>
     </div>
     <div class="extremos"><span>← ${n} baja: ganamos</span><span>${n} sube: perdemos →</span></div>
@@ -368,12 +370,14 @@ function cortoReal(R) {
       <span style="--m:var(--tinta-2)"><i></i>Entrada ${num(p.entrada)}</span>
       <span style="--m:var(--sube)"><i></i>Mejor ${num(p.min)}</span>
       <span style="--m:var(--baja)"><i></i>Stop ${num(p.stop)}</span>
+      ${eq && !S.nivel ? `<span style="--m:var(--aviso)"><i></i>Asegura en ${num4(eq)}</span>` : ""}
     </div>
     <div class="fila" style="margin-top:8px">
       ${dato("Mejor momento", `<span class="${tono(rMejor)}">${pct(rMejor)}</span>`)}
       ${dato("Si toca el stop", `<span class="${tono(rStop)}">${pct(rStop)} (${clpS(usdStop)})</span>`)}
       ${dato("Apostado", (p.cantidad * p.entrada).toFixed(2) + " USDT")}
     </div>
+    ${S ? bloqueSeguro(p, S, r, n) : ""}
     <h3 style="margin-top:14px">Cuándo se cierra</h3>
     <ul class="salidas">
       <li><span>1</span><span>Si ${n} sube hasta <b>${num(p.stop)}</b>, Binance la cierra sola (el stop ya está puesto allá). Resultado en ese caso: <b class="${tono(rStop)}">${pct(rStop)}</b>${asegurado ? " — ya hay ganancia asegurada" : ""}.</span></li>
@@ -383,8 +387,29 @@ function cortoReal(R) {
     <details class="ayuda"><summary>¿Cuánto esperamos ganar y por qué no se vendió cuando iba +2%?</summary>
       <p>No hay precio objetivo: es seguimiento de tendencia. La idea es quedarse mientras dure la caída, que puede ser de 10%, 20% o más, y salir cuando el precio rebote con fuerza o la caída se acabe. Cada hora, si ${n} marca un nuevo mínimo, el stop baja con él (3 veces el movimiento diario típico sobre el mínimo); nunca sube. Así, si la caída sigue, el stop termina asegurando ganancia.</p>
       <p>${vaiven ? `${n} se mueve en promedio un <b>${pct(vaiven)}</b> entre el máximo y el mínimo de cada día. ` : ""}Por eso pasar de +2% a −1,4% es ruido normal y no una señal de salida. Si se cerrara con cada +2%, las comisiones y las caídas largas que se dejan pasar se comerían la ganancia: en la historia, lo que paga son las pocas caídas grandes.</p>
-      <p>Lo revisa cada hora (decide) y cada minuto (vigila el stop).</p></details>` + historial + pie;
+      <p>¿Por qué asegura desde +${Math.round((S ? S.desde : 0.05) * 100)}% y no desde +2%? Se probaron varias reglas con los datos de 2020–2026: asegurar desde +3%, cerrar con objetivo fijo de +3%, +5% o +10%, y esta. Las que cierran antes ganan más seguido (70% de las veces), pero ganan poco cada vez y se pierden las caídas grandes: en total rindieron peor. Esta fue la que menos costó frente a no asegurar nada, y la que mejor anduvo en los últimos 3 años.</p>
+      <p>Lo revisa cada minuto (stop y ganancia asegurada) y cada hora (si conviene seguir).</p></details>` + historial + pie;
 }
+function bloqueSeguro(p, S, r, n) {
+  const fin = S.mitad_desde, avance = Math.max(0, Math.min(1, r / fin)), marca1 = S.desde / fin * 100;
+  const gStop = p.entrada / p.stop - 1;
+  const titulo = S.nivel === "mitad" ? `<span class="sube">✓ Ganancia asegurada: al menos ${pct(gStop)}</span>`
+    : S.nivel === "equilibrio" ? `<span class="sube">✓ Sin riesgo de pérdida</span>`
+    : `Aún no asegurada`;
+  const texto = S.nivel === "mitad"
+    ? `Aunque ${n} rebote, el stop (${num4(p.stop)}) cierra con al menos la mitad de la mejor ganancia. Si sigue bajando, el stop baja con él.`
+    : S.nivel === "equilibrio"
+    ? `El stop ya está en ${num4(p.stop)} (entrada menos comisiones): en el peor caso se sale sin perder. Si ${n} baja a <b>${num4(S.mitad_precio)}</b> (+${Math.round(fin * 100)}%), se guarda la mitad de la mejor ganancia.`
+    : `Cuando ${n} baje a <b>${num4(S.equilibrio_precio)}</b> (+${Math.round(S.desde * 100)}%), el stop pasa a ${num4(S.equilibrio_stop)} y ya no se podrá perder${r > 0 && r < S.desde ? ` (le falta bajar ${pct(ahoraFalta(p, S), 1).replace("+", "")})` : ""}. A <b>${num4(S.mitad_precio)}</b> (+${Math.round(fin * 100)}%) se guarda la mitad de la mejor ganancia.`;
+  return `<h3 style="margin-top:14px">Ganancia asegurada</h3>
+    <div style="font-weight:600;font-size:14px">${titulo}</div>
+    <div class="barra" style="margin:8px 0 4px;height:10px"><i style="left:0;width:${(avance * 100).toFixed(1)}%;background:var(--sube)"></i>
+      <i style="left:${marca1}%;width:2px;background:var(--tinta-2)"></i></div>
+    <div class="extremos"><span>0%</span><span>+${Math.round(S.desde * 100)}% sin pérdida</span><span>+${Math.round(fin * 100)}% guarda la mitad</span></div>
+    <p class="explica">${texto}</p>`;
+}
+const ahoraFalta = (p, S) => 1 - S.equilibrio_precio / (p.precio || p.entrada);
+const num4 = v => Number(v).toLocaleString("es-CL", { maximumSignificantDigits: 4 });
 function sombra_ranking() {   // mismas reglas que bot/sombra.py: ranking_corto
   const d = T0.detalle, baj = Object.keys(d).filter(s => d[s].mom < 0 && !d[s].sobre_sma);
   return baj.includes("BTC/USDT") ? baj.sort((a, b) => d[a].mom - d[b].mom) : [];
