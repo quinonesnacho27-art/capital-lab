@@ -122,6 +122,24 @@
   nav button svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
   nav button[aria-current="page"] { color: var(--acento); }
   footer { color: var(--tenue); font-size: 12px; padding: 4px 2px; }
+  .estado-op { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase;
+               padding: 3px 9px; border-radius: 999px; background: color-mix(in srgb, var(--c) 16%, transparent); color: var(--c); }
+  .estado-op i { width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
+  .regla { position: relative; height: 22px; margin: 16px 6px 2px; }
+  .regla .pista { position: absolute; left: 0; right: 0; top: 8px; height: 6px; border-radius: 99px;
+                  background: linear-gradient(90deg, color-mix(in srgb, var(--sube) 55%, transparent), color-mix(in srgb, var(--baja) 55%, transparent)); }
+  .regla .marca { position: absolute; top: 3px; width: 3px; height: 16px; border-radius: 2px; transform: translateX(-50%); background: var(--m); }
+  .regla .marca.ahora { top: 2px; width: 18px; height: 18px; border-radius: 50%; border: 3px solid var(--superficie); background: var(--m); }
+  .extremos { display: flex; justify-content: space-between; font-size: 11px; color: var(--tenue); margin: 0 2px; }
+  .leyenda { display: flex; flex-wrap: wrap; gap: 4px 14px; font-size: 12.5px; margin-top: 8px; font-variant-numeric: tabular-nums; }
+  .leyenda span { display: inline-flex; align-items: center; gap: 5px; white-space: nowrap; }
+  .leyenda i { width: 9px; height: 9px; border-radius: 50%; background: var(--m); }
+  .salidas { list-style: none; margin: 8px 0 0; padding: 0; font-size: 13px; }
+  .salidas li { display: grid; grid-template-columns: 22px 1fr; gap: 6px; padding: 7px 0; border-top: 1px solid var(--linea); }
+  .salidas li span:first-child { font-weight: 700; text-align: center; }
+  .explica { font-size: 13px; color: var(--tinta-2); margin: 8px 0 0; }
+  details.ayuda { margin-top: 10px; font-size: 13px; color: var(--tinta-2); }
+  details.ayuda summary { cursor: pointer; color: var(--acento); font-weight: 500; }
 </style>
 </head>
 <body>
@@ -295,6 +313,83 @@ $("l-equity").addEventListener("click", ev => { const b = ev.target.closest("but
   ocultas.has(b.dataset.n) ? ocultas.delete(b.dataset.n) : ocultas.add(b.dataset.n); equity(); });
 
 // ── Largo (real) y corto (virtual) ───────────────────────────────────
+const T0 = B.tendencia || { detalle: {}, ranking: [] };
+const clpS = u => (u >= 0 ? "+" : "−") + clp(Math.abs(u));
+const ok = c =>c ? `<span class="sube">✓</span>` : `<span class="baja">✗</span>`;
+const hace = iso => { const h = (Date.now() - new Date(iso)) / 3.6e6; return h < 24 ? `${Math.round(h)} h` : `${Math.floor(h / 24)} d ${Math.round(h % 24)} h`; };
+// Movimiento diario típico (rango alto-bajo promedio de 14 días), para dar escala a las oscilaciones.
+const vaivenDiario = s => { const v = (B.velas[s] || []).slice(-14); return v.length ? v.reduce((a, q) => a + (q[2] - q[3]) / q[4], 0) / v.length : null; };
+
+function esperaLargo() {
+  const btc = T0.detalle["BTC/USDT"] || {};
+  return `<p class="explica" style="margin-top:4px">Todo en USDT. El largo compra solo cuando <b>BTC</b> está en tendencia al alza; hoy no lo está:</p>
+    <ul class="salidas">
+      <li>${ok(btc.mom > 0)}<span>Momentum de 21 días positivo · hoy <b class="${tono(btc.mom)}">${pct(btc.mom)}</b></span></li>
+      <li>${ok(btc.sobre_sma)}<span>Precio sobre su media de 50 días · hoy ${btc.sobre_sma ? "sobre" : "<b class='baja'>bajo</b>"} la media</span></li>
+    </ul>
+    <details class="ayuda"><summary>¿Por qué no hace compras rápidas?</summary>
+      <p>Cada compra y venta cuesta ~0,2% en comisiones más el diferencial de precio. En la prueba histórica, las operaciones de horas (modelo de machine learning a 4 y 24 h) acertaron la dirección el 50,7% de las veces: igual que una moneda al aire, y con las comisiones el resultado fue negativo. Comprar contra una caída fuerte fue la causa de las peores pérdidas de 2020–2026. Por eso, mientras el mercado baja, el capital espera en USDT y la ganancia se busca con el corto.</p></details>`;
+}
+
+function cortoReal(R) {
+  $("corto").parentElement.style.gridTemplateColumns = "1fr";
+  const p = R.pos, cab = `<div style="display:flex;justify-content:space-between;align-items:center;gap:8px">
+      <div class="etq">Corto · dinero real</div>${p ? `<span class="estado-op"><i></i>Posición abierta</span>` : `<span class="estado-op" style="opacity:.7">${R.pausado ? "En pausa" : "Sin posición"}</span>`}</div>`;
+  const historial = R.operaciones.length ? `<h3 style="margin-top:14px">Cortos cerrados</h3>` + R.operaciones.slice(0, 5).map(o =>
+      `<div class="renglon" style="grid-template-columns:1fr auto"><span><b>${corto(o.simbolo)}</b> <span class="tenue">${esc(o.fecha.slice(5, 10))} · ${esc(o.razon)}</span></span>
+       <span class="n ${tono(o.resultado_usdt)}">${clpS(o.resultado_usdt)} (${pct(o.retorno)})</span></div>`).join("") : "";
+  const pie = `<p class="tenue" style="margin:10px 0 0">Billetera de Futuros: ${R.capital != null ? R.capital.toFixed(2) + " USDT" : "—"} · desde que se activó <span class="${tono(R.retorno)}">${pct(R.retorno)}</span> · sin apalancamiento · se pausa sola si pierde 25%.</p>`;
+  if (!p) {
+    $("corto").innerHTML = cab + `<p class="explica">No hay apuesta a la baja abierta. Abre una cuando BTC está en tendencia bajista, en la cripto que más cae.</p>` + historial + pie;
+    return;
+  }
+  const s = p.simbolo, n = corto(s), ahora = p.precio || p.entrada;
+  const r = p.entrada / ahora - 1, usd = p.cantidad * (p.entrada - ahora) - (p.comision_usdt || 0);
+  const rMejor = p.entrada / p.min - 1, rStop = p.entrada / p.stop - 1, usdStop = p.cantidad * (p.entrada - p.stop) - 2 * (p.comision_usdt || 0);
+  const asegurado = p.stop < p.entrada;
+  // Regla de precios: a la izquierda precios más bajos (ganancia), a la derecha el stop (pérdida).
+  const lo = Math.min(p.min, ahora) * 0.995, hi = Math.max(p.stop, ahora) * 1.005, X = v => ((v - lo) / (hi - lo) * 100).toFixed(1) + "%";
+  const ranking = sombra_ranking(), puesto = ranking.indexOf(s), btc = T0.detalle["BTC/USDT"] || {};
+  const btcBaja = btc.mom < 0 && !btc.sobre_sma, vaiven = vaivenDiario(s);
+  $("corto").innerHTML = cab + `
+    <div class="valor"><span class="${tono(usd)}">${clpS(usd)}</span>
+      <span class="${tono(r)}" style="font-size:16px">${pct(r)}</span></div>
+    <p class="explica" style="margin-top:0">La venta en corto de <b>${n}</b> ya se ejecutó en Binance hace ${hace(p.fecha)}, a ${num(p.entrada)}. El bot gana si ${n} baja. Este resultado es <b>lo que se ganaría si se cerrara ahora</b>: cambia con cada movimiento del precio y no es definitivo hasta que se cierre.</p>
+    <div class="regla" role="img" aria-label="Precio de ${n}: mejor ${num(p.min)}, entrada ${num(p.entrada)}, ahora ${num(ahora)}, stop ${num(p.stop)}">
+      <div class="pista"></div>
+      <div class="marca" style="left:${X(p.min)};--m:var(--sube)"></div>
+      <div class="marca" style="left:${X(p.entrada)};--m:var(--tinta-2)"></div>
+      <div class="marca" style="left:${X(p.stop)};--m:var(--baja)"></div>
+      <div class="marca ahora" style="left:${X(ahora)};--m:var(--c)"></div>
+    </div>
+    <div class="extremos"><span>← ${n} baja: ganamos</span><span>${n} sube: perdemos →</span></div>
+    <div class="leyenda">
+      <span style="--m:var(--c)"><i></i><b>Ahora ${num(ahora)}</b></span>
+      <span style="--m:var(--tinta-2)"><i></i>Entrada ${num(p.entrada)}</span>
+      <span style="--m:var(--sube)"><i></i>Mejor ${num(p.min)}</span>
+      <span style="--m:var(--baja)"><i></i>Stop ${num(p.stop)}</span>
+    </div>
+    <div class="fila" style="margin-top:8px">
+      ${dato("Mejor momento", `<span class="${tono(rMejor)}">${pct(rMejor)}</span>`)}
+      ${dato("Si toca el stop", `<span class="${tono(rStop)}">${pct(rStop)} (${clpS(usdStop)})</span>`)}
+      ${dato("Apostado", (p.cantidad * p.entrada).toFixed(2) + " USDT")}
+    </div>
+    <h3 style="margin-top:14px">Cuándo se cierra</h3>
+    <ul class="salidas">
+      <li><span>1</span><span>Si ${n} sube hasta <b>${num(p.stop)}</b>, Binance la cierra sola (el stop ya está puesto allá). Resultado en ese caso: <b class="${tono(rStop)}">${pct(rStop)}</b>${asegurado ? " — ya hay ganancia asegurada" : ""}.</span></li>
+      <li><span>2</span><span>Si ${n} deja de estar entre las 2 criptos que más caen. Hoy: ${puesto >= 0 ? `<b>puesto ${puesto + 1}</b> de ${ranking.length} ${ok(puesto < 2)}` : `<b class="baja">fuera del ranking</b> (se cierra en la próxima revisión)`}</span></li>
+      <li><span>3</span><span>Si BTC deja de estar en baja. Hoy: BTC ${pct(btc.mom)} en 21 días, ${btc.sobre_sma ? "sobre" : "bajo"} su media de 50 días ${ok(btcBaja)}</span></li>
+    </ul>
+    <details class="ayuda"><summary>¿Cuánto esperamos ganar y por qué no se vendió cuando iba +2%?</summary>
+      <p>No hay precio objetivo: es seguimiento de tendencia. La idea es quedarse mientras dure la caída, que puede ser de 10%, 20% o más, y salir cuando el precio rebote con fuerza o la caída se acabe. Cada hora, si ${n} marca un nuevo mínimo, el stop baja con él (3 veces el movimiento diario típico sobre el mínimo); nunca sube. Así, si la caída sigue, el stop termina asegurando ganancia.</p>
+      <p>${vaiven ? `${n} se mueve en promedio un <b>${pct(vaiven)}</b> entre el máximo y el mínimo de cada día. ` : ""}Por eso pasar de +2% a −1,4% es ruido normal y no una señal de salida. Si se cerrara con cada +2%, las comisiones y las caídas largas que se dejan pasar se comerían la ganancia: en la historia, lo que paga son las pocas caídas grandes.</p>
+      <p>Lo revisa cada hora (decide) y cada minuto (vigila el stop).</p></details>` + historial + pie;
+}
+function sombra_ranking() {   // mismas reglas que bot/sombra.py: ranking_corto
+  const d = T0.detalle, baj = Object.keys(d).filter(s => d[s].mom < 0 && !d[s].sobre_sma);
+  return baj.includes("BTC/USDT") ? baj.sort((a, b) => d[a].mom - d[b].mom) : [];
+}
+
 (function lados() {
   const real = B.modo === "real";
   $("largo").innerHTML = `<div class="etq">Largo · ${real ? "dinero real" : "simulado"}</div>
@@ -303,19 +398,9 @@ $("l-equity").addEventListener("click", ev => { const b = ev.target.closest("but
       return `<div class="pos"><b>${esc(corto(p.simbolo))}</b> <span class="${tono(r)}" style="font-weight:600">${pct(r)}</span>
         <div class="fila" style="margin-top:6px">${dato("Invertido", clp(p.invertido_usdt))}${dato("Entrada", num(p.entrada))}${dato("Ahora", num(p.precio))}${dato("Stop", num(p.stop) + " (" + pct(p.stop / p.precio - 1) + ")")}</div>
         <p class="tenue" style="margin:6px 0 0">${esc(p.razon)}</p></div>`; }).join("")
-      : `<p class="tenue" style="margin:4px 0 0">Todo el capital está en USDT (dólar digital). Compra cuando BTC vuelva a tendencia alcista. Hasta ${C.casilleros} posición${C.casilleros > 1 ? "es" : ""} a la vez.</p>`);
+      : esperaLargo());
   const R = B.corto_real;
-  if (R && R.activo) {
-    const p = R.pos, r = p && p.precio ? p.entrada / p.precio - 1 : null;
-    $("corto").innerHTML = `<div class="etq">Corto · dinero real${R.pausado ? " · en pausa" : ""}</div>
-      <div class="valor"><span class="${tono(R.retorno)}">${pct(R.retorno)}</span></div>` +
-      (p ? `<div class="pos"><b>${esc(corto(p.simbolo))}</b> apostando a la baja <span class="${tono(r)}" style="font-weight:600">${pct(r)}</span>
-        <div class="fila" style="margin-top:6px">${dato("Entrada", num(p.entrada))}${dato("Ahora", p.precio ? num(p.precio) : "—")}${dato("Stop", num(p.stop))}</div></div>`
-         : `<p class="tenue" style="margin:4px 0 0">Sin posición: abre solo cuando BTC está en tendencia bajista.</p>`) +
-      `<p class="tenue" style="margin:8px 0 0">Capital del corto: ${R.capital != null ? R.capital.toFixed(2) + " USDT" : "—"} en la billetera de Futuros. Sin apalancamiento; se pausa solo si pierde 25%.
-       ${R.operaciones.length ? `Últimas: ` + R.operaciones.slice(0, 3).map(o => `${corto(o.simbolo)} <span class="${tono(o.resultado_usdt)}">${o.resultado_usdt >= 0 ? "+" : ""}${o.resultado_usdt.toFixed(2)}</span>`).join(" · ") : ""}</p>`;
-    return;
-  }
+  if (R && R.activo) { cortoReal(R); return; }
   const cv = B.corto_virtual || [], rc = B.comparacion["Corto en bajadas (virtual)"];
   $("corto").innerHTML = `<div class="etq">Corto · dinero ficticio</div>
     <div class="valor"><span class="${tono(rc)}">${pct(rc)}</span></div>` +
