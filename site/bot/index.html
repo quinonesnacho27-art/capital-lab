@@ -154,7 +154,7 @@
   <div class="vista" id="v-inicio">
     <div id="avisos"></div>
     <section class="panel heroe">
-      <div class="tenue">Capital del bot</div>
+      <div class="tenue">Capital total del bot</div>
       <div class="capital" id="capital"></div>
       <div class="fila" style="margin-top:8px;align-items:center" id="resumen"></div>
       <div class="lectura" id="lec-equity"></div>
@@ -228,6 +228,7 @@
 const B = window.BOT, $ = id => document.getElementById(id);
 const esc = t => String(t ?? "").replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
 const clp = u => "$" + Math.round(u * B.dolar).toLocaleString("es-CL");
+const clpS = u => (u >= 0 ? "+" : "−") + clp(Math.abs(u));
 const pct = (v, d = 1) => v == null ? "—" : (v > 0 ? "+" : "") + (v * 100).toFixed(d).replace(".", ",") + "%";
 const tono = v => v > 0 ? "sube" : v < 0 ? "baja" : "";
 const flecha = v => v > 0 ? "▲" : v < 0 ? "▼" : "•";
@@ -263,10 +264,18 @@ if (B.ia.activa && !B.ia.conectada) avisos.push("La IA está desconectada. El bo
 $("avisos").innerHTML = avisos.map(a => `<div class="aviso" style="margin-bottom:8px">${a}</div>`).join("");
 
 // ── Capital ──────────────────────────────────────────────────────────
-const C = B.capital, e = B.estadisticas;
-$("capital").textContent = clp(C.usdt);
-$("resumen").innerHTML = `<span class="pildora ${tono(C.retorno)}">${flecha(C.retorno)} ${pct(C.retorno)}</span>
-  <span class="tenue">${C.usdt.toFixed(2)} USDT · desde el ${esc(B.inicio)}</span>`;
+const C = B.capital, e = B.estadisticas, RC = B.corto_real && B.corto_real.capital != null ? B.corto_real : null;
+(function capitalTotal() {
+  // Total = cuenta de largo (Spot) + billetera del corto (Futuros). Cada una con su propio rendimiento.
+  const total = C.usdt + (RC ? RC.capital : 0), base = C.inicial_usdt + (RC ? RC.aportado : 0);
+  const ganancia = (C.usdt - C.inicial_usdt) + (RC ? RC.ganancia : 0), r = ganancia / base;
+  $("capital").textContent = clp(total);
+  $("resumen").innerHTML = `<span class="pildora ${tono(r)}">${flecha(r)} ${pct(r)}</span>
+    <span class="tenue">${clpS(ganancia)} · ${total.toFixed(2)} USDT</span>` +
+    (RC ? `<div class="leyenda" style="width:100%;margin-top:2px">
+      <span style="--m:var(--sube)"><i></i>Largo (Spot) ${clp(C.usdt)} <b class="${tono(C.retorno)}">${pct(C.retorno)}</b></span>
+      <span style="--m:var(--corto)"><i></i>Corto (Futuros) ${clp(RC.capital)} <b class="${tono(RC.retorno)}">${pct(RC.retorno)}</b></span></div>` : "");
+})();
 
 // Arrastre con dedo o ratón sobre un gráfico: llama a f(fracción 0..1) y a fin() al soltar.
 function arrastre(el, f, fin) {
@@ -314,7 +323,6 @@ $("l-equity").addEventListener("click", ev => { const b = ev.target.closest("but
 
 // ── Largo (real) y corto (virtual) ───────────────────────────────────
 const T0 = B.tendencia || { detalle: {}, ranking: [] };
-const clpS = u => (u >= 0 ? "+" : "−") + clp(Math.abs(u));
 const ok = c =>c ? `<span class="sube">✓</span>` : `<span class="baja">✗</span>`;
 const hace = iso => { const h = (Date.now() - new Date(iso)) / 3.6e6; return h < 24 ? `${Math.round(h)} h` : `${Math.floor(h / 24)} d ${Math.round(h % 24)} h`; };
 // Movimiento diario típico (rango alto-bajo promedio de 14 días), para dar escala a las oscilaciones.
@@ -338,9 +346,18 @@ function cortoReal(R) {
   const historial = R.operaciones.length ? `<h3 style="margin-top:14px">Cortos cerrados</h3>` + R.operaciones.slice(0, 5).map(o =>
       `<div class="renglon" style="grid-template-columns:1fr auto"><span><b>${corto(o.simbolo)}</b> <span class="tenue">${esc(o.fecha.slice(5, 10))} · ${esc(o.razon)}</span></span>
        <span class="n ${tono(o.resultado_usdt)}">${clpS(o.resultado_usdt)} (${pct(o.retorno)})</span></div>`).join("") : "";
-  const pie = `<p class="tenue" style="margin:10px 0 0">Billetera de Futuros: ${R.capital != null ? R.capital.toFixed(2) + " USDT" : "—"} · desde que se activó <span class="${tono(R.retorno)}">${pct(R.retorno)}</span> · sin apalancamiento · se pausa sola si pierde 25%.</p>`;
+  const pie = `<p class="tenue" style="margin:10px 0 0">Billetera de Futuros: ${R.capital != null ? R.capital.toFixed(2) + " USDT" : "—"} (incluye lo abierto) de ${R.aportado != null ? R.aportado.toFixed(2) : "—"} USDT puestos · resultado <span class="${tono(R.ganancia)}">${R.ganancia != null ? (R.ganancia >= 0 ? "+" : "") + R.ganancia.toFixed(2) + " USDT (" + pct(R.retorno) + ")" : "—"}</span> · sin apalancamiento · cada operación pierde como máximo ${Math.round((R.perdida_max_op || 0.1) * 100)}% · se pausa sola si el corto pierde 25%.</p>`;
+  const IA = R.ia || {}, ult = IA.ultima;
+  const revs = (IA.revisiones || []).filter(r => r.ret_72h != null);
+  const frenos = revs.filter(r => r.decision === "esperar"), bien = frenos.filter(r => r.ret_72h < 0).length;
+  const bloqueIA = `<h3 style="margin-top:14px">Revisión de la IA</h3>` +
+    (p && p.ia ? `<p class="explica" style="margin-top:0">🧠 La IA aprobó este corto (cree en un ${Math.round(p.ia.confianza * 100)}% que gana en 72 h): ${esc(p.ia.tesis)}</p>`
+      : !p && ult && ult.decision === "esperar" && Date.now() / 1000 - ult.t < 4 * 3600
+        ? `<p class="explica" style="margin-top:0">🧠 La IA <b>frenó</b> el corto en ${corto(ult.simbolo)} (${fechaHora(ult.t)}): ${esc(ult.tesis)}${(ult.noticias || []).length ? `<br><span class="tenue">Noticias: ${ult.noticias.map(esc).join(" · ")}</span>` : ""}<br><span class="tenue">Lo vuelve a revisar cada 4 horas.</span></p>`
+        : `<p class="explica" style="margin-top:0">Antes de abrir cada corto, la IA (Opus) revisa noticias de las últimas 24 h, lo que dicen en X/Twitter autoridades e influyentes, el financiamiento y el sentimiento. Puede frenarlo si ve un riesgo concreto de rebote; no puede ampliar el stop ni usar más capital.</p>`) +
+    (frenos.length ? `<p class="tenue" style="margin:4px 0 0">Veces que frenó: ${frenos.length}; acertó en ${bien} (la cripto subió en las 72 h siguientes).</p>` : "");
   if (!p) {
-    $("corto").innerHTML = cab + `<p class="explica">No hay apuesta a la baja abierta. Abre una cuando BTC está en tendencia bajista, en la cripto que más cae.</p>` + historial + pie;
+    $("corto").innerHTML = cab + `<p class="explica">No hay apuesta a la baja abierta. Abre una cuando BTC está en tendencia bajista, en la cripto que más cae, si la IA no ve un riesgo concreto de rebote.</p>` + bloqueIA + historial + pie;
     return;
   }
   const s = p.simbolo, n = corto(s), ahora = p.precio || p.entrada;
@@ -378,6 +395,7 @@ function cortoReal(R) {
       ${dato("Apostado", (p.cantidad * p.entrada).toFixed(2) + " USDT")}
     </div>
     ${S ? bloqueSeguro(p, S, r, n) : ""}
+    ${bloqueIA}
     <h3 style="margin-top:14px">Cuándo se cierra</h3>
     <ul class="salidas">
       <li><span>1</span><span>Si ${n} sube hasta <b>${num(p.stop)}</b>, Binance la cierra sola (el stop ya está puesto allá). Resultado en ese caso: <b class="${tono(rStop)}">${pct(rStop)}</b>${asegurado ? " — ya hay ganancia asegurada" : ""}.</span></li>
