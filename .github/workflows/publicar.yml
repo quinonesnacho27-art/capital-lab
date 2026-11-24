@@ -3,7 +3,12 @@ name: Publicar la web
 # Publica la carpeta site/ en GitHub Pages. Va separado de la simulación
 # semanal a propósito: la web sigue disponible aunque la corrida falle
 # (por ejemplo si Yahoo Finance cambia algo). Cada vez que el job semanal
-# commitea site/data.js, este workflow se dispara solo.
+# o el bot commitean algo en site/, este workflow se dispara solo.
+#
+# Dos jobs (construir -> desplegar), como la plantilla oficial de GitHub:
+# con ambos pasos en el mismo job, deploy-pages a veces busca el artefacto
+# antes de que GitHub lo registre y falla con "No artifacts named
+# github-pages" (actions/deploy-pages#451; desde nov-2026 fallaba siempre).
 
 on:
   push:
@@ -20,14 +25,11 @@ permissions:
 
 concurrency:
   group: pages
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
-  publicar:
+  construir:
     runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deploy.outputs.page_url }}
     steps:
       - uses: actions/checkout@v7
 
@@ -37,5 +39,12 @@ jobs:
         with:
           path: site
 
+  desplegar:
+    needs: construir
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
       - id: deploy
         uses: actions/deploy-pages@v5
