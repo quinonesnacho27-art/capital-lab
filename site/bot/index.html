@@ -116,7 +116,7 @@
   nav { position: fixed; left: 0; right: 0; bottom: 0; z-index: 5; background: color-mix(in srgb, var(--superficie) 90%, transparent);
         backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-top: 1px solid var(--linea);
         padding-bottom: env(safe-area-inset-bottom); }
-  nav div { max-width: 560px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); height: var(--barra); }
+  nav div { max-width: 560px; margin: 0 auto; display: grid; grid-template-columns: repeat(5, 1fr); height: var(--barra); }
   nav button { background: none; border: 0; color: var(--tenue); font: 500 11px var(--texto); cursor: pointer;
                display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; }
   nav button svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
@@ -140,6 +140,31 @@
   .explica { font-size: 13px; color: var(--tinta-2); margin: 8px 0 0; }
   details.ayuda { margin-top: 10px; font-size: 13px; color: var(--tinta-2); }
   details.ayuda summary { cursor: pointer; color: var(--acento); font-weight: 500; }
+  .op-rev { padding: 12px 0; }
+  .op-rev + .op-rev { border-top: 1px solid var(--linea); }
+  .op-cab { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; flex-wrap: wrap; }
+  .op-cab .n { font-weight: 600; font-variant-numeric: tabular-nums; }
+  .rango { position: relative; height: 26px; margin: 8px 6px 0; }
+  .rango .pista { position: absolute; left: 0; right: 0; top: 11px; height: 4px; border-radius: 99px; background: var(--superficie-2); }
+  .rango .tramo { position: absolute; top: 9px; height: 8px; border-radius: 99px;
+                  background: linear-gradient(90deg, color-mix(in srgb, var(--baja) 70%, transparent), color-mix(in srgb, var(--sube) 70%, transparent)); }
+  .rango .cero { position: absolute; top: 4px; width: 1px; height: 18px; background: var(--tenue); }
+  .rango .cierre { position: absolute; top: 5px; width: 16px; height: 16px; border-radius: 50%; transform: translateX(-50%);
+                   background: var(--tinta); border: 3px solid var(--superficie); }
+  .rango .nueva { position: absolute; top: 5px; width: 16px; height: 16px; border-radius: 50%; transform: translateX(-50%);
+                  border: 2.5px solid var(--sube); background: transparent; }
+  .escala { display: flex; justify-content: space-between; font-size: 10.5px; color: var(--tenue); margin: 0 2px; font-variant-numeric: tabular-nums; }
+  .tarjeta { background: var(--superficie-2); border-radius: 12px; padding: 12px 14px; }
+  .tarjeta + .tarjeta { margin-top: 10px; }
+  .tarjeta b.t { display: block; font: 600 14px/1.3 var(--titulos); margin-bottom: 4px; }
+  .tarjeta p { margin: 0; font-size: 13.5px; color: var(--tinta-2); }
+  .alcance { display: grid; grid-template-columns: 44px 1fr 40px; gap: 4px 10px; align-items: center; font-size: 13px; font-variant-numeric: tabular-nums; }
+  .alcance .n { text-align: right; font-weight: 600; }
+  tr.elegida td { color: var(--sube); font-weight: 600; }
+  tr.elegida td:first-child { color: var(--sube); }
+  .monto { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin-bottom: 10px; }
+  .monto input { font: 600 16px var(--titulos); width: 150px; padding: 8px 10px; border-radius: 10px; border: 1px solid var(--linea);
+                 background: var(--superficie-2); color: var(--tinta); font-variant-numeric: tabular-nums; }
 </style>
 </head>
 <body>
@@ -198,6 +223,17 @@
     <section class="panel"><h2>Qué dijeron las voces influyentes</h2><div id="voces"></div></section>
   </div>
 
+  <!-- ── Análisis ── -->
+  <div class="vista" id="v-analisis">
+    <section class="panel"><h2>Revisión de cada corto</h2><div id="an-ops"></div></section>
+    <section class="panel"><h2>Qué estaba mal y qué cambió</h2><div id="an-cambios"></div></section>
+    <section class="panel"><h2>¿Hasta dónde llega un corto?</h2><div id="an-alcance"></div></section>
+    <section class="panel"><h2>Reglas para tomar ganancia, probadas en 6 años</h2><div id="an-reglas"></div></section>
+    <section class="panel"><h2>¿Y con apalancamiento?</h2><div id="an-apal"></div></section>
+    <section class="panel"><h2>Largo: ¿están bien sus reglas?</h2><div id="an-largo"></div></section>
+    <section class="panel"><h2>¿Y si pongo más capital?</h2><div id="an-capital"></div></section>
+  </div>
+
   <!-- ── Más ── -->
   <div class="vista" id="v-mas">
     <section class="panel"><h2>Operaciones cerradas</h2><div id="ops"></div></section>
@@ -219,6 +255,7 @@
   <button type="button" data-v="inicio"><svg viewBox="0 0 24 24"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/></svg>Inicio</button>
   <button type="button" data-v="mercado"><svg viewBox="0 0 24 24"><path d="M7 4v16M7 8h0M17 4v16"/><rect x="5" y="7" width="4" height="8" rx="1"/><rect x="15" y="9" width="4" height="7" rx="1"/></svg>Mercado</button>
   <button type="button" data-v="ia"><svg viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="3"/><path d="M10 10h4v4h-4zM9 3v3M15 3v3M9 18v3M15 18v3M3 9h3M3 15h3M18 9h3M18 15h3"/></svg>IA</button>
+  <button type="button" data-v="analisis"><svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M20 20l-4.8-4.8M7.5 12l2-2.2 2 1.4 2-2.6"/></svg>Análisis</button>
   <button type="button" data-v="mas"><svg viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg>Más</button>
 </div></nav>
 
@@ -238,7 +275,7 @@ const fechaHora = t => new Date(t * 1000).toLocaleString("es-CL", { day: "numeri
 const dato = (k, v) => `<div class="dato"><span>${esc(k)}</span><span>${v}</span></div>`;
 
 // ── Pestañas ─────────────────────────────────────────────────────────
-const VISTAS = ["inicio", "mercado", "ia", "mas"];
+const VISTAS = ["inicio", "mercado", "ia", "analisis", "mas"];
 const alMostrar = {};
 function ir(v) {
   if (!VISTAS.includes(v)) v = "inicio";
@@ -344,7 +381,7 @@ function cortoReal(R) {
   const p = R.pos, cab = `<div style="display:flex;justify-content:space-between;align-items:center;gap:8px">
       <div class="etq">Corto · dinero real</div>${p ? `<span class="estado-op"><i></i>Posición abierta</span>` : `<span class="estado-op" style="opacity:.7">${R.pausado ? "En pausa" : "Sin posición"}</span>`}</div>`;
   const historial = R.operaciones.length ? `<h3 style="margin-top:14px">Cortos cerrados</h3>` + R.operaciones.slice(0, 5).map(o =>
-      `<div class="renglon" style="grid-template-columns:1fr auto"><span><b>${corto(o.simbolo)}</b> <span class="tenue">${esc(o.fecha.slice(5, 10))} · ${esc(o.razon)}</span></span>
+      `<div class="renglon" style="grid-template-columns:1fr auto"><span><b>${corto(o.simbolo)}</b> <span class="tenue">${esc(o.fecha.slice(5, 10))}${o.mejor != null ? ` · llegó a ${pct(o.mejor)}` : ""} · ${esc(o.razon)}</span></span>
        <span class="n ${tono(o.resultado_usdt)}">${clpS(o.resultado_usdt)} (${pct(o.retorno)})</span></div>`).join("") : "";
   const pie = `<p class="tenue" style="margin:10px 0 0">Billetera de Futuros: ${R.capital != null ? R.capital.toFixed(2) + " USDT" : "—"} (incluye lo abierto) de ${R.aportado != null ? R.aportado.toFixed(2) : "—"} USDT puestos · resultado <span class="${tono(R.ganancia)}">${R.ganancia != null ? (R.ganancia >= 0 ? "+" : "") + R.ganancia.toFixed(2) + " USDT (" + pct(R.retorno) + ")" : "—"}</span> · sin apalancamiento · cada operación pierde como máximo ${Math.round((R.perdida_max_op || 0.1) * 100)}% · se pausa sola si el corto pierde 25%.</p>`;
   const IA = R.ia || {}, ult = IA.ultima;
@@ -352,12 +389,13 @@ function cortoReal(R) {
   const frenos = revs.filter(r => r.decision === "esperar"), bien = frenos.filter(r => r.ret_72h < 0).length;
   const bloqueIA = `<h3 style="margin-top:14px">Revisión de la IA</h3>` +
     (p && p.ia ? `<p class="explica" style="margin-top:0">🧠 La IA aprobó este corto (cree en un ${Math.round(p.ia.confianza * 100)}% que gana en 72 h): ${esc(p.ia.tesis)}</p>`
-      : !p && ult && ult.decision === "esperar" && Date.now() / 1000 - ult.t < 4 * 3600
-        ? `<p class="explica" style="margin-top:0">🧠 La IA <b>frenó</b> el corto en ${corto(ult.simbolo)} (${fechaHora(ult.t)}): ${esc(ult.tesis)}${(ult.noticias || []).length ? `<br><span class="tenue">Noticias: ${ult.noticias.map(esc).join(" · ")}</span>` : ""}<br><span class="tenue">Lo vuelve a revisar cada 4 horas.</span></p>`
+      : !p && ult && ult.decision === "esperar" && Date.now() / 1000 - ult.t < 24 * 3600
+        ? `<p class="explica" style="margin-top:0">🧠 La IA <b>frenó</b> el corto en ${corto(ult.simbolo)} (${fechaHora(ult.t)}): ${esc(ult.tesis)}${(ult.noticias || []).length ? `<br><span class="tenue">Noticias: ${ult.noticias.map(esc).join(" · ")}</span>` : ""}<br><span class="tenue">Lo vuelve a evaluar en el próximo cierre diario (21:00 hora de Chile).</span></p>`
         : `<p class="explica" style="margin-top:0">Antes de abrir cada corto, la IA (Opus) revisa noticias de las últimas 24 h, lo que dicen en X/Twitter autoridades e influyentes, el financiamiento y el sentimiento. Puede frenarlo si ve un riesgo concreto de rebote; no puede ampliar el stop ni usar más capital.</p>`) +
     (frenos.length ? `<p class="tenue" style="margin:4px 0 0">Veces que frenó: ${frenos.length}; acertó en ${bien} (la cripto subió en las 72 h siguientes).</p>` : "");
   if (!p) {
-    $("corto").innerHTML = cab + `<p class="explica">No hay apuesta a la baja abierta. Abre una cuando BTC está en tendencia bajista, en la cripto que más cae, si la IA no ve un riesgo concreto de rebote.</p>` + bloqueIA + historial + pie;
+    const hoyCerro = R.operaciones.length && new Date(R.operaciones[0].fecha).toISOString().slice(0, 10) === new Date().toISOString().slice(0, 10);
+    $("corto").innerHTML = cab + `<p class="explica">No hay apuesta a la baja abierta. Abre una cuando BTC está en tendencia bajista, en la cripto que más cae, si la IA no ve un riesgo concreto de rebote. Lo revisa <b>una vez al día, a las 21:00</b> (hora de Chile), al cierre de la vela diaria${hoyCerro ? "; hoy ya cerró uno, así que espera a ese cierre para no entrar en pleno rebote" : ""}.</p>` + bloqueIA + historial + pie;
     return;
   }
   const s = p.simbolo, n = corto(s), ahora = p.precio || p.entrada;
@@ -365,7 +403,7 @@ function cortoReal(R) {
   const rMejor = p.entrada / p.min - 1, rStop = p.entrada / p.stop - 1, usdStop = p.cantidad * (p.entrada - p.stop) - 2 * (p.comision_usdt || 0);
   const asegurado = p.stop < p.entrada;
   // Regla de precios: a la izquierda precios más bajos (ganancia), a la derecha el stop (pérdida).
-  const S = p.seguro || null, eq = S ? S.equilibrio_precio : null;
+  const S = p.seguro || null, eq = S ? S.activa_precio : null;
   const lo = Math.min(p.min, ahora, eq || Infinity) * 0.995, hi = Math.max(p.stop, ahora) * 1.005, X = v => ((v - lo) / (hi - lo) * 100).toFixed(1) + "%";
   const ranking = sombra_ranking(), puesto = ranking.indexOf(s), btc = T0.detalle["BTC/USDT"] || {};
   const btcBaja = btc.mom < 0 && !btc.sobre_sma, vaiven = vaivenDiario(s);
@@ -405,28 +443,23 @@ function cortoReal(R) {
     <details class="ayuda"><summary>¿Cuánto esperamos ganar y por qué no se vendió cuando iba +2%?</summary>
       <p>No hay precio objetivo: es seguimiento de tendencia. La idea es quedarse mientras dure la caída, que puede ser de 10%, 20% o más, y salir cuando el precio rebote con fuerza o la caída se acabe. Cada hora, si ${n} marca un nuevo mínimo, el stop baja con él (3 veces el movimiento diario típico sobre el mínimo); nunca sube. Así, si la caída sigue, el stop termina asegurando ganancia.</p>
       <p>${vaiven ? `${n} se mueve en promedio un <b>${pct(vaiven)}</b> entre el máximo y el mínimo de cada día. ` : ""}Por eso pasar de +2% a −1,4% es ruido normal y no una señal de salida. Si se cerrara con cada +2%, las comisiones y las caídas largas que se dejan pasar se comerían la ganancia: en la historia, lo que paga son las pocas caídas grandes.</p>
-      <p>¿Por qué asegura desde +${Math.round((S ? S.desde : 0.05) * 100)}% y no desde +2%? Se probaron varias reglas con los datos de 2020–2026: asegurar desde +3%, cerrar con objetivo fijo de +3%, +5% o +10%, y esta. Las que cierran antes ganan más seguido (70% de las veces), pero ganan poco cada vez y se pierden las caídas grandes: en total rindieron peor. Esta fue la que menos costó frente a no asegurar nada, y la que mejor anduvo en los últimos 3 años.</p>
-      <p>Lo revisa cada minuto (stop y ganancia asegurada) y cada hora (si conviene seguir).</p></details>` + historial + pie;
+      <p>¿Por qué asegura desde +${Math.round((S ? S.desde : 0.05) * 100)}% y no desde +2%? En 6 años de historia, la mitad de los cortos llega a +5% en algún momento, pero menos de 2 de cada 10 llega a +10%. Al llegar a +5% el stop guarda la mitad de lo mejor y baja con el precio: si sigue cayendo, se gana más; si rebota, se sale con la mitad. Cerrar todo en +3% gana más seguido, pero rindió peor. Detalle en la pestaña <b>Análisis</b>.</p>
+      <p>Lo revisa cada minuto (stop y ganancia asegurada) y cada hora (si conviene seguir). Abre cortos nuevos solo una vez al día, a las 21:00 (hora de Chile).</p></details>` + historial + pie;
 }
 function bloqueSeguro(p, S, r, n) {
-  const fin = S.mitad_desde, avance = Math.max(0, Math.min(1, r / fin)), marca1 = S.desde / fin * 100;
-  const gStop = p.entrada / p.stop - 1;
-  const titulo = S.nivel === "mitad" ? `<span class="sube">✓ Ganancia asegurada: al menos ${pct(gStop)}</span>`
-    : S.nivel === "equilibrio" ? `<span class="sube">✓ Sin riesgo de pérdida</span>`
-    : `Aún no asegurada`;
-  const texto = S.nivel === "mitad"
-    ? `Aunque ${n} rebote, el stop (${num4(p.stop)}) cierra con al menos la mitad de la mejor ganancia. Si sigue bajando, el stop baja con él.`
-    : S.nivel === "equilibrio"
-    ? `El stop ya está en ${num4(p.stop)} (entrada menos comisiones): en el peor caso se sale sin perder. Si ${n} baja a <b>${num4(S.mitad_precio)}</b> (+${Math.round(fin * 100)}%), se guarda la mitad de la mejor ganancia.`
-    : `Cuando ${n} baje a <b>${num4(S.equilibrio_precio)}</b> (+${Math.round(S.desde * 100)}%), el stop pasa a ${num4(S.equilibrio_stop)} y ya no se podrá perder${r > 0 && r < S.desde ? ` (le falta bajar ${pct(ahoraFalta(p, S), 1).replace("+", "")})` : ""}. A <b>${num4(S.mitad_precio)}</b> (+${Math.round(fin * 100)}%) se guarda la mitad de la mejor ganancia.`;
+  const mejor = p.entrada / p.min - 1, activo = S.nivel === "mitad" || mejor >= S.desde;
+  const avance = Math.max(0, Math.min(1, mejor / S.desde)), gStop = p.entrada / p.stop - 1;
+  const falta = 1 - S.activa_precio / (p.precio || p.entrada);
+  const titulo = activo ? `<span class="sube">✓ Ganancia asegurada: al menos ${pct(gStop)}</span>` : `Aún no asegurada`;
+  const texto = activo
+    ? `Llegó a ganar ${pct(mejor)}. Aunque ${n} rebote, el stop (${num4(p.stop)}) cierra con al menos la mitad de eso. Si sigue bajando, el stop baja con él.`
+    : `Cuando ${n} baje a <b>${num4(S.activa_precio)}</b> (+${Math.round(S.desde * 100)}%), el stop pasa a ${num4(S.activa_stop)} (${pct(p.entrada / S.activa_stop - 1)} asegurado) y desde ahí guarda la mitad de la mejor ganancia${falta > 0 ? ` (le falta bajar ${pct(falta, 1).replace("+", "")})` : ""}.`;
   return `<h3 style="margin-top:14px">Ganancia asegurada</h3>
     <div style="font-weight:600;font-size:14px">${titulo}</div>
-    <div class="barra" style="margin:8px 0 4px;height:10px"><i style="left:0;width:${(avance * 100).toFixed(1)}%;background:var(--sube)"></i>
-      <i style="left:${marca1}%;width:2px;background:var(--tinta-2)"></i></div>
-    <div class="extremos"><span>0%</span><span>+${Math.round(S.desde * 100)}% sin pérdida</span><span>+${Math.round(fin * 100)}% guarda la mitad</span></div>
+    <div class="barra" style="margin:8px 0 4px;height:10px"><i style="left:0;width:${(avance * 100).toFixed(1)}%;background:var(--sube)"></i></div>
+    <div class="extremos"><span>0%</span><span>mejor momento ${pct(mejor)}</span><span>+${Math.round(S.desde * 100)}% guarda la mitad</span></div>
     <p class="explica">${texto}</p>`;
 }
-const ahoraFalta = (p, S) => 1 - S.equilibrio_precio / (p.precio || p.entrada);
 const num4 = v => Number(v).toLocaleString("es-CL", { maximumSignificantDigits: 4 });
 function sombra_ranking() {   // mismas reglas que bot/sombra.py: ranking_corto
   const d = T0.detalle, baj = Object.keys(d).filter(s => d[s].mom < 0 && !d[s].sobre_sma);
@@ -586,6 +619,134 @@ $("pie").textContent = `Datos del ${B.generado}. El bot puede perder todo el cap
 if (matchMedia("(display-mode: standalone)").matches || navigator.standalone) $("instalar").style.display = "none";
 
 // ── Arranque ─────────────────────────────────────────────────────────
+// ── Análisis: revisión de operaciones, reglas probadas, apalancamiento, capital ──
+(function analisis() {
+  const A = B.analisis, R = B.corto_real || { operaciones: [] };
+  const regla = nombre => A && A.reglas.find(x => x.nombre === nombre);
+  const NUEVA = "Guardar 50% de lo mejor desde +5%", ANTES = "Anterior (sin pérdida +5%, mitad +10%)", HORA = "Anterior, reabriendo cada hora (como estaba)";
+  const fecha = iso => new Date(iso).toLocaleDateString("es-CL", { day: "numeric", month: "short" });
+  const mesAnio = d => new Date(d + "T12:00:00Z").toLocaleDateString("es-CL", { month: "short", year: "numeric" });
+
+  // 1. Cada operación: rango entre lo peor y lo mejor que llegó a ir, y dónde se cerró.
+  const ops = [...R.operaciones].filter(o => o.mejor != null);
+  if (!ops.length) $("an-ops").innerHTML = `<p class="tenue">Aún no hay cortos cerrados con este detalle.</p>`;
+  else {
+    const usd = o => o.usdt_entrada || 0;
+    const real = ops.reduce((a, o) => a + o.resultado_usdt, 0);
+    const nueva = ops.reduce((a, o) => a + (o.regla_nueva ? o.regla_nueva.resultado_usdt : o.resultado_usdt), 0);
+    const tope = Math.max(...ops.map(o => o.mejor)), piso = Math.max(...ops.map(o => o.peor));
+    const lo = -Math.max(0.02, piso) * 1.08, hi = Math.max(0.02, tope) * 1.08, X = v => ((v - lo) / (hi - lo) * 100).toFixed(1) + "%";
+    const linea = o => {
+      const rn = o.regla_nueva, gan = usd(o) * o.mejor;
+      let t;
+      if (rn && rn.cambia) t = `Llegó a ganar <b class="sube">${pct(o.mejor)}</b> (≈ ${clpS(gan)}) y devolvió casi todo: el stop solo protegía no perder. Con la regla nueva habría cerrado en ≈ <b class="sube">${pct(rn.retorno)}</b> (${clpS(rn.resultado_usdt)}).`;
+      else if (o.mejor >= 0.05) t = `Llegó a ganar ${pct(o.mejor)} y cerró en ${pct(o.retorno)}: se quedó con ${Math.round(o.retorno / o.mejor * 100)}% de lo mejor.`;
+      else if (o.retorno <= -0.05) t = `Nunca ganó más de ${pct(o.mejor)}: el precio subió hasta el stop. Es el costo normal de la estrategia (4 de cada 10 cortos terminan en pérdida), pero este fue el más caro.`;
+      else t = `Se movió poco (entre ${pct(-o.peor)} y ${pct(o.mejor)}) y se cerró porque la caída perdió fuerza.`;
+      return t + (o.nota ? ` <span class="tenue">${esc(o.nota)}</span>` : "");
+    };
+    $("an-ops").innerHTML = `<div class="fila" style="margin-bottom:6px">
+        ${dato("Resultado real", `<span class="${tono(real)}">${clpS(real)}</span>`)}
+        ${dato("Con las reglas nuevas", `<span class="${tono(nueva)}">${clpS(nueva)}</span>`)}
+        ${dato("Cortos", ops.length)}</div>
+      <p class="tenue" style="margin:0 0 4px">La barra va de lo peor a lo mejor que llegó a ir cada corto. ● = dónde se cerró · ○ = dónde habría cerrado con la regla nueva.</p>` +
+      ops.map(o => `<div class="op-rev">
+        <div class="op-cab"><span><b>${corto(o.simbolo)}</b> <span class="tenue">${o.apertura ? fecha(o.apertura) + " → " : ""}${fecha(o.fecha)} · ${Math.round(usd(o))} USDT</span></span>
+          <span class="n ${tono(o.resultado_usdt)}">${clpS(o.resultado_usdt)} (${pct(o.retorno)})</span></div>
+        <div class="rango" role="img" aria-label="Peor ${pct(-o.peor)}, mejor ${pct(o.mejor)}, cerró ${pct(o.retorno)}">
+          <div class="pista"></div><div class="tramo" style="left:${X(-o.peor)};width:calc(${X(o.mejor)} - ${X(-o.peor)})"></div>
+          <div class="cero" style="left:${X(0)}"></div>
+          ${o.regla_nueva && o.regla_nueva.cambia ? `<div class="nueva" style="left:${X(o.regla_nueva.retorno)}"></div>` : ""}
+          <div class="cierre" style="left:${X(o.retorno)}"></div></div>
+        <p class="explica" style="margin-top:4px">${linea(o)}</p></div>`).join("") +
+      `<div class="escala" style="position:relative;height:16px;margin-top:2px"><span style="position:absolute;left:0">${pct(lo, 0)} en contra</span>
+        <span style="position:absolute;left:${X(0)};transform:translateX(-50%)">0</span><span style="position:absolute;right:0">${pct(hi, 0)} a favor</span></div>`;
+  }
+  if (!A) { ["an-cambios", "an-alcance", "an-reglas", "an-apal", "an-capital"].forEach(id => $(id).innerHTML = `<p class="tenue">Sin datos del análisis histórico.</p>`); return; }
+
+  // 2. Qué cambió
+  const rN = regla(NUEVA), rA = regla(ANTES), rH = regla(HORA);
+  $("an-cambios").innerHTML = `
+    <div class="tarjeta"><b class="t">1 · Reabría un corto apenas cerraba otro</b>
+      <p>Después de un stop, el bot abría otro en la hora siguiente, justo cuando el mercado estaba rebotando (el 25-11 cerró XRP a las 16:17 y a las 17:01 ya había abierto ETH). En 6 años de historia eso rindió <b class="baja">${pct(rH.todo.retorno_anual)} al año</b>, contra <b class="sube">${pct(rA.todo.retorno_anual)}</b> abriendo una sola vez al día.<br><b>Ahora:</b> abre solo a las 21:00 (hora de Chile), al cierre de la vela diaria, y nunca el mismo día en que cerró otro.</p></div>
+    <div class="tarjeta"><b class="t">2 · Entre +5% y +10% solo se protegía no perder</b>
+      <p>XRP llegó a +6,2% y SOL a +5,9%, y ambos se cerraron en +0,2%: el stop estaba en la entrada. <b>Ahora:</b> desde +5%, el stop guarda la mitad de la mejor ganancia y baja con el precio. En la historia: <b class="sube">${pct(rN.todo.retorno_anual)} al año</b> contra ${pct(rA.todo.retorno_anual)}, mejor en las dos mitades del período.</p></div>
+    <div class="tarjeta"><b class="t">3 · SOL del 22-11 (−9,1%)</b>
+      <p>Entró justo antes de un rebote de todo el mercado (Nvidia +27%, Nasdaq +6,8% el 23-11) y nunca estuvo en ganancia. No fue un error de cálculo: en la historia, 4 de cada 10 cortos terminan en pérdida. Desde ese día la IA revisa cada apertura con noticias y X/Twitter, y ese mismo día frenó un corto en XRP en pleno rebote.</p></div>`;
+
+  // 3. Alcance
+  const niv = Object.entries(A.alcance);
+  $("an-alcance").innerHTML = `<div class="alcance">` + niv.map(([k, v]) =>
+      `<span>+${Math.round(k * 100)}%</span><div class="barra"><i style="left:0;width:${(v * 100).toFixed(0)}%;background:var(--corto)"></i></div><span class="n">${Math.round(v * 100)}%</span>`).join("") + `</div>
+    <p class="explica">Porcentaje de cortos que en algún momento llegó a ganar cada nivel (${A.periodo[0].slice(0, 4)}–${A.periodo[1].slice(0, 4)}). La mitad llega a +5%, pero solo ${Math.round((A.alcance["0.10"] || 0) * 10)} de cada 10 a +10%. Por eso al llegar a +5% se asegura la mitad: si es de los que siguen cayendo, el stop baja con el precio; si rebota, se sale con la mitad. A la vez, la mitad de los cortos va ${pct(-A.mae_mediana)} en contra en algún momento: es ruido normal y no motivo para cerrar.</p>`;
+
+  // 4. Reglas
+  const filas = [[HORA, "Antes: reabría cada hora"], [ANTES, "Antes, abriendo 1 vez al día"], [NUEVA, "Ahora: guarda la mitad desde +5%"],
+    ["Tomar todo al ganar +3%", "Cerrar todo en +3%"], ["Tomar todo al ganar +5%", "Cerrar todo en +5%"], ["Tomar todo al ganar +10%", "Cerrar todo en +10%"],
+    ["Guardar 50% de lo mejor desde +3%", "Guardar la mitad desde +3%"], ["Guardar 70% de lo mejor desde +5%", "Guardar 70% desde +5%"],
+    ["Sin asegurar (solo 3×ATR y tope 10%)", "Sin asegurar nada"]].filter(([n]) => regla(n));
+  $("an-reglas").innerHTML = `<div class="desborde"><table><thead><tr><th>Regla</th><th>Al año</th><th>${A.periodo[0].slice(0, 4)}–${A.mitad.slice(0, 4)}</th><th>${A.mitad.slice(0, 4)}–${A.periodo[1].slice(0, 4)}</th><th>Peor caída</th><th>Aciertos</th></tr></thead><tbody>` +
+    filas.map(([n, et]) => { const x = regla(n); return `<tr class="${n === NUEVA ? "elegida" : ""}"><td>${et}</td>
+      <td class="${tono(x.todo.retorno_anual)}">${pct(x.todo.retorno_anual)}</td><td>${pct(x.m1.retorno_anual)}</td><td>${pct(x.m2.retorno_anual)}</td>
+      <td>${pct(x.todo.max_caida, 0)}</td><td>${Math.round(x.todo.aciertos * 100)}%</td></tr>`; }).join("") + `</tbody></table></div>
+    <p class="explica">Simulación con las mismas reglas del bot sobre velas de 1 hora (${A.periodo.map(mesAnio).join(" a ")}), con comisiones, deslizamiento y financiamiento real. Cerrar pronto acierta más veces pero gana menos, porque lo que paga los stops son las pocas caídas grandes. Ojo: las diferencias entre reglas cambian mucho de un año a otro y ninguna evita años malos (en 2024 la regla nueva perdió ${Math.round(Math.abs(rN.por_anio["2024"] || 0) * 100)}% y casi todas las demás también). Lo que sí es claro: reabrir cada hora era lo peor, y cerrar todo muy pronto tampoco sirve.</p>
+    <details class="ayuda"><summary>Año por año con la regla nueva</summary>
+      <p>${Object.entries(rN.por_anio).filter(([y]) => y > A.periodo[0].slice(0, 4)).map(([y, v]) => `${y}: <b class="${tono(v)}">${pct(v)}</b>`).join(" · ")}</p></details>`;
+
+  // 5. Apalancamiento
+  const ap = A.apalancamiento.filter(x => x.regla === NUEVA);
+  const ap1 = ap.find(x => x.x === 1), ap2 = ap.find(x => x.x === 2), ap3 = ap.find(x => x.x === 3);
+  $("an-apal").innerHTML = `<div class="desborde"><table><thead><tr><th>Apalancamiento</th><th>Al año</th><th>Peor caída</th><th>Peor operación</th><th>Pausa −25%</th></tr></thead><tbody>` +
+    ap.map(x => `<tr class="${x.x === 1 ? "elegida" : ""}"><td>${x.x}x${x.x === 1 ? " (el bot)" : ""}</td><td class="${tono(x.retorno_anual)}">${pct(x.retorno_anual)}</td>
+      <td>${pct(x.max_caida, 0)}</td><td>${pct(x.peor_op_capital, 0)}</td><td>${x.pausado_en ? fecha(x.pausado_en + "T12:00:00Z") + " " + x.pausado_en.slice(0, 4) : "nunca"}</td></tr>`).join("") + `</tbody></table></div>
+    <p class="explica">Con apalancamiento cada movimiento cuenta doble o triple: un stop normal (−10% del precio) se lleva ${pct(ap2.peor_op_capital, 0)} de la billetera con 2x y ${pct(ap3.peor_op_capital, 0)} con 3x. En 6 años, el mismo corto que a 1x ganó ${pct(ap1.retorno_anual)} al año habría <b class="baja">perdido ${pct(ap2.retorno_anual)} al año con 2x</b> y ${pct(ap3.retorno_anual)} con 3x: las rachas de stops seguidos dejan la billetera tan chica que después no alcanza a recuperarse. Con 2x o más, la pausa automática de −25% se habría activado en ${ap2.pausado_en ? "mayo de " + ap2.pausado_en.slice(0, 4) : "—"}, a las pocas semanas. Por eso el bot sigue en 1x: el apalancamiento solo conviene a una estrategia con ventaja mucho más clara que esta.</p>`;
+
+  // 6. Largo
+  const AL = B.analisis_largo;
+  if (AL) {
+    const V = n => AL.variantes.find(v => v.nombre.startsWith(n));
+    const filasL = [["Como el bot hoy", "Como el bot hoy ✓ (3 posiciones, stop 3×ATR)"], ["3 posiciones, repone al cierre", "Reponer solo al cierre diario"],
+      ["1 posición", "1 sola posición"], ["Stop 2×ATR", "Stop más corto (2×ATR)"], ["Stop 4×ATR", "Stop más largo (4×ATR)"],
+      ["Tope de pérdida 10%", "Perder máx. 10% por operación"], ["Guardar 50% de lo mejor desde +10%", "Guardar la mitad desde +10%"],
+      ["Stop de 5%", "Stop de 5% (lo que pedía la IA)"]].filter(([n]) => V(n));
+    const hoy = V("Como el bot hoy"), ia5 = V("Stop de 5%"), am = AL.amplio && AL.amplio["Como el bot hoy"];
+    $("an-largo").innerHTML = `<p class="explica" style="margin-top:0">Compra cuando BTC está en tendencia al alza (momentum de 21 días positivo y sobre su media de 50 días), hasta 3 criptos con tendencia, en partes iguales. Cada una lleva un stop a 3 veces su movimiento diario bajo el máximo, que solo sube, y además queda puesto en Binance por si el servidor se apaga. Si la cripto pierde la tendencia o BTC la pierde, vende.</p>
+      <div class="desborde"><table><thead><tr><th>Regla</th><th>Al año</th><th>${AL.periodo[0].slice(0, 4)}–${AL.mitad.slice(0, 4)}</th><th>${AL.mitad.slice(0, 4)}–${AL.periodo[1].slice(0, 4)}</th><th>Peor caída</th><th>Peor operación</th></tr></thead><tbody>` +
+      filasL.map(([n, et]) => { const x = V(n); return `<tr class="${n === "Como el bot hoy" ? "elegida" : ""}"><td>${et}</td>
+        <td class="${tono(x.todo.retorno_anual)}">${pct(x.todo.retorno_anual, 0)}</td><td>${pct(x.m1.retorno_anual, 0)}</td><td>${pct(x.m2.retorno_anual, 0)}</td>
+        <td>${pct(x.todo.max_caida, 0)}</td><td>${pct(x.todo.peor_op, 0)}</td></tr>`; }).join("") + `</tbody></table></div>
+      <p class="explica">Las reglas que usa hoy el bot están entre las mejores: con 1 sola posición se gana algo más, pero con caídas más profundas (${pct(V("1 posición").todo.max_caida, 0)}) y todo apostado a una cripto. Cortar antes las pérdidas (stop más corto o tope de 10%) parece más seguro, pero vende en vaivenes normales de una subida y rinde bastante menos, con caídas casi iguales. Con 10 criptos en vez de 5 (menos sesgo de supervivencia) habría dado ${am ? pct(am.todo.retorno_anual, 0) + " al año, con caída de " + pct(am.todo.max_caida, 0) : "—"}. BTC comprado y mantenido: ${pct(AL.btc.retorno_anual, 0)} al año, con caída de ${pct(AL.btc.max_caida, 0)}.</p>
+      <h3 style="margin-top:14px">Revisado y corregido el 26-nov</h3>
+      <div class="tarjeta"><b class="t">El stop que pedía la IA habría arruinado la estrategia</b>
+        <p>En 92 de 94 decisiones la IA pidió un stop de 5%, y el bot lo habría usado en la primera compra. En la historia eso rinde <b class="baja">${ia5 ? pct(ia5.todo.retorno_anual) : "+2%"} al año</b> contra <b class="sube">${pct(hoy.todo.retorno_anual, 0)}</b>, porque vende en cada vaivén y vuelve a comprar más caro. <b>Ahora:</b> el stop siempre es el de la estrategia; el de la IA queda solo como opinión.</p></div>
+      <div class="tarjeta"><b class="t">La IA podía vetar compras sin haberlo ganado</b>
+        <p>Desde que la IA decide, el mercado ha estado en baja: nunca ha tenido que decidir una compra de verdad. <b>Ahora:</b> si quiere quedarse fuera de una compra de la estrategia, se compra igual con la mitad. Su opinión se mide como si se hubiera ejecutado, y si sus desvíos le ganan a la estrategia, se gana el derecho a vetar del todo.</p></div>
+      <div class="tarjeta"><b class="t">Órdenes reales probadas en Binance</b>
+        <p>El largo nunca ha comprado con dinero real. Se validaron con Binance la compra, el stop y la venta de las 5 criptos, con los montos que usaría hoy (≈ 19,5 USDT cada una), sin ejecutar nada: permisos, IP y mínimos están bien.</p></div>
+      <div class="tarjeta"><b class="t">Funciona solo</b>
+        <p>Si el programa se cae, el servidor lo reinicia en 30 segundos; si se queda pegado más de 15 minutos, un vigía lo reinicia. Los stops quedan puestos en Binance, así que las posiciones siguen protegidas aunque el servidor se apague.</p></div>`;
+  } else $("an-largo").innerHTML = `<p class="tenue">Sin datos del análisis del largo.</p>`;
+
+  // 7. Más capital
+  const vivo = AL && AL.variantes.find(v => v.nombre.startsWith("Como el bot hoy"));
+  const L = vivo ? { por_anio: vivo.por_anio, max_caida: vivo.todo.max_caida } : A.largo;
+  const anios = Object.keys(rN.por_anio).filter(y => y > A.periodo[0].slice(0, 4) && L.por_anio[y] != null);
+  function capital() {
+    const m = Math.max(0, Number(($("an-monto") || {}).value || 100000)), f = v => (v >= 0 ? "+" : "−") + "$" + Math.round(Math.abs(v) * m).toLocaleString("es-CL");
+    $("an-tabla").innerHTML = `<table><thead><tr><th>Año</th><th>Largo (Spot)</th><th>Corto (Futuros)</th></tr></thead><tbody>` +
+      anios.map(y => `<tr><td>${y}${y === A.periodo[1].slice(0, 4) ? " (a nov)" : ""}</td><td class="${tono(L.por_anio[y])}">${f(L.por_anio[y])}</td><td class="${tono(rN.por_anio[y])}">${f(rN.por_anio[y])}</td></tr>`).join("") +
+      `<tr><td><b>Peor caída</b></td><td class="baja">${f(L.max_caida)}</td><td class="baja">${f(rN.todo.max_caida)}</td></tr></tbody></table>`;
+  }
+  $("an-capital").innerHTML = `<div class="monto"><label for="an-monto" class="tenue">Si hubiera tenido</label>
+      <input id="an-monto" type="number" inputmode="numeric" min="0" step="10000" value="100000"><span class="tenue">pesos en cada estrategia al comenzar cada año:</span></div>
+    <div class="desborde" id="an-tabla"></div>
+    <p class="explica">Más capital no cambia los porcentajes: las ganancias y las pérdidas crecen en la misma proporción. «Peor caída» es lo máximo que habría bajado desde un máximo antes de recuperarse.</p>
+    <p class="explica"><b>Largo</b> (3 posiciones, como opera el bot): sus años muy buenos (2021, 2023) están inflados, porque la prueba usa criptos que hoy sabemos que sobrevivieron (SOL subió ~100 veces en 2021). Desde 2025 casi no gana, y hoy espera en USDT porque BTC está en baja. <b>Corto:</b> gana en años de caída fuerte (2021, 2026) y pierde cuando el mercado sube con tropiezos (2024).</p>
+    <p class="tenue" style="margin:8px 0 0">Prueba histórica, no promesa, y no es asesoría financiera. Lo que se ponga en el bot debería ser dinero que se pueda perder sin afectar los gastos del mes.</p>`;
+  $("an-monto").addEventListener("input", capital);
+  capital();
+})();
+
 alMostrar.inicio = equity;
 alMostrar.mercado = () => { monedas(); velas(); };
 ir(location.hash.slice(1));
