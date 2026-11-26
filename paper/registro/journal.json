@@ -116,18 +116,37 @@
    "invertido_clp": 210002,
    "resultado_clp": -2269,
    "resultado_pct": -0.0108
-  }
- ],
- "posiciones_abiertas": [
+  },
   {
    "ticker": "SOXX",
    "estrategia": "Rebote RSI 30/70",
    "fecha_entrada": "2026-11-06",
+   "fecha_salida": "2026-11-25",
    "razon_entrada": "RSI14 recuperó el nivel 30 desde sobreventa",
+   "razon_salida": "Stop loss tocado en 120.40 USD",
    "precio_entrada_usd": 136.53,
-   "stop_usd": 120.4,
-   "invertido_clp": 83745
+   "precio_salida_usd": 120.4,
+   "riesgo_clp": 9891,
+   "invertido_clp": 83745,
+   "resultado_clp": -5746,
+   "resultado_pct": -0.0686
   },
+  {
+   "ticker": "QQQ",
+   "estrategia": "Rebote RSI 30/70",
+   "fecha_entrada": "2026-11-23",
+   "fecha_salida": "2026-11-25",
+   "razon_entrada": "RSI14 recuperó el nivel 30 desde sobreventa",
+   "razon_salida": "Stop loss tocado en 609.15 USD",
+   "precio_entrada_usd": 651.03,
+   "precio_salida_usd": 609.15,
+   "riesgo_clp": 9902,
+   "invertido_clp": 153948,
+   "resultado_clp": -3745,
+   "resultado_pct": -0.0243
+  }
+ ],
+ "posiciones_abiertas": [
   {
    "ticker": "SPY",
    "estrategia": "Rebote RSI 30/70",
@@ -136,24 +155,15 @@
    "precio_entrada_usd": 722.29,
    "stop_usd": 691.59,
    "invertido_clp": 233001
-  },
-  {
-   "ticker": "QQQ",
-   "estrategia": "Rebote RSI 30/70",
-   "fecha_entrada": "2026-11-23",
-   "razon_entrada": "RSI14 recuperó el nivel 30 desde sobreventa",
-   "precio_entrada_usd": 651.03,
-   "stop_usd": 609.15,
-   "invertido_clp": 153948
   }
  ],
  "metricas": {
-  "sesiones": 80,
-  "n_trades": 8,
-  "sharpe": -0.66,
+  "sesiones": 81,
+  "n_trades": 10,
+  "sharpe": -0.83,
   "max_drawdown": -0.0555,
-  "win_rate": 0.25,
-  "retorno_total": -0.009,
-  "resultado_clp": -8972
+  "win_rate": 0.2,
+  "retorno_total": -0.0146,
+  "resultado_clp": -14553
  }
 }
